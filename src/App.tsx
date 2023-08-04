@@ -3,6 +3,7 @@ import { UserProvider } from './contexts/user-context';
 import MainLayout from './layouts/layout';
 import MiddlewareRoutes from './middlewares/middleware-route';
 import Home from './pages/home-page';
+import SkinCancerPage from './pages/skin-cancer-page';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             {/* All Routes [Login] (no need authenticate routes) (login.tsx) */}
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/home" element={<Home></Home>}></Route>
+            <Route path="/skin-cancer" element={<SkinCancerPage />}></Route>
 
             {/* First Authentication Method Using Authenticate Routes VVV */}
             {/* 
