@@ -1,0 +1,9 @@
+/* Cursor */
+.typed-cursor {
+  font-weight: 100 !important;
+  margin-left: 10px;
+}
+
+/* If fade out option is set */
+.typed-fade-out {
+}
