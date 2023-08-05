@@ -3,7 +3,7 @@ import DeseaseMenu from './desease-menu';
 
 export default function Navbar() {
   return (
-    <div className="absolute left-[50%] translate-x-[-50%] h-fit top-10 max-w-screen-xl w-[60%]">
+    <div className="absolute z-10 left-[50%] translate-x-[-50%] h-fit top-10 max-w-screen-xl w-[60%]">
       <div className="absolute  w-[100%] h-10  left-0 z-0 rounded-xl  bg-primary top-[-13px]"></div>
       <div className="py-3 px-16 absolute  w-full h-fit left-0 z-0 rounded-xl bg-white custom-shadow flex justify-between items-center ">
         <div className="mx-2 font-bold">Diagno AI</div>
