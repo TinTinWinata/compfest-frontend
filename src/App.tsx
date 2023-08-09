@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UserProvider } from './contexts/user-context';
 import MainLayout from './layouts/layout';
 import MiddlewareRoutes from './middlewares/middleware-route';
+import DiabetesPage from './pages/diabetes-page';
 import Home from './pages/home-page/home-page';
 import MobileSkinCancerPage from './pages/mobile-skin-cancer-page';
 import SkinCancerPage from './pages/skin-cancer-page';
@@ -22,6 +23,7 @@ function App() {
               path="/skin-cancer/:id"
               element={<MobileSkinCancerPage />}
             ></Route>
+            <Route path="/diabetes" element={<DiabetesPage />}></Route>
             <Route
               path="/*"
               element={<MiddlewareRoutes></MiddlewareRoutes>}
