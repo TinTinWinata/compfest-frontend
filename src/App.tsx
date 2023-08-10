@@ -9,7 +9,9 @@ import DiabetesPage from './pages/diabetes-page';
 import { default as HomePage } from './pages/home-page/home-page';
 import LoginPage from './pages/login-page';
 import MobileSkinCancerPage from './pages/mobile-skin-cancer-page';
+import ProfilePage from './pages/profile-page';
 import SkinCancerPage from './pages/skin-cancer-page';
+import { Room } from './components/room';
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/home" element={<HomePage />}></Route>
-              <Route path="/skin-cancer" element={<SkinCancerPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
+              <Route path="/skin-cancer" element={<SkinCancerPage />}></Route>
+              <Route path="/profile" element={<ProfilePage />}></Route>
               <Route
                 path="/skin-cancer/:id"
                 element={<MobileSkinCancerPage />}
@@ -31,6 +34,14 @@ function App() {
               <Route
                 path="/*"
                 element={<MiddlewareRoutes></MiddlewareRoutes>}
+              ></Route>
+              <Route
+                path="/room-create/:id"
+                element={<Room mode={'create'} callId={''} />}
+              ></Route>
+              <Route
+                path="/room/:id"
+                element={<Room mode={'join'} callId={''} />}
               ></Route>
             </Routes>
           </MainLayout>
