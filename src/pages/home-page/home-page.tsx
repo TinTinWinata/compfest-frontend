@@ -3,7 +3,7 @@ import ChangeText from '../../components/change-text';
 import Navbar from '../../components/navbar/navbar';
 import Desease from './desease';
 
-export default function Home() {
+export default function HomePage() {
   const navigate = useNavigate();
 
   const onHandleClick = () => navigate('/skin-cancer');
@@ -45,7 +45,7 @@ export default function Home() {
           <Desease name="Coronary Heart" />
           <Desease name="Cancer" />
           <Desease name="Stroke" />
-        </div>  
+        </div>
       </div>
     </>
   );

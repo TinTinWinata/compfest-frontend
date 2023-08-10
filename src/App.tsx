@@ -5,7 +5,8 @@ import { UserProvider } from './contexts/user-context';
 import MainLayout from './layouts/layout';
 import MiddlewareRoutes from './middlewares/middleware-route';
 import DiabetesPage from './pages/diabetes-page';
-import Home from './pages/home-page/home-page';
+import { default as HomePage } from './pages/home-page/home-page';
+import LoginPage from './pages/login-page';
 import MobileSkinCancerPage from './pages/mobile-skin-cancer-page';
 import SkinCancerPage from './pages/skin-cancer-page';
 
@@ -16,9 +17,10 @@ function App() {
       <UserProvider>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/home" element={<Home></Home>}></Route>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/home" element={<HomePage />}></Route>
             <Route path="/skin-cancer" element={<SkinCancerPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
             <Route
               path="/skin-cancer/:id"
               element={<MobileSkinCancerPage />}

@@ -111,7 +111,7 @@ export default function Forms({ forms }: { forms: IFormQuestion[] }) {
         <div className="w-full center translate-x-[-50%] left-[50%] absolute bottom-0">
           <div
             onClick={handleNext}
-            className=" cursor-pointer w-full bg-blue-500   hover:bg-blue-600 transition-all center text-gray-50 p-5 rounded-b-xl font-semibold"
+            className=" cursor-pointer w-full bg-accent    transition-all center text-gray-50 p-5 rounded-b-xl font-semibold"
           >
             Next
           </div>
