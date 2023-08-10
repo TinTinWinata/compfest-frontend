@@ -13,10 +13,10 @@ export default function HomePage() {
       <div className="w-full min-h-screen center relative overflow-hidden">
         <div className="w-[80%] center ">
           {/* <div className="sm:block hidden absolute w-[200px] left-[18%] bottom-[30%] translate-y-[50%] ">
-            <Player autoplay loop src={'/left-2.json'} />
+            <Player autoplay loop src={'/assets/left-2.json'} />
           </div>
           <div className="sm:block hidden absolute w-[300px] right-[18%] bottom-[30%] translate-y-[50%] ">
-            <Player autoplay loop src={'/find.json'} />
+            <Player autoplay loop src={'/assets/find.json'} />
           </div> */}
           <div className="flex flex-col items-center text-center">
             <div className="text-primary font-bold text-[60px]">

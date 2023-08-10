@@ -1,21 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IChildrenProps } from '../interfaces/children-interface';
+import { ILoginPayload } from '../interfaces/login-payload';
 
-const userContext = createContext({} as any);
+interface IUserContext {
+  login: (payload: ILoginPayload) => void;
+  user: any;
+}
 
-type ContentLayout = {
-  children: JSX.Element;
-};
+const userContext = createContext<IUserContext>({} as IUserContext);
 
-export function UserProvider({ children }: ContentLayout) {
-  const [auth, setAuth] = useState(false);
+export function UserProvider({ children }: IChildrenProps) {
+  const [user, setUser] = useState<any>();
+  const navigate = useNavigate();
 
-  // Authenticate logic here VVV
-  function isAuth() {
-    return auth;
+  function login(payload: ILoginPayload) {
+    setUser(true);
+    navigate('/home');
   }
 
   // You can pass all user data in here V (Global Data)
-  const data = { setAuth, auth, isAuth };
+  const data = { login, user };
 
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }

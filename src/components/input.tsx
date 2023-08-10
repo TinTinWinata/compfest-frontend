@@ -30,8 +30,8 @@ export default function Input({
   };
 
   return (
-    <div className="w-full h-10 relative px-3 py-2 border border-border border-opacity-20 rounded-md">
-      <div className="absolute left-2 text-primary top-[50%] translate-y-[-50%]">
+    <div className="w-full h-10 relative px-3 py-6 border border-border border-opacity-20 rounded-md">
+      <div className="absolute left-4 text-gray-400 top-[50%] translate-y-[-50%]">
         {icon && icon}
       </div>
       {type === 'password' && (
@@ -55,7 +55,7 @@ export default function Input({
         type={filterType}
         defaultValue={defaultValue}
         disabled={disabled}
-        className={`absolute top-[50%] left-[10%] translate-y-[-50%] text-sm w-[90%] focus:none focus:outline-none  rounded`}
+        className={`placeholder-gray-400 text-gray-500 absolute top-[50%] left-[13%] translate-y-[-50%] text-md w-[85%] focus:none focus:outline-none  rounded`}
         name={name}
         placeholder={label}
       ></input>

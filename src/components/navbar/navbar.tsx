@@ -1,8 +1,10 @@
 import { BsPeople } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { useUserAuth } from '../../contexts/user-context';
 import DeseaseMenu from './desease-menu';
 
 export default function Navbar() {
+  const { user } = useUserAuth();
   return (
     <div className="absolute z-10 left-[50%] translate-x-[-50%] h-fit top-10 max-w-screen-xl w-[60%]">
       <div className="absolute  w-[100%] h-10  left-0 z-0 rounded-xl  bg-primary top-[-13px]"></div>
@@ -10,10 +12,10 @@ export default function Navbar() {
         <div className="mx-2 font-bold">Diagno AI</div>
         <DeseaseMenu />
         <Link
-          to="/login"
+          to={!user ? '/login' : '/profile'}
           className="gap-2 py-1 px-5 border border-gray-400 cursor-pointer transition-all rounded-full text-semibold flex"
         >
-          <p>Login</p>
+          <p>{!user ? 'Login' : 'Profile'}</p>
           <div className="center">
             <BsPeople />
           </div>

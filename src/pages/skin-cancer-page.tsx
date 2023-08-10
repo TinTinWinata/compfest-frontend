@@ -52,19 +52,19 @@ export default function SkinCancerPage() {
           <h1>1. Open Website in Mobile</h1>
           <div className="h-[200px] relative">
             <div className="absolute w-[200px] left-[50%] top-[35%] translate-x-[-50%] translate-y-[-50%]">
-              <Player autoplay loop src={'/mobile.json'} />
+              <Player autoplay loop src={'/assets/mobile.json'} />
             </div>
           </div>
           <h1>2. Take a Photo</h1>
           <div className="h-[200px] relative">
             <div className="absolute w-[200px] left-[50%] top-[35%] translate-x-[-50%] translate-y-[-50%]">
-              <Player autoplay loop src={'/photo.json'} />
+              <Player autoplay loop src={'/assets/photo.json'} />
             </div>
           </div>
           <h1>3. Get Result</h1>
           <div className="h-[200px] relative">
             <div className="absolute w-[200px] left-[50%] top-[60%] translate-x-[-50%] translate-y-[-50%]">
-              <Player autoplay loop speed={0.5} src={'/health-2.json'} />
+              <Player autoplay loop speed={0.5} src={'/assets/health-2.json'} />
             </div>
           </div>
         </div>
