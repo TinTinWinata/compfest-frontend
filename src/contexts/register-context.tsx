@@ -1,8 +1,11 @@
-import { createContext, useContext, useState } from 'react';
+import { ChangeEvent, createContext, useContext, useState } from 'react';
 import { AiOutlineLock } from 'react-icons/ai';
 import { GoPeople } from 'react-icons/go';
 import Input from '../components/input';
 import Modal from '../components/modal';
+import { IRegisterPayload } from '../interfaces/register-payload';
+import { toastError } from '../settings/toast-setting';
+import { useUserAuth } from './user-context';
 
 interface IRegisterContext {
   openRegister: () => void;
@@ -16,9 +19,24 @@ type ContentLayout = {
 
 export function RegisterProvider({ children }: ContentLayout) {
   const [open, setOpen] = useState<boolean>(false);
+  const { register } = useUserAuth();
 
   const openRegister = () => {
     setOpen(true);
+  };
+
+  const handleOnSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    console.log('test');
+    e.preventDefault();
+    const { email, name, password, confirm } = e.target;
+    if (password.value !== confirm.value) {
+      toastError('Password and confirm password is not the same value.');
+    }
+    const payload: IRegisterPayload = {
+      email: email.value,
+      password: password.value,
+    };
+    register(payload);
   };
 
   const data = { openRegister };
@@ -26,6 +44,7 @@ export function RegisterProvider({ children }: ContentLayout) {
   return (
     <registerContext.Provider value={data}>
       <Modal
+        onSubmit={handleOnSubmit}
         title="Welcome to DiagnoAI"
         caption="Future of Personalized Health"
         open={open}

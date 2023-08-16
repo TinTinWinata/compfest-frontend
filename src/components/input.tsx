@@ -45,7 +45,7 @@ export default function Input({
         {icon && icon}
       </div>
       {type === 'password' && (
-        <div className="absolute right-2 text-black top-[50%] translate-y-[-50%] z-20">
+        <div className="absolute z-0 right-2 text-black top-[50%] translate-y-[-50%]">
           {filterType === 'password' ? (
             <AiFillEye
               onClick={tooglePassword}
@@ -65,8 +65,8 @@ export default function Input({
         className={
           'absolute  transition-all text-sm translate-y-[-50%] text-gray-400 ' +
           (labelUp
-            ? ' left-[5%] top-0 bg-white px-1 text-xs '
-            : ' left-[14%] top-[50%] ')
+            ? ' left-[11%] top-0 bg-white px-1 text-xs '
+            : ' left-[11%] top-[50%] ')
         }
       >
         {label}
@@ -78,7 +78,7 @@ export default function Input({
         type={filterType}
         defaultValue={defaultValue}
         disabled={disabled}
-        className={`placeholder-gray-400 bg-transparent text-gray-500 z-1 absolute top-[50%] left-[13%] translate-y-[-50%] text-md w-[85%] focus:none focus:outline-none  rounded`}
+        className={`placeholder-gray-400 bg-transparent text-gray-500 z-1 absolute top-[50%] left-[13%] translate-y-[-50%] text-md w-[80%] focus:none focus:outline-none  rounded`}
         name={name}
       ></input>
     </div>

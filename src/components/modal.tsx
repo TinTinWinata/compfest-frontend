@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Dialog, Transition } from '@headlessui/react';
-import { Dispatch, Fragment, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, Fragment, SetStateAction } from 'react';
 import { IChildrenProps } from '../interfaces/children-interface';
 
 export interface IModalProps extends IChildrenProps {
@@ -9,6 +9,8 @@ export interface IModalProps extends IChildrenProps {
   title?: string;
   caption?: string;
   button?: string;
+  onClick?: () => void;
+  onSubmit?: (e: ChangeEvent<HTMLFormElement>) => void;
 }
 
 export default function Modal({
@@ -18,7 +20,13 @@ export default function Modal({
   caption,
   children,
   button,
+  onClick,
+  onSubmit,
 }: IModalProps) {
+  const handleOnSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit && onSubmit(e);
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -57,7 +65,8 @@ export default function Modal({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div
+            <form
+              onSubmit={handleOnSubmit}
               className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full 
             sm:py-8 sm:px-12"
             >
@@ -75,15 +84,15 @@ export default function Modal({
               {button && (
                 <div className="mt-5 sm:mt-5">
                   <button
-                    type="button"
+                    onClick={onClick}
+                    type="submit"
                     className="inline-flex justify-center w-full rounded-full transition-all  border border-transparent shadow-sm px-4 py-3  bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-md"
-                    onClick={() => setOpen(false)}
                   >
                     {button}
                   </button>
                 </div>
               )}
-            </div>
+            </form>
           </Transition.Child>
         </div>
       </Dialog>

@@ -53,7 +53,7 @@ export default function LoginPage() {
           </div>
         </div>
       </form>
-      <div className="bg-blue-100 w-full"></div>
+      <div className="lg:block hidden bg-blue-100 w-full"></div>
     </div>
   );
 }
