@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createRef, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 interface IInputProps {
   label: string;
@@ -18,15 +18,25 @@ export default function Input({
   icon,
 }: IInputProps) {
   const [filterType, setFilterType] = useState(type);
-
+  const [labelUp, setLabelUp] = useState<boolean>(false);
+  const inputRef = createRef<HTMLInputElement>();
   const tooglePassword = () => {
     if (filterType === 'password') {
       setFilterType('text');
     } else {
       setFilterType('password');
     }
+  };
 
-    console.log(filterType);
+  const handleFocus = () => {
+    setLabelUp(true);
+  };
+  const handleBlur = () => {
+    if (inputRef.current && inputRef.current.value !== '') {
+      setLabelUp(true);
+    } else {
+      setLabelUp(false);
+    }
   };
 
   return (
@@ -51,13 +61,25 @@ export default function Input({
           )}
         </div>
       )}
+      <div
+        className={
+          'absolute  transition-all text-sm translate-y-[-50%] text-gray-400 ' +
+          (labelUp
+            ? ' left-[5%] top-0 bg-white px-1 text-xs '
+            : ' left-[14%] top-[50%] ')
+        }
+      >
+        {label}
+      </div>
       <input
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        ref={inputRef}
         type={filterType}
         defaultValue={defaultValue}
         disabled={disabled}
-        className={`placeholder-gray-400 text-gray-500 absolute top-[50%] left-[13%] translate-y-[-50%] text-md w-[85%] focus:none focus:outline-none  rounded`}
+        className={`placeholder-gray-400 bg-transparent text-gray-500 z-1 absolute top-[50%] left-[13%] translate-y-[-50%] text-md w-[85%] focus:none focus:outline-none  rounded`}
         name={name}
-        placeholder={label}
       ></input>
     </div>
   );
