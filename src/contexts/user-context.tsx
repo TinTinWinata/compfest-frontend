@@ -13,7 +13,11 @@ import { useNavigate } from 'react-router-dom';
 import { IChildrenProps } from '../interfaces/children-interface';
 import { ILoginPayload } from '../interfaces/login-payload';
 import { IRegisterPayload } from '../interfaces/register-payload';
-import { toastError, toastFirebaseError } from '../settings/toast-setting';
+import {
+  toastError,
+  toastFirebaseError,
+  toastSuccess,
+} from '../settings/toast-setting';
 
 interface IUserContext {
   login: (payload: ILoginPayload) => void;
@@ -46,6 +50,7 @@ export function UserProvider({ children }: IChildrenProps) {
   async function login(payload: ILoginPayload) {
     try {
       await signInWithEmailAndPassword(auth, payload.email, payload.password);
+      toastSuccess('Succesfully logged in!');
       navigate('/home');
     } catch (err: any) {
       if (err instanceof FirebaseError) {

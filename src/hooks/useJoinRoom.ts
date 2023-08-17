@@ -9,32 +9,16 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { useRef, useState } from 'react';
-import { FaCopy, FaEllipsisV, FaPhone } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
-import '../css/room.css';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../settings/firebase-setting';
-import { toastSuccess } from '../settings/toast-setting';
+import { servers } from '../settings/webrtc-setting';
 
-// Initialize WebRTC
-const servers = {
-  iceServers: [
-    {
-      urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-    },
-  ],
-  iceCandidatePoolSize: 10,
-};
-
-export function Room({ mode, callId }: { mode: any; callId: any }) {
+export default function useJoinRoom(callId: string, mode: string) {
   const pc = new RTCPeerConnection(servers);
   // Invite Mutation
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
-  const { id, time } = useParams<any>();
 
-  if (callId === undefined || callId === null || callId === '') {
-    callId = id;
-  }
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
 
@@ -58,8 +42,8 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
       });
     };
 
-    localRef.current.srcObject = localStream;
-    remoteRef.current.srcObject = remoteStream;
+    if (localRef.current) localRef.current.srcObject = localStream;
+    if (remoteRef.current) remoteRef.current.srcObject = remoteStream;
 
     setWebcamActive(true);
 
@@ -180,53 +164,5 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
       }
     }
   };
-
-  return (
-    <div className="room">
-      <video ref={localRef} autoPlay playsInline className="local" muted />
-      <video ref={remoteRef} autoPlay playsInline className="remote" />
-
-      <div className="buttonsContainer">
-        <button
-          onClick={hangUp}
-          disabled={!webcamActive}
-          className="hangup button"
-        >
-          <FaPhone className="phone-icon" />
-        </button>
-        <div tabIndex={0} role="button" className="more button">
-          <FaEllipsisV className="ellipsis-icon" />
-          <div className="popover">
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(link + '/room/' + roomId);
-                toastSuccess('Coppied to clipboard!');
-              }}
-            >
-              <FaCopy /> Copy joining code
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {!webcamActive && (
-        <div className="modalContainer">
-          <div className="modal">
-            <h3>Turn on your camera and microphone and start the call</h3>
-            <div className="container">
-              <button
-                onClick={() => navigate('/create-room')}
-                className="secondary"
-              >
-                Cancel
-              </button>
-              <button className="bg-primary text-white" onClick={setupSources}>
-                Start
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  return { remoteRef, hangUp, setupSources, localRef, webcamActive };
 }

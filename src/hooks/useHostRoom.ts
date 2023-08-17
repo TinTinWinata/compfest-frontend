@@ -1,45 +1,72 @@
+import { FirebaseError } from 'firebase/app';
 import {
   addDoc,
   collection,
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   onSnapshot,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
 import { useRef, useState } from 'react';
-import { FaCopy, FaEllipsisV, FaPhone } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
-import '../css/room.css';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../settings/firebase-setting';
-import { toastSuccess } from '../settings/toast-setting';
+import { toastFirebaseError } from '../settings/toast-setting';
+import { servers } from '../settings/webrtc-setting';
 
-// Initialize WebRTC
-const servers = {
-  iceServers: [
-    {
-      urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-    },
-  ],
-  iceCandidatePoolSize: 10,
-};
-
-export function Room({ mode, callId }: { mode: any; callId: any }) {
+export default function useHostRoom(callId: string, mode: string) {
   const pc = new RTCPeerConnection(servers);
   // Invite Mutation
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
-  const { id, time } = useParams<any>();
+  const [isIncomeStream, setIsIncomeStream] = useState<boolean>(false);
 
-  if (callId === undefined || callId === null || callId === '') {
-    callId = id;
-  }
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
 
   const localRef = useRef<any>();
   const remoteRef = useRef<any>();
+
+  const clearDb = async (): Promise<void> => {
+    try {
+      const offerSnapshot = await getDocs(getOfferRef());
+      await Promise.all(
+        offerSnapshot.docs.map(async (document) => {
+          const docRef = doc(
+            collection(db, `calls/${callId}/offerCandidates`),
+            document.id
+          );
+          await deleteDoc(docRef);
+        })
+      );
+      const answerSnapshot = await getDocs(getAnswerRef());
+      await Promise.all(
+        answerSnapshot.docs.map(async (document) => {
+          const docRef = doc(
+            collection(db, `calls/${callId}/answerCandidates`),
+            document.id
+          );
+          await deleteDoc(docRef);
+        })
+      );
+      const callRef = getCallDoc();
+      await deleteDoc(callRef);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        toastFirebaseError(err);
+      }
+    }
+  };
+
+  const getCallDoc = () => doc(collection(db, 'calls'), callId);
+
+  const getOfferRef = () =>
+    collection(db, `calls/${getCallDoc().id}/offerCandidates`);
+
+  const getAnswerRef = () =>
+    collection(db, `calls/${getCallDoc().id}/answerCandidates`);
 
   const setupSources = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
@@ -54,16 +81,20 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
 
     pc.ontrack = (event: any) => {
       event.streams[0].getTracks().forEach((track: any) => {
+        console.log('test');
+        track && setIsIncomeStream(true);
         remoteStream.addTrack(track);
       });
     };
 
-    localRef.current.srcObject = localStream;
-    remoteRef.current.srcObject = remoteStream;
+    if (localRef.current) localRef.current.srcObject = localStream;
+    if (remoteRef.current) remoteRef.current.srcObject = remoteStream;
 
     setWebcamActive(true);
 
     if (mode === 'create') {
+      await clearDb();
+
       const callDoc = doc(collection(db, 'calls'), callId);
       const offerCandidates = collection(
         db,
@@ -79,7 +110,6 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
 
       pc.onicecandidate = (event: any) => {
         // event.candidate && offerCandidates.add(event.candidate.toJSON());
-        console.log('hello world');
         event.candidate && addDoc(offerCandidates, event.candidate.toJSON());
       };
 
@@ -180,53 +210,5 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
       }
     }
   };
-
-  return (
-    <div className="room">
-      <video ref={localRef} autoPlay playsInline className="local" muted />
-      <video ref={remoteRef} autoPlay playsInline className="remote" />
-
-      <div className="buttonsContainer">
-        <button
-          onClick={hangUp}
-          disabled={!webcamActive}
-          className="hangup button"
-        >
-          <FaPhone className="phone-icon" />
-        </button>
-        <div tabIndex={0} role="button" className="more button">
-          <FaEllipsisV className="ellipsis-icon" />
-          <div className="popover">
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(link + '/room/' + roomId);
-                toastSuccess('Coppied to clipboard!');
-              }}
-            >
-              <FaCopy /> Copy joining code
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {!webcamActive && (
-        <div className="modalContainer">
-          <div className="modal">
-            <h3>Turn on your camera and microphone and start the call</h3>
-            <div className="container">
-              <button
-                onClick={() => navigate('/create-room')}
-                className="secondary"
-              >
-                Cancel
-              </button>
-              <button className="bg-primary text-white" onClick={setupSources}>
-                Start
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  return { remoteRef, hangUp, setupSources, isIncomeStream };
 }
