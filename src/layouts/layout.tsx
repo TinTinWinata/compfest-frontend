@@ -11,7 +11,7 @@ export default function MainLayout({ children }: ContentLayout) {
 
       {/* All Content will be inside this div (chidren) VVV */}
       <div className="center w-full h-full ">
-        <div className="w-full h-full">{children}</div>
+        <div className="w-full h-full ">{children}</div>
       </div>
 
       {/* ----------------------------------- */}

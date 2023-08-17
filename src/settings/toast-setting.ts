@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app';
 import { Id, toast } from 'react-toastify';
 
 const position = 'bottom-left';
@@ -59,3 +60,7 @@ export function toastUpdateFailed(id: Id, text: string = 'Failed!') {
     draggable: true,
   });
 }
+
+export const toastFirebaseError = (error: FirebaseError) => {
+  toastError(error.message);
+};

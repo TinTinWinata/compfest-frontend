@@ -5,7 +5,6 @@ import Desease from './desease';
 
 export default function HomePage() {
   const navigate = useNavigate();
-
   const onHandleClick = () => navigate('/skin-cancer');
   return (
     <>

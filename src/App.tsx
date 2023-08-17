@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Room } from './components/room';
 import { RegisterProvider } from './contexts/register-context';
 import { UserProvider } from './contexts/user-context';
 import MainLayout from './layouts/layout';
@@ -11,7 +12,6 @@ import LoginPage from './pages/login-page';
 import MobileSkinCancerPage from './pages/mobile-skin-cancer-page';
 import ProfilePage from './pages/profile-page';
 import SkinCancerPage from './pages/skin-cancer-page';
-import { Room } from './components/room';
 
 function App() {
   return (

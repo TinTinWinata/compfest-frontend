@@ -1,94 +1,57 @@
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { CiLogout } from 'react-icons/ci';
 import Navbar from '../components/navbar/navbar';
+import { useUserAuth } from '../contexts/user-context';
 
 export default function ProfilePage() {
+  const { user, logout } = useUserAuth();
+  const handleLogout = () => logout();
   return (
     <>
       <Navbar />
       <div className="center">
-        <div className="mt-40 divide-y divide-gray-200 w-[50%]">
-          <div className="space-y-1">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Profile
-            </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              This information will be displayed publicly so be careful what you
-              share.
-            </p>
+        <div className="w-[60%] mt-32 max-w-screen-xl">
+          <div className="w-full h-full border rounded-xl border-gray-400 border-opacity-30 p-3 flex  ">
+            <div className="flex  p-8">
+              <img
+                className="w-24 rounded-full"
+                src="/assets/profile.png"
+                alt=""
+              />
+              <div className="w-full grow ml-3 mr-20 flex flex-col">
+                <h1 className="font-semibold text-[30px] text-gray-500">
+                  Justine Winata
+                </h1>
+                <p className="text-gray-500 text-opacity-60">
+                  tintin6892@gmail.com
+                </p>
+              </div>
+            </div>
+            <div className="border-l border-r my-5 border-gray-300 px-20 flex flex-col justify-center items-center">
+              <div className="text-gray-400 font-semibold  text-lg">
+                Test Taked
+              </div>
+              <div className="font-semibold text-gray-600 text-opacity-80 text-[45px]">
+                939
+              </div>
+            </div>
+            <div className="center ml-20">
+              <CircularProgressbar
+                className="w-28 h-28"
+                value={10}
+                text={`${10}%`}
+              />
+            </div>
           </div>
-          <div className="mt-6">
-            <dl className="divide-y divide-gray-200">
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                <dt className="text-sm font-medium text-gray-500">Name</dt>
-                <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <span className="flex-grow">Chelsea Hagon</span>
-                  <span className="ml-4 flex-shrink-0">
-                    <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                <dt className="text-sm font-medium text-gray-500">Photo</dt>
-                <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <span className="flex-grow">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </span>
-                  <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                    <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Update
-                    </button>
-                    <span className="text-gray-300" aria-hidden="true">
-                      |
-                    </span>
-                    <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Remove
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                <dt className="text-sm font-medium text-gray-500">Email</dt>
-                <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <span className="flex-grow">chelsea.hagon@example.com</span>
-                  <span className="ml-4 flex-shrink-0">
-                    <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
-                <dt className="text-sm font-medium text-gray-500">Job title</dt>
-                <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <span className="flex-grow">Human Resources Manager</span>
-                  <span className="ml-4 flex-shrink-0">
-                    <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-            </dl>
+          <div
+            onClick={handleLogout}
+            className="flex gap-2 cursor-pointer p-3 justify-end text-gray-500 hover:text-primary transition-all"
+          >
+            <p className="">Logout</p>
+            <div className="center">
+              <CiLogout className="" />
+            </div>
           </div>
         </div>
       </div>
