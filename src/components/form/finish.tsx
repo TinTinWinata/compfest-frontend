@@ -10,7 +10,6 @@ interface IFormFinishProps {
 }
 
 export default function Finish({ answers }: IFormFinishProps) {
-  // const { data } = UseDiabetics(answers);
   const data = { result: [] };
   const navigate = useNavigate();
   const handleBack = () => navigate('/');
@@ -57,9 +56,7 @@ export default function Finish({ answers }: IFormFinishProps) {
       <div className="text-center  flex flex-col center w-full h-full">
         <Player className="w-52 h-52" src={getLottieAsset()} autoplay loop />
         <h3 className="font-semibold text-2xl ">{getLottieTitle()}</h3>
-        <p className="mt-2 text-gray-500 dark:text-gray-200">
-          {getLottieString()}
-        </p>
+        <p className="mt-2 text-gray-500 ">{getLottieString()}</p>
 
         {/* Invicible Button */}
         <div className="h-16"></div>
@@ -67,7 +64,7 @@ export default function Finish({ answers }: IFormFinishProps) {
         {/* Real Button */}
         <Link
           to="/home"
-          className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold bg-blue-600 hover:bg-blue-700 text-gray-50  dark:hover:bg-blue-700 transition-all w-full dark:bg-blue-600"
+          className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold   text-gray-50  transition-all w-full bg-accent "
         >
           Home
         </Link>

@@ -88,8 +88,10 @@ export default function Forms({ forms }: { forms: IFormQuestion[] }) {
 
   if (finish) {
     return (
-      <div className="relative w-96  p-6  bg-gray-50 rounded-xl ">
-        <Finish answers={answers} />
+      <div className="bg-primary w-full h-screen overflow-hidden center">
+        <div className="relative p-6 w-[600px] h-[90%] bg-gray-50 rounded-xl ">
+          <Finish answers={answers} />
+        </div>
       </div>
     );
   }
@@ -98,7 +100,7 @@ export default function Forms({ forms }: { forms: IFormQuestion[] }) {
     <div className="bg-primary w-full h-screen overflow-hidden  center">
       <div
         data-aos="fade-up"
-        className="  relative w-[90%] h-[90%] p-6     bg-white rounded-xl"
+        className="  relative w-[600px] h-[90%] p-6 bg-white rounded-xl"
       >
         <ProgressBar from={index + 1} to={forms.length} />
         <FormDetail

@@ -15,7 +15,7 @@ export default function FormDetail({
   inputRef,
 }: FormDetailProps) {
   const getAnswerClass = (index: number) =>
-    `w-full border border-blue-600 cursor-pointer  border-opacity-20 rounded-md p-5 text-xl tracking-wider my-2  hover:bg-blue-600 hover:text-gray-50 transition-all  ${
+    `w-full border border-blue-600 cursor-pointer  border-opacity-20 rounded-md p-3 text-base tracking-wider my-2  hover:bg-blue-600 hover:text-gray-50 transition-all  ${
       index == activeBox ? getActiveClass() : ' text-gray-500 '
     }`;
 
@@ -24,7 +24,7 @@ export default function FormDetail({
   return (
     <div className="relative">
       <div className="center">
-        <div className="text-center font-bold w-1/2 mb-6 mt-2 text-gray-800 tracking-wide text-2xl ">
+        <div className="text-center font-bold  mb-6 mt-2 text-gray-800 tracking-wide text-2xl ">
           {form.question}
         </div>
       </div>
