@@ -72,6 +72,7 @@ export default function Input({
         {label}
       </div>
       <input
+      autoComplete=''
         onFocus={handleFocus}
         onBlur={handleBlur}
         ref={inputRef}

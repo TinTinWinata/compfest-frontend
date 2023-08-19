@@ -1,6 +1,9 @@
-import { ChangeEvent } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { ChangeEvent, useEffect } from 'react';
 import { AiOutlineLock } from 'react-icons/ai';
 import { GoPeople } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
+import GoogleButton from '../components/google-button';
 import Input from '../components/input';
 import { useRegister } from '../contexts/register-context';
 import { useUserAuth } from '../contexts/user-context';
@@ -8,7 +11,10 @@ import { ILoginPayload } from '../interfaces/login-payload';
 
 export default function LoginPage() {
   const { openRegister } = useRegister();
-  const { login } = useUserAuth();
+  const { login, loginGoogle } = useUserAuth();
+  const { user } = useUserAuth();
+  const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
   const handleOnSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = e.target;
@@ -17,6 +23,14 @@ export default function LoginPage() {
       password: password.value,
     };
     login(payload);
+  };
+  useEffect(() => {
+    if (user) {
+      navigate('/home');
+    }
+  }, [user]);
+  const handleLoginWithGoogle = () => {
+    loginGoogle();
   };
   const handleRegister = () => {
     openRegister();
@@ -29,6 +43,7 @@ export default function LoginPage() {
           <div className="mt-3 mb-12 text-[35px] text-gray-600 font-semibold uppercase">
             Diagno AI
           </div>
+          <GoogleButton handler={loginGoogle} />
           <Input
             name="email"
             icon={<GoPeople className="w-5 h-5" />}

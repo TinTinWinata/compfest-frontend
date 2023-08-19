@@ -1,10 +1,12 @@
 import { FirebaseError } from 'firebase/app';
 import {
+  GoogleAuthProvider,
   User,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from 'firebase/auth';
@@ -24,11 +26,14 @@ interface IUserContext {
   user: User | null;
   register: (payload: IRegisterPayload) => void;
   logout: () => Promise<void>;
+  loginGoogle: () => Promise<void>;
 }
 
 const userContext = createContext<IUserContext>({} as IUserContext);
 
 export function UserProvider({ children }: IChildrenProps) {
+  const secret = import.meta.env.VITE_SECRET;
+  const provider = new GoogleAuthProvider();
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const auth = getAuth();
@@ -39,10 +44,7 @@ export function UserProvider({ children }: IChildrenProps) {
   const listen = () => {
     onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
-        // navigate('/home');
         setUser(user);
-      } else {
-        // navigate('/login');
       }
     });
   };
@@ -53,15 +55,30 @@ export function UserProvider({ children }: IChildrenProps) {
       toastSuccess('Succesfully logged in!');
       navigate('/home');
     } catch (err: any) {
-      if (err instanceof FirebaseError) {
-        toastFirebaseError(err);
-      }
+      toastError('Wrong credentials!');
     }
+  }
+
+  async function loginGoogle() {
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate('/login');
+        toastSuccess(`Welcome ${user.displayName}! to DiagnoAI`);
+      })
+      .catch((error) => {
+        toastError('Failed to login with google');
+      });
   }
 
   async function logout() {
     try {
+      setUser(null);
       await signOut(auth);
+      navigate('/login');
+      toastSuccess('Successfully logged out');
     } catch (err) {
       if (err instanceof FirebaseError) {
         toastFirebaseError(err);
@@ -86,7 +103,7 @@ export function UserProvider({ children }: IChildrenProps) {
     }
   }
 
-  const data = { login, user, register, logout };
+  const data = { login, user, register, logout, loginGoogle };
 
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }
