@@ -1,44 +1,82 @@
 import { Player } from '@lottiefiles/react-lottie-player';
+import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import { IAIResponse } from '../../interfaces/ai-response-interface';
+import { IEndpoint } from '../../interfaces/endpoint-interface';
 import { IFormAnswer } from '../../interfaces/form-answer';
+import { toastError } from '../../settings/toast-setting';
+import Service from '../../utils/service';
 // import UseDiabetics from '../../hooks/use-diabetics';
 // import { IFormAnswer } from '../../types/form-answer';
 
 interface IFormFinishProps {
   answers: IFormAnswer[];
+  endpoint: IEndpoint;
 }
 
-export default function Finish({ answers }: IFormFinishProps) {
-  const data = { result: [] };
+interface IResultType {
+  [key: string]: number;
+}
+
+export default function Finish({ answers, endpoint }: IFormFinishProps) {
+  const [data, setData] = useState<IAIResponse | null>(null);
   const navigate = useNavigate();
+  const fetch = async () => {
+    const service = new Service();
+    const data = dataConverter(answers);
+    console.log('data : ', data);
+    const response = await service.request<IAIResponse>(
+      endpoint,
+      undefined,
+      data
+    );
+    console.log('setting data : ', response.data);
+    if (response.success) {
+      setData(response.data);
+    } else {
+      console.log('response : ', response);
+      toastError(response.message);
+    }
+  };
+
+  const dataConverter = (answers: IFormAnswer[]): {} => {
+    return answers.reduce((acc: IResultType, { name, value }) => {
+      acc[name] = value;
+      return acc;
+    }, {});
+  };
+
+  useEffect(() => {
+    fetch();
+  }, [answers]);
+
   const handleBack = () => navigate('/');
   const getLottieAsset = (): string => {
-    if (!data) {
-      return '/assets/loading.json';
-    } else if (data.result[0] == 0) {
+    if (data && data.result[0] >= 0.5) {
       return '/assets/sickness.json';
-    } else if (data.result[0] == 1) {
+    } else if (data && data.result[0] < 0.5) {
       return '/assets/strong.json';
     }
     return '/assets/loading.json';
   };
+
   const getLottieString = (): string => {
     if (!data) {
       return 'Please wait were checking all your answers!';
-    } else if (data.result[0] == 0) {
+    } else if (data.result[0] >= 0.5) {
       return 'Kamu harus senantiasa menjaga kesehatan dengan pola makan sehat, olahraga teratur, dan memantau kadar gula darah untuk mencegah terjadinya komplikasi yang bisa membahayakan kesehatan saya di masa depan.';
-    } else if (data.result[0] == 1) {
-      return 'Kamu harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko diabetes dan memiliki gaya hidup yang lebih sehat dan bugar.';
+    } else if (data.result[0] < 0.5) {
+      return 'Kamu aman! Harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko diabetes dan memiliki gaya hidup yang lebih sehat dan bugar.';
     }
     return '/assets/loading.json';
   };
   const getLottieTitle = (): string => {
     if (!data) {
       return '';
-    } else if (data.result[0] == 0) {
+    } else if (data.result[0] >= 0.5) {
       return 'Kamu tidak aman';
-    } else if (data.result[0] == 1) {
+    } else if (data.result[0] < 0.5) {
       return 'Kamu aman';
     }
     return '/assets/loading.json';
@@ -60,7 +98,6 @@ export default function Finish({ answers }: IFormFinishProps) {
 
         {/* Invicible Button */}
         <div className="h-16"></div>
-
         {/* Real Button */}
         <Link
           to="/home"

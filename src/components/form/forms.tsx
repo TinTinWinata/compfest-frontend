@@ -1,4 +1,5 @@
 import { createRef, useState } from 'react';
+import { IEndpoint } from '../../interfaces/endpoint-interface';
 import { IFormAnswer } from '../../interfaces/form-answer';
 import { IFormQuestion } from '../../interfaces/form-question';
 import { toastError } from '../../settings/toast-setting';
@@ -8,7 +9,12 @@ import ProgressBar from './progress-bar';
 
 const DEFAULT_ACTIVE = -1;
 
-export default function Forms({ forms }: { forms: IFormQuestion[] }) {
+interface IFormsProps {
+  forms: IFormQuestion[];
+  endpoint: IEndpoint;
+}
+
+export default function Forms({ forms, endpoint }: IFormsProps) {
   const [finish, setFinish] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
   const [activeBox, setActiveBox] = useState<number>(DEFAULT_ACTIVE);
@@ -89,8 +95,8 @@ export default function Forms({ forms }: { forms: IFormQuestion[] }) {
   if (finish) {
     return (
       <div className="bg-primary w-full h-screen overflow-hidden center">
-        <div className="relative p-6 w-[600px] h-[90%] bg-gray-50 rounded-xl ">
-          <Finish answers={answers} />
+        <div className="relative p-6 w-[1000px] h-[90%] bg-gray-50 rounded-xl ">
+          <Finish endpoint={endpoint} answers={answers} />
         </div>
       </div>
     );
@@ -100,7 +106,7 @@ export default function Forms({ forms }: { forms: IFormQuestion[] }) {
     <div className="bg-primary w-full h-screen overflow-hidden  center">
       <div
         data-aos="fade-up"
-        className="  relative w-[600px] h-[90%] p-6 bg-white rounded-xl"
+        className="  relative w-[1000px] h-[90%] p-6 bg-white rounded-xl"
       >
         <ProgressBar from={index + 1} to={forms.length} />
         <FormDetail

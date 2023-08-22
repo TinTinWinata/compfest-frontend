@@ -5,6 +5,11 @@ import { IEndpoint } from '../interfaces/endpoint-interface';
 
 export interface EndpointList {
   auth: AuthEndpoint;
+  ai: AIEndpoint;
+}
+
+interface AIEndpoint {
+  diabetes: IEndpoint;
 }
 
 interface AuthEndpoint {
@@ -18,6 +23,14 @@ const AUTH_ENDPOINT: AuthEndpoint = {
   },
 };
 
+const AI_ENDPOINT: AIEndpoint = {
+  diabetes: {
+    method: Method.POST,
+    url: '/diabetes',
+  },
+};
+
 export const ENDPOINT_LIST: EndpointList = {
   auth: AUTH_ENDPOINT,
+  ai: AI_ENDPOINT,
 };

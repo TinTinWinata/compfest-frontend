@@ -27,10 +27,8 @@ class Service {
     accessToken?: string | null,
     contentType: ContentType = ContentType.JSON
   ) {
-    const baseURL = import.meta.env.VITE_API_URL;
     const config: AxiosRequestConfig = {
       headers: {
-        baseURL,
         Authorization: `Bearer ${accessToken}`,
         ContentType: this.getContentType(contentType),
       },
@@ -57,7 +55,8 @@ class Service {
   }
 
   public generateUrl(endpoint: IEndpoint, id: string = '', param: any = {}) {
-    let url = endpoint.url;
+    const baseURL = import.meta.env.VITE_API_URL;
+    let url = baseURL + endpoint.url;
     url += id ? `/${id}` : ``;
 
     Object.keys(param).forEach((key, index) => {
@@ -73,11 +72,18 @@ class Service {
     data: any = {},
     param: any = {}
   ) {
-    let result: IBackendResponse<T>;
+    let result: IBackendResponse<T> = {
+      data: null,
+      message:
+        'Sorry we have technical issues, please try again later. Have a nice day.',
+      success: false,
+    };
     try {
       const url = this.generateUrl(endpoint, id, param);
       const response = await this.getResponse(endpoint.method, data, url);
-      result = response.data;
+      result.data = response.data;
+      result.message = response.statusText;
+      result.success = true;
     } catch (error) {
       const { response } = error as any;
 
