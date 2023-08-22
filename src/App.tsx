@@ -1,3 +1,6 @@
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,11 +12,11 @@ import MiddlewareRoutes from './middlewares/middleware-route';
 import DiabetesPage from './pages/diabetes-page';
 import { default as HomePage } from './pages/home-page/home-page';
 import LoginPage from './pages/login-page';
-import MobileSkinCancerPage from './pages/skin-cancer-page/mobile-skin-cancer-page';
 import ProfilePage from './pages/profile-page';
+import MobileSkinCancerPage from './pages/skin-cancer-page/mobile-skin-cancer-page';
 import SkinCancerPage from './pages/skin-cancer-page/skin-cancer-page';
-
 function App() {
+  useEffect(()=>{AOS.init()},[])
   return (
     <BrowserRouter>
       <ToastContainer />

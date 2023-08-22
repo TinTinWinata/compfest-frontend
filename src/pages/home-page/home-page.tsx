@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Navbar from '../../components/navbar/navbar';
 import Desease from './desease';
+import HomeMarquee from './home-marquee';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function HomePage() {
     <>
       <Navbar></Navbar>
       <div className="w-full min-h-screen center relative overflow-hidden">
-        <div className="w-[80%] center ">
+        <div data-aos="fade-up" className="w-[80%] center ">
           {/* <div className="sm:block hidden absolute w-[200px] left-[18%] bottom-[30%] translate-y-[50%] ">
             <Player autoplay loop src={'/assets/left-2.json'} />
           </div>
@@ -32,20 +33,25 @@ export default function HomePage() {
             >
               Skin Cancer
             </button>
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="tracking-wide text-sm text-gray-500 mt-2 ">
               Test is conducted free of charge,
             </p>
           </div>
         </div>
       </div>
-      <div className="rounded-t-[5%] w-full min-h-screen h-full  center">
-        <div className="grid grid-cols-2 max-w-[800px] w-full h-[450px] gap-x-10 gap-y-20 m-5">
+      <hr />
+      <div className="mt-10">
+        <HomeMarquee />
+      </div>
+      <div className=" rounded-t-[5%] w-full h-full  center">
+        <div className="bg-white rounded-xl p-10 grid grid-cols-2 max-w-[1000px] w-full h-[550px] gap-x-10 gap-y-20 m-5">
           <Desease name="Diabetes" />
           <Desease name="Coronary Heart" />
           <Desease name="Cancer" />
           <Desease name="Stroke" />
         </div>
       </div>
+      <div className="h-32"></div>
     </>
   );
 }

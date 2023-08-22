@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        archia: 'Archia-Regular, sans-serif',
+      },
       colors: {
         secondary: '#001642',
         primary: '#085BFF',
