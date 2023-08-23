@@ -12,13 +12,15 @@ const DEFAULT_ACTIVE = -1;
 interface IFormsProps {
   forms: IFormQuestion[];
   endpoint: IEndpoint;
+  name: string;
 }
 
-export default function Forms({ forms, endpoint }: IFormsProps) {
+export default function Forms({ forms, endpoint, name }: IFormsProps) {
   const [finish, setFinish] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
   const [activeBox, setActiveBox] = useState<number>(DEFAULT_ACTIVE);
   const [answers, setAnswers] = useState<IFormAnswer[]>([]);
+  const [first, setFirst] = useState<boolean>(true);
   const inputRef = createRef<HTMLInputElement>();
 
   const isCurrentQuestionIsInput = () => {
@@ -96,7 +98,7 @@ export default function Forms({ forms, endpoint }: IFormsProps) {
     return (
       <div className="bg-primary w-full h-screen overflow-hidden center">
         <div className="relative p-6 w-[1000px] h-[90%] bg-gray-50 rounded-xl ">
-          <Finish endpoint={endpoint} answers={answers} />
+          <Finish name={name} endpoint={endpoint} answers={answers} />
         </div>
       </div>
     );

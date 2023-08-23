@@ -149,13 +149,13 @@ const EXAMPLE_QUESTIONS: IFormQuestion[] = [
   },
 ];
 
-export default function DiabetesPage() {
+export default function CardiovaskularPage() {
   return (
     <div>
       <Forms
-        name="Diabetes ANN"
+        name="Cardiovaskular"
         forms={EXAMPLE_QUESTIONS}
-        endpoint={ENDPOINT_LIST.ai.diabetesAnn}
+        endpoint={ENDPOINT_LIST.ai.diabetes}
       />
     </div>
   );

@@ -40,15 +40,16 @@ export default function HomePage() {
         </div>
       </div>
       <hr />
-      <div className="mt-10">
+      <div className="my-5">
         <HomeMarquee />
       </div>
-      <div className=" rounded-t-[5%] w-full h-full  center">
+      <hr />
+      <div className=" rounded-t-[5%] w-full h-full center">
         <div className="bg-white rounded-xl p-10 grid grid-cols-2 max-w-[1000px] w-full h-[550px] gap-x-10 gap-y-20 m-5">
           <Desease name="Diabetes" />
-          <Desease name="Coronary Heart" />
-          <Desease name="Cancer" />
+          <Desease name="Cardiovaskular" />
           <Desease name="Stroke" />
+          <Desease name="Mental Health" />
         </div>
       </div>
       <div className="h-32"></div>

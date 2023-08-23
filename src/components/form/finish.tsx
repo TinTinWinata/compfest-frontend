@@ -2,38 +2,38 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUserAuth } from '../../contexts/user-context';
 import { IAIResponse } from '../../interfaces/ai-response-interface';
 import { IEndpoint } from '../../interfaces/endpoint-interface';
 import { IFormAnswer } from '../../interfaces/form-answer';
 import { toastError } from '../../settings/toast-setting';
 import Service from '../../utils/service';
-// import UseDiabetics from '../../hooks/use-diabetics';
-// import { IFormAnswer } from '../../types/form-answer';
 
-interface IFormFinishProps {
+export interface IFormFinishProps {
   answers: IFormAnswer[];
   endpoint: IEndpoint;
+  name: string;
 }
 
-interface IResultType {
+export interface IResultType {
   [key: string]: number;
 }
 
-export default function Finish({ answers, endpoint }: IFormFinishProps) {
+export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
+  const { saveDesease } = useUserAuth();
   const [data, setData] = useState<IAIResponse | null>(null);
   const navigate = useNavigate();
   const fetch = async () => {
     const service = new Service();
-    const data = dataConverter(answers);
-    console.log('data : ', data);
+    const data: IResultType = dataConverter(answers);
     const response = await service.request<IAIResponse>(
       endpoint,
       undefined,
       data
     );
-    console.log('setting data : ', response.data);
     if (response.success) {
       setData(response.data);
+      saveDesease(data, name);
     } else {
       console.log('response : ', response);
       toastError(response.message);

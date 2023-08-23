@@ -10,6 +10,13 @@ export interface EndpointList {
 
 interface AIEndpoint {
   diabetes: IEndpoint;
+  diabetesAnn: IEndpoint;
+  cardiovaskular: IEndpoint;
+  cardiovaskularAnn: IEndpoint;
+  stroke: IEndpoint;
+  strokeAnn: IEndpoint;
+  mental: IEndpoint;
+  mentalAnn: IEndpoint;
 }
 
 interface AuthEndpoint {
@@ -27,6 +34,34 @@ const AI_ENDPOINT: AIEndpoint = {
   diabetes: {
     method: Method.POST,
     url: '/diabetes',
+  },
+  diabetesAnn: {
+    method: Method.POST,
+    url: '/diabetes-ann',
+  },
+  cardiovaskular: {
+    method: Method.POST,
+    url: '/cardiovaskular',
+  },
+  cardiovaskularAnn: {
+    method: Method.POST,
+    url: '/cardiovaskular-ann',
+  },
+  mental: {
+    method: Method.POST,
+    url: '/mental',
+  },
+  mentalAnn: {
+    method: Method.POST,
+    url: '/mental-ann',
+  },
+  stroke: {
+    method: Method.POST,
+    url: '/stroke',
+  },
+  strokeAnn: {
+    method: Method.POST,
+    url: '/stroke-ann',
   },
 };
 

@@ -10,11 +10,14 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IResultType } from '../components/form/finish';
 import { IChildrenProps } from '../interfaces/children-interface';
 import { ILoginPayload } from '../interfaces/login-payload';
 import { IRegisterPayload } from '../interfaces/register-payload';
+import { db } from '../settings/firebase-setting';
 import {
   toastError,
   toastFirebaseError,
@@ -27,6 +30,7 @@ interface IUserContext {
   register: (payload: IRegisterPayload) => void;
   logout: () => Promise<void>;
   loginGoogle: () => Promise<void>;
+  saveDesease: (answers: IResultType, name: string) => Promise<void>;
 }
 
 const userContext = createContext<IUserContext>({} as IUserContext);
@@ -73,6 +77,24 @@ export function UserProvider({ children }: IChildrenProps) {
       });
   }
 
+  async function getDesease() {}
+
+  async function saveDesease(
+    answers: IResultType,
+    name: string
+  ): Promise<void> {
+    try {
+      console.log('user : ', user);
+      if (user) {
+        console.log('saving ...');
+        await setDoc(doc(db, user.uid, name), answers);
+        console.log('saved ...');
+      }
+    } catch (err) {
+      toastError('Failed to save desease to profile');
+    }
+  }
+
   async function logout() {
     try {
       setUser(null);
@@ -103,7 +125,7 @@ export function UserProvider({ children }: IChildrenProps) {
     }
   }
 
-  const data = { login, user, register, logout, loginGoogle };
+  const data = { login, user, register, logout, loginGoogle, saveDesease };
 
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }
