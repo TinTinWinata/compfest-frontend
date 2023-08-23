@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Navbar from '../../components/navbar/navbar';
-import Desease from './desease';
+import HomeDeseaseWrapper from './home-disease-wrapper';
+import HomeHowTo from './home-how-to';
+import HomeJoin from './home-join';
 import HomeMarquee from './home-marquee';
 
 export default function HomePage() {
@@ -39,19 +41,13 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <hr />
-      <div className="mt-10">
+      <div className="my-20">
         <HomeMarquee />
       </div>
-      <div className=" rounded-t-[5%] w-full h-full  center">
-        <div className="bg-white rounded-xl p-10 grid grid-cols-2 max-w-[1000px] w-full h-[550px] gap-x-10 gap-y-20 m-5">
-          <Desease name="Diabetes" />
-          <Desease name="Coronary Heart" />
-          <Desease name="Cancer" />
-          <Desease name="Stroke" />
-        </div>
-      </div>
-      <div className="h-32"></div>
+      <HomeHowTo />
+      <HomeDeseaseWrapper />
+      <HomeJoin />
+      {/* <Footer /> */}
     </>
   );
 }

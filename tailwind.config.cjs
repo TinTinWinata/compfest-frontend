@@ -12,6 +12,7 @@ module.exports = {
         primaryHover: '#0552eb',
         background: '#FFFFFF',
         accent: '#FF8025',
+        backgroundGray: '#2C374F',
       },
     },
   },

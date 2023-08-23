@@ -35,7 +35,7 @@ export default function SkinCancerPage() {
   };
 
   return (
-    <div className="w-full h-full center relative overflow-hidden">
+    <div className="w-full h-screen center relative overflow-hidden">
       <div className="w-full h-full center">
         <div className="border-gray-500 relative border border-opacity-20 rounded-[5%] w-[70%] h-[80%] center">
           <div className="flex flex-col gap-4">

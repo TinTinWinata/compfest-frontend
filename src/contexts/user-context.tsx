@@ -10,11 +10,14 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IChildrenProps } from '../interfaces/children-interface';
 import { ILoginPayload } from '../interfaces/login-payload';
 import { IRegisterPayload } from '../interfaces/register-payload';
+import { IUserFirestore } from '../interfaces/user-firestore-interface';
+import { db } from '../settings/firebase-setting';
 import {
   toastError,
   toastFirebaseError,
@@ -24,7 +27,7 @@ import {
 interface IUserContext {
   login: (payload: ILoginPayload) => void;
   user: User | null;
-  register: (payload: IRegisterPayload) => void;
+  register: (payload: IRegisterPayload) => Promise<boolean>;
   logout: () => Promise<void>;
   loginGoogle: () => Promise<void>;
 }
@@ -35,6 +38,7 @@ export function UserProvider({ children }: IChildrenProps) {
   const secret = import.meta.env.VITE_SECRET;
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState<User | null>(null);
+  const [firestore, setFirestore] = useState<IUserFirestore | null>(null);
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -45,6 +49,7 @@ export function UserProvider({ children }: IChildrenProps) {
     onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         setUser(user);
+        loadFirestore(user.uid);
       }
     });
   };
@@ -86,8 +91,19 @@ export function UserProvider({ children }: IChildrenProps) {
     }
   }
 
-  async function register(payload: IRegisterPayload) {
+  function loadFirestore(id: string) {
     try {
+      onSnapshot(doc(db, 'users', id), (doc) => {
+        const data = doc.data() as IUserFirestore;
+        console.log('data : ', data);
+        setFirestore(data);
+      });
+    } catch (err) {}
+  }
+
+  async function register(payload: IRegisterPayload): Promise<boolean> {
+    try {
+      console.log('test');
       const credential = await createUserWithEmailAndPassword(
         auth,
         payload.email,
@@ -95,11 +111,17 @@ export function UserProvider({ children }: IChildrenProps) {
       );
       if (credential) {
         const user = credential.user;
+        setDoc(doc(db, 'users', user.uid), {
+          tests: [],
+        });
         await updateProfile(user, { displayName: payload.name });
+        return true;
       }
+      return false;
     } catch (err: any) {
       const { code, message } = err;
       toastError(code + ' ' + message);
+      return false;
     }
   }
 

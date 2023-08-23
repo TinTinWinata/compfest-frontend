@@ -15,6 +15,7 @@ export function toastSuccess(str: String) {
 }
 
 export function toastError(str: String) {
+  console.log('[Error] : ', str);
   toast.error(str, {
     position: position,
     autoClose: 5000,
