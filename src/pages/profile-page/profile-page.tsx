@@ -14,14 +14,14 @@ export default function ProfilePage() {
       <Navbar />
       <div data-aos="fade-up" className="center">
         <div className="w-[60%] mt-32 max-w-screen-xl">
-          <div className="w-full h-full border rounded-xl border-gray-400 border-opacity-30 p-3 flex  ">
-            <div className="flex  p-8">
+          <div className="w-full overflow-hidden h-full border rounded-xl border-gray-400 border-opacity-30 p-3 flex  ">
+            <div className="center p-8">
               <img
                 className="w-24 rounded-full"
                 src="/assets/profile.png"
                 alt=""
               />
-              <div className="w-full grow ml-3 mr-20 flex flex-col">
+              <div className="w-full grow ml-6 mr-20 flex flex-col">
                 <h1 className="font-semibold text-[30px] text-gray-500">
                   {user?.displayName}
                 </h1>
@@ -53,8 +53,8 @@ export default function ProfilePage() {
               <CiLogout className="" />
             </div>
           </div>
-          <hr className="my-10" />
-          <ProfileDisease/>
+          <div className="h-5"></div>
+          <ProfileDisease />
         </div>
       </div>
     </>

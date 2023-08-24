@@ -9,9 +9,9 @@ export default function MobileSkinCancerPage() {
     const { localRef, webcamActive, setupSources } = useJoinRoom(id, 'join');
     const handleScreenshot = (src: string) => {};
     return (
-      <div className="w-full h-full center bg-primary">
+      <div className="w-full h-screen overflow-hidden center bg-primary">
         <MobileView>
-          <div className="m-10 center video-wrapper relative ">
+          <div className="m-10 h-full center video-wrapper relative ">
             {webcamActive && (
               <>
                 <div className="absolute z-0 left-[-40px]  top-10  translate-y-[-100%]">

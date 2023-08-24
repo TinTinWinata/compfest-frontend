@@ -29,7 +29,7 @@ export default function SkinCancerTutorial({
   return (
     <div
       className={
-        'h-full transition-all  px-20  bg-primary shadow-md  center ' +
+        'h-full transition-all duration-500  px-20  bg-primary shadow-md  center ' +
         getClass()
       }
     >

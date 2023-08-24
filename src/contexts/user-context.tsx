@@ -149,7 +149,7 @@ export function UserProvider({ children }: IChildrenProps) {
     return success;
   };
   const getPercentage = (): number => {
-    if (firestore) {
+    if (firestore && firestore.tests.length > 0) {
       const total = firestore.tests.length;
       const success = getSuccess();
       return (success / total) * 100;

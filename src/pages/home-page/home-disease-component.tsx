@@ -19,7 +19,7 @@ export default function DiseaseComponent({
   const isFocusButNotThis = () => selected >= 0 && selected !== index;
   return (
     <Link
-      to={'/' + name.toLowerCase()}
+      to={'/' + name.toLowerCase().replace(' ', '-')}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className="relative w-full cursor-pointer"

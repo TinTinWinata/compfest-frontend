@@ -9,7 +9,7 @@ import ProgressBar from './progress-bar';
 
 const DEFAULT_ACTIVE = -1;
 
-interface IFormsProps {
+export interface IFormsProps {
   forms: IFormQuestion[];
   endpoint: IEndpoint;
   name: string;

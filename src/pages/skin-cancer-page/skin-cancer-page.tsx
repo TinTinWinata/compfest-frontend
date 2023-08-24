@@ -13,10 +13,8 @@ export default function SkinCancerPage() {
   const uuid = user ? user.uid : uuidv4();
   const [firstSetup, setFirstSetup] = useState<boolean>(true);
   const navigate = useNavigate();
-  const { hangUp, remoteRef, setupSources, isIncomeStream } = useHostRoom(
-    uuid,
-    'create'
-  );
+  const { hangUp, remoteRef, setupSources, isIncomeStream, screenshotRemote } =
+    useHostRoom(uuid, 'create');
 
   const getLink = () => `/skin-cancer/${uuid}`;
   if (isMobile) {
@@ -51,7 +49,10 @@ export default function SkinCancerPage() {
             ></video>
             {isIncomeStream && (
               <div className="center">
-                <button className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold">
+                <button
+                  onClick={screenshotRemote}
+                  className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
+                >
                   Take Screenshot
                 </button>
               </div>
