@@ -105,10 +105,10 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
   }
 
   return (
-    <div className="bg-primary w-full h-screen overflow-hidden  center">
+    <div className="bg-primary  w-full h-screen overflow-hidden  center">
       <div
         data-aos="fade-up"
-        className="  relative w-[1000px] h-[90%] p-6 bg-white rounded-xl"
+        className="shadow-xl relative w-[1000px] h-[80%] p-6 bg-white rounded-xl"
       >
         <ProgressBar from={index + 1} to={forms.length} />
         <FormDetail

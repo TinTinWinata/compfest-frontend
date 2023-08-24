@@ -25,18 +25,20 @@ export function RegisterProvider({ children }: ContentLayout) {
     setOpen(true);
   };
 
-  const handleOnSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    console.log('test');
+  const handleOnSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { email, name, password, confirm } = e.target;
+    const { email, username, password, confirm } = e.target;
     if (password.value !== confirm.value) {
       toastError('Password and confirm password is not the same value.');
     }
     const payload: IRegisterPayload = {
+      name: username.value,
       email: email.value,
       password: password.value,
     };
-    register(payload);
+    if (await register(payload)) {
+      setOpen(false);
+    }
   };
 
   const data = { openRegister };
@@ -53,7 +55,7 @@ export function RegisterProvider({ children }: ContentLayout) {
       >
         <div className="flex flex-col gap-3">
           <Input icon={<GoPeople />} label="Email Address" name="email" />
-          <Input icon={<GoPeople />} label="Name" name="name" />
+          <Input icon={<GoPeople />} label="Name" name="username" />
           <Input
             type="password"
             icon={<AiOutlineLock />}

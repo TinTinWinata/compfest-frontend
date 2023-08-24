@@ -71,3 +71,20 @@ html, body, #root{
 .gradient-block{
   background-image: linear-gradient(90deg,rgb(27, 104, 175),rgba(179,24,255,0) 7%),linear-gradient(270deg,#1b68af 1%,rgba(179,24,255,0) 10%);
 }
+
+.gradient-white{ 
+  background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(221,221,223,1) 100%);
+
+}
+
+.gradient-circle-blue{
+  background: rgb(246,246,255);
+background: radial-gradient(circle, rgba(246,246,255,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.glow-blue{
+  -webkit-box-shadow:0px 0px 102px 0px rgba(44,155,189,0.3);
+-moz-box-shadow: 0px 0px 102px 0px rgba(44,155,189,0.3);
+box-shadow: 0px 0px 102px 0px rgba(44,155,189,0.3);
+}
