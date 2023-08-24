@@ -1,12 +1,14 @@
-import { createRef, useState } from 'react';
+import { ChangeEvent, RefObject, createRef, useEffect, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 interface IInputProps {
   label: string;
   name: string;
   disabled?: boolean;
   type?: string;
+  inputRef?: RefObject<HTMLInputElement>;
   icon?: JSX.Element;
   defaultValue?: string;
+  externalValue?: string;
 }
 
 export default function Input({
@@ -16,10 +18,13 @@ export default function Input({
   disabled = false,
   type,
   icon,
+  inputRef,
+  externalValue,
 }: IInputProps) {
   const [filterType, setFilterType] = useState(type);
   const [labelUp, setLabelUp] = useState<boolean>(false);
-  const inputRef = createRef<HTMLInputElement>();
+  const [value, setValue] = useState<string>('');
+  inputRef = inputRef ? inputRef : createRef<HTMLInputElement>();
   const tooglePassword = () => {
     if (filterType === 'password') {
       setFilterType('text');
@@ -28,11 +33,21 @@ export default function Input({
     }
   };
 
+  useEffect(() => {
+    if (externalValue) {
+      setValue(externalValue);
+    }
+  }, [externalValue]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   const handleFocus = () => {
     setLabelUp(true);
   };
   const handleBlur = () => {
-    if (inputRef.current && inputRef.current.value !== '') {
+    if (inputRef && inputRef.current && inputRef.current.value !== '') {
       setLabelUp(true);
     } else {
       setLabelUp(false);
@@ -72,10 +87,12 @@ export default function Input({
         {label}
       </div>
       <input
-      autoComplete=''
+        onChange={handleChange}
+        autoComplete=""
         onFocus={handleFocus}
         onBlur={handleBlur}
         ref={inputRef}
+        value={value}
         type={filterType}
         defaultValue={defaultValue}
         disabled={disabled}

@@ -6,6 +6,7 @@ import { useUserAuth } from '../../contexts/user-context';
 import { IAIResponse } from '../../interfaces/ai-response-interface';
 import { IEndpoint } from '../../interfaces/endpoint-interface';
 import { IFormAnswer } from '../../interfaces/form-answer';
+import { ITest } from '../../interfaces/user-firestore-interface';
 import { toastError } from '../../settings/toast-setting';
 import Service from '../../utils/service';
 
@@ -31,9 +32,14 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
       undefined,
       data
     );
-    if (response.success) {
+    if (response.success && response.data) {
       setData(response.data);
-      saveDesease(data, name);
+      const test: ITest = {
+        answers: data,
+        name: name,
+        result: response.data.result[0],
+      };
+      saveDesease(test);
     } else {
       console.log('response : ', response);
       toastError(response.message);

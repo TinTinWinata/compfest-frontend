@@ -14,7 +14,7 @@ import DiabetesPage from './pages/diabetes-page';
 import { default as HomePage } from './pages/home-page/home-page';
 import LoginPage from './pages/login-page';
 import MentalHealthPage from './pages/mental-health-page';
-import ProfilePage from './pages/profile-page';
+import ProfilePage from './pages/profile-page/profile-page';
 import MobileSkinCancerPage from './pages/skin-cancer-page/mobile-skin-cancer-page';
 import SkinCancerPage from './pages/skin-cancer-page/skin-cancer-page';
 import StrokePage from './pages/stroke';

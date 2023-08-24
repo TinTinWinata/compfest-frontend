@@ -1,4 +1,4 @@
 export interface IAIResponse {
-  result: float[];
+  result: number[];
   status: string;
 }

@@ -1,16 +1,18 @@
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { CiLogout } from 'react-icons/ci';
-import Navbar from '../components/navbar/navbar';
-import { useUserAuth } from '../contexts/user-context';
+import Navbar from '../../components/navbar/navbar';
+import { useUserAuth } from '../../contexts/user-context';
+import ProfileDisease from './profile-disease';
 
 export default function ProfilePage() {
-  const { user, logout } = useUserAuth();
+  const { user, logout, firestore, getPercentage } = useUserAuth();
   const handleLogout = () => logout();
+  const percentage = getPercentage();
   return (
     <>
       <Navbar />
-      <div className="center">
+      <div data-aos="fade-up" className="center">
         <div className="w-[60%] mt-32 max-w-screen-xl">
           <div className="w-full h-full border rounded-xl border-gray-400 border-opacity-30 p-3 flex  ">
             <div className="flex  p-8">
@@ -21,11 +23,9 @@ export default function ProfilePage() {
               />
               <div className="w-full grow ml-3 mr-20 flex flex-col">
                 <h1 className="font-semibold text-[30px] text-gray-500">
-                  Justine Winata
+                  {user?.displayName}
                 </h1>
-                <p className="text-gray-500 text-opacity-60">
-                  tintin6892@gmail.com
-                </p>
+                <p className="text-gray-500 text-opacity-60">{user?.email}</p>
               </div>
             </div>
             <div className="border-l border-r my-5 border-gray-300 px-20 flex flex-col justify-center items-center">
@@ -33,14 +33,14 @@ export default function ProfilePage() {
                 Test Taked
               </div>
               <div className="font-semibold text-gray-600 text-opacity-80 text-[45px]">
-                939
+                {firestore?.tests.length}
               </div>
             </div>
             <div className="center ml-20">
               <CircularProgressbar
                 className="w-28 h-28"
-                value={10}
-                text={`${10}%`}
+                value={percentage}
+                text={`${percentage}%`}
               />
             </div>
           </div>
@@ -53,6 +53,8 @@ export default function ProfilePage() {
               <CiLogout className="" />
             </div>
           </div>
+          <hr className="my-10" />
+          <ProfileDisease/>
         </div>
       </div>
     </>

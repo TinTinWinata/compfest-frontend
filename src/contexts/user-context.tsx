@@ -13,11 +13,10 @@ import {
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IResultType } from '../components/form/finish';
 import { IChildrenProps } from '../interfaces/children-interface';
 import { ILoginPayload } from '../interfaces/login-payload';
 import { IRegisterPayload } from '../interfaces/register-payload';
-import { IUserFirestore } from '../interfaces/user-firestore-interface';
+import { ITest, IUserFirestore } from '../interfaces/user-firestore-interface';
 import { db } from '../settings/firebase-setting';
 import {
   toastError,
@@ -31,7 +30,9 @@ interface IUserContext {
   register: (payload: IRegisterPayload) => Promise<boolean>;
   logout: () => Promise<void>;
   loginGoogle: () => Promise<void>;
-  saveDesease: (answers: IResultType, name: string) => Promise<void>;
+  saveDesease: (test: ITest) => Promise<void>;
+  firestore: IUserFirestore | null;
+  getPercentage: () => number;
 }
 
 const userContext = createContext<IUserContext>({} as IUserContext);
@@ -80,18 +81,13 @@ export function UserProvider({ children }: IChildrenProps) {
       });
   }
 
-  async function getDesease() {}
-
-  async function saveDesease(
-    answers: IResultType,
-    name: string
-  ): Promise<void> {
+  async function saveDesease(test: ITest): Promise<void> {
     try {
-      console.log('user : ', user);
-      if (user) {
-        console.log('saving ...');
-        await setDoc(doc(db, user.uid, name), answers);
-        console.log('saved ...');
+      console.log('saving ...', test);
+      if (user && firestore) {
+        const temp = { ...firestore };
+        temp.tests.push(test);
+        await setDoc(doc(db, 'users', user.uid), temp);
       }
     } catch (err) {
       toastError('Failed to save desease to profile');
@@ -115,7 +111,6 @@ export function UserProvider({ children }: IChildrenProps) {
     try {
       onSnapshot(doc(db, 'users', id), (doc) => {
         const data = doc.data() as IUserFirestore;
-        console.log('data : ', data);
         setFirestore(data);
       });
     } catch (err) {}
@@ -123,7 +118,6 @@ export function UserProvider({ children }: IChildrenProps) {
 
   async function register(payload: IRegisterPayload): Promise<boolean> {
     try {
-      console.log('test');
       const credential = await createUserWithEmailAndPassword(
         auth,
         payload.email,
@@ -145,7 +139,34 @@ export function UserProvider({ children }: IChildrenProps) {
     }
   }
 
-  const data = { login, user, register, logout, loginGoogle, saveDesease };
+  const getSuccess = () => {
+    let success = 0;
+    firestore?.tests.forEach((test: ITest) => {
+      if (test.result < 0.5) {
+        success += 1;
+      }
+    });
+    return success;
+  };
+  const getPercentage = (): number => {
+    if (firestore) {
+      const total = firestore.tests.length;
+      const success = getSuccess();
+      return (success / total) * 100;
+    }
+    return 0;
+  };
+
+  const data = {
+    login,
+    user,
+    register,
+    logout,
+    loginGoogle,
+    saveDesease,
+    firestore,
+    getPercentage,
+  };
 
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }

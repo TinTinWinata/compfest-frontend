@@ -1,6 +1,8 @@
+import { IResultType } from "../components/form/finish";
+
 export interface ITest {
   name: string;
-  answers: any;
+  answers: IResultType;
   result: number;
 }
 

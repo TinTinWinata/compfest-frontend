@@ -54,6 +54,7 @@ export default function HomeHowTo() {
             const onClick = () => setSelected(index);
             return (
               <div
+                key={index}
                 onClick={onClick}
                 className={`cursor-pointer bg-primary w-3 h-3 rounded-full ${
                   isSelected ? 'opacity-100' : 'opacity-50'

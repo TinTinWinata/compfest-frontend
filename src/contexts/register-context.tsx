@@ -8,7 +8,8 @@ import { toastError } from '../settings/toast-setting';
 import { useUserAuth } from './user-context';
 
 interface IRegisterContext {
-  openRegister: () => void;
+  openRegister: (email?: string) => void;
+  setEmail: (email: string) => void;
 }
 
 const registerContext = createContext({} as IRegisterContext);
@@ -21,7 +22,10 @@ export function RegisterProvider({ children }: ContentLayout) {
   const [open, setOpen] = useState<boolean>(false);
   const { register } = useUserAuth();
 
-  const openRegister = () => {
+  const [email, setEmail] = useState<string>('');
+
+  const openRegister = (email?: string) => {
+    if (email) setEmail(email);
     setOpen(true);
   };
 
@@ -41,7 +45,7 @@ export function RegisterProvider({ children }: ContentLayout) {
     }
   };
 
-  const data = { openRegister };
+  const data = { openRegister, setEmail };
 
   return (
     <registerContext.Provider value={data}>
@@ -54,7 +58,12 @@ export function RegisterProvider({ children }: ContentLayout) {
         setOpen={setOpen}
       >
         <div className="flex flex-col gap-3">
-          <Input icon={<GoPeople />} label="Email Address" name="email" />
+          <Input
+            icon={<GoPeople />}
+            label="Email Address"
+            name="email"
+            externalValue={email}
+          />
           <Input icon={<GoPeople />} label="Name" name="username" />
           <Input
             type="password"

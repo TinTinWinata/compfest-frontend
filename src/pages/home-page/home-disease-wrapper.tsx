@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DiseaseComponent from './home-disease-component';
 
 const DISEASE_LIST = [
@@ -22,9 +22,7 @@ const DISEASE_LIST = [
 
 export default function HomeDeseaseWrapper() {
   const [selected, setSelected] = useState<number>(-1);
-  useEffect(() => {
-    console.log('selected : ', selected);
-  }, [selected]);
+
   return (
     <div className="bg-backgroundGray pb-10 w-full min-h-[900px]  flex justify-center items-center">
       <div className="w-full flex flex-col items-center max-w-[900px]">

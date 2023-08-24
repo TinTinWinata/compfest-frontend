@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
+import Footer from '../../components/footer';
 import Navbar from '../../components/navbar/navbar';
 import HomeDeseaseWrapper from './home-disease-wrapper';
 import HomeHowTo from './home-how-to';
 import HomeJoin from './home-join';
-import HomeMarquee from './home-marquee';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -41,13 +41,13 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="my-20">
+      {/* <div className="my-20">
         <HomeMarquee />
-      </div>
+      </div> */}
       <HomeHowTo />
       <HomeDeseaseWrapper />
       <HomeJoin />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
