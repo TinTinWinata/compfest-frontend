@@ -16,6 +16,7 @@ import { db } from '../settings/firebase-setting';
 import { toastFirebaseError } from '../settings/toast-setting';
 import { servers } from '../settings/webrtc-setting';
 import { screenshotVideoToFirebase } from '../utils/firebase-helper';
+import useSkinCancer from './useSkinCancer';
 
 export default function useHostRoom(callId: string, mode: string) {
   const pc = new RTCPeerConnection(servers);
@@ -23,6 +24,7 @@ export default function useHostRoom(callId: string, mode: string) {
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
   const [isIncomeStream, setIsIncomeStream] = useState<boolean>(false);
+  const { data, checkResult } = useSkinCancer();
 
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
@@ -30,9 +32,14 @@ export default function useHostRoom(callId: string, mode: string) {
   const localRef = useRef<HTMLVideoElement>();
   const remoteRef = useRef<HTMLVideoElement>();
 
+  const saveScreenshot = async (link: string) => {
+    await updateDoc(doc(db, 'calls', callId), { result: link });
+  };
+
   const screenshotRemote = async () => {
     if (remoteRef && remoteRef.current) {
-      screenshotVideoToFirebase(remoteRef, callId);
+      const result = await screenshotVideoToFirebase(remoteRef, callId);
+      if (result !== '') saveScreenshot(result);
     }
   };
 
@@ -131,6 +138,7 @@ export default function useHostRoom(callId: string, mode: string) {
       await setDoc(callDoc, { offer });
       onSnapshot(callDoc, (snapshot: any) => {
         const data = snapshot.data();
+        checkResult(data);
         if (!pc.currentRemoteDescription && data?.answer) {
           const answerDescription = new RTCSessionDescription(data.answer);
           pc.setRemoteDescription(answerDescription);
@@ -215,5 +223,12 @@ export default function useHostRoom(callId: string, mode: string) {
       }
     }
   };
-  return { remoteRef, hangUp, setupSources, isIncomeStream, screenshotRemote };
+  return {
+    remoteRef,
+    hangUp,
+    setupSources,
+    isIncomeStream,
+    screenshotRemote,
+    data,
+  };
 }

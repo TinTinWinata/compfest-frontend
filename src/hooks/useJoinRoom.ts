@@ -12,18 +12,32 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../settings/firebase-setting';
 import { servers } from '../settings/webrtc-setting';
+import { screenshotVideoToFirebase } from '../utils/firebase-helper';
+import useSkinCancer from './useSkinCancer';
 
 export default function useJoinRoom(callId: string, mode: string) {
   const pc = new RTCPeerConnection(servers);
   // Invite Mutation
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
+  const { checkResult, data } = useSkinCancer();
 
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
 
   const localRef = useRef<any>();
   const remoteRef = useRef<any>();
+
+  const saveScreenshot = async (link: string) => {
+    await setDoc(doc(db, 'calls', callId), { result: link });
+  };
+
+  const screenshotLocal = async () => {
+    if (localRef && localRef.current) {
+      const result = await screenshotVideoToFirebase(localRef, callId);
+      if (result !== '') saveScreenshot(result);
+    }
+  };
 
   const setupSources = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
@@ -62,8 +76,6 @@ export default function useJoinRoom(callId: string, mode: string) {
       setRoomId(callDoc.id);
 
       pc.onicecandidate = (event: any) => {
-        // event.candidate && offerCandidates.add(event.candidate.toJSON());
-        console.log('hello world');
         event.candidate && addDoc(offerCandidates, event.candidate.toJSON());
       };
 
@@ -75,8 +87,8 @@ export default function useJoinRoom(callId: string, mode: string) {
         type: offerDescription.type,
       };
 
-      // await callDoc.set({ offer });
       await setDoc(callDoc, { offer });
+
       onSnapshot(callDoc, (snapshot: any) => {
         const data = snapshot.data();
         if (!pc.currentRemoteDescription && data?.answer) {
@@ -133,6 +145,10 @@ export default function useJoinRoom(callId: string, mode: string) {
       };
 
       await updateDoc(callDoc, { answer });
+      onSnapshot(callDoc, (snapshot: any) => {
+        const data = snapshot.data();
+        checkResult(data);
+      });
 
       onSnapshot(offerCandidates, (snapshot: any) => {
         snapshot.docChanges().forEach((change: any) => {
@@ -164,5 +180,13 @@ export default function useJoinRoom(callId: string, mode: string) {
       }
     }
   };
-  return { remoteRef, hangUp, setupSources, localRef, webcamActive };
+  return {
+    remoteRef,
+    hangUp,
+    setupSources,
+    localRef,
+    webcamActive,
+    screenshotLocal,
+    data,
+  };
 }

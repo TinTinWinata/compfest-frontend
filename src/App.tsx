@@ -39,6 +39,7 @@ function App() {
               ></Route>
               {DISEASE_LIST.map((disease: IDiseaseForm) => (
                 <Route
+                  key={disease.link}
                   path={disease.link}
                   element={
                     <Forms

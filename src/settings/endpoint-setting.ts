@@ -17,6 +17,7 @@ interface AIEndpoint {
   strokeAnn: IEndpoint;
   mental: IEndpoint;
   mentalAnn: IEndpoint;
+  dcnn: IEndpoint;
 }
 
 interface AuthEndpoint {
@@ -31,6 +32,10 @@ const AUTH_ENDPOINT: AuthEndpoint = {
 };
 
 const AI_ENDPOINT: AIEndpoint = {
+  dcnn: {
+    method: Method.POST,
+    url: '/dcnn',
+  },
   diabetes: {
     method: Method.POST,
     url: '/diabetes',

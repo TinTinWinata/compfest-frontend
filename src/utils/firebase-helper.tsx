@@ -5,7 +5,7 @@ import { storage } from '../settings/firebase-setting';
 export const screenshotVideoToFirebase = async (
   remoteRef: MutableRefObject<HTMLVideoElement | undefined>,
   fileName: string
-) => {
+): Promise<string> => {
   if (remoteRef.current) {
     const canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
@@ -23,4 +23,5 @@ export const screenshotVideoToFirebase = async (
       });
     }
   }
+  return '';
 };

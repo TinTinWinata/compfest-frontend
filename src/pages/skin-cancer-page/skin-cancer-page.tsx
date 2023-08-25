@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useUserAuth } from '../../contexts/user-context';
 import useHostRoom from '../../hooks/useHostRoom';
 import { toastSuccess } from '../../settings/toast-setting';
+import SkinCancerResult from './skin-cancer-result';
 import SkinCancerTutorial from './skin-cancer-tutorial';
 
 export default function SkinCancerPage() {
@@ -32,38 +33,50 @@ export default function SkinCancerPage() {
     setupSources();
   };
 
+  const data = null;
+
   return (
     <div className="w-full h-screen center relative overflow-hidden">
       <div className="w-full h-full center">
         <div className="border-gray-500 relative border border-opacity-20 rounded-[5%] w-[70%] h-[80%] center">
-          <div className="flex flex-col gap-4 ">
-            <video
-              playsInline
-              autoPlay
-              muted
-              className={
-                'w-[500px] h-[500px] rounded-md ' +
-                (isIncomeStream ? ' block ' : ' hidden ')
-              }
-              ref={remoteRef}
-            ></video>
-            {isIncomeStream && (
-              <div className="center">
-                <button
-                  onClick={screenshotRemote}
-                  className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
-                >
-                  Take Screenshot
-                </button>
+          {!data ? (
+            <>
+              <div className="flex flex-col gap-4 ">
+                <video
+                  playsInline
+                  autoPlay
+                  muted
+                  className={
+                    'w-[500px] h-[500px] rounded-md ' +
+                    (isIncomeStream ? ' block ' : ' hidden ')
+                  }
+                  ref={remoteRef}
+                ></video>
+                {isIncomeStream && (
+                  <div className="center">
+                    <button
+                      onClick={screenshotRemote}
+                      className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
+                    >
+                      Take Screenshot
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div className="absolute left-[50%] top-0 translate-y-[-50%] text-center w-[60%] translate-x-[-50%] bg-white p-5">
-            <h1 className="text-primary text-[50px] font-bold">Upload Image</h1>
-            <p className="font-semibold text-gray-500">
-              Open this website on your mobile devices
-            </p>
-          </div>
+              <div className="absolute left-[50%] top-0 translate-y-[-50%] text-center w-[60%] translate-x-[-50%] bg-white p-5">
+                <h1 className="text-primary text-[50px] font-bold">
+                  Upload Image
+                </h1>
+                <p className="font-semibold text-gray-500">
+                  Open this website on your mobile devices
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <SkinCancerResult data={data} />
+            </>
+          )}
           {!isIncomeStream && (
             <div className="flex flex-col gap-5 items-center justify-center w-fit h-fit">
               <QRCode
