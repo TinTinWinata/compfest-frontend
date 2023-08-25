@@ -38,7 +38,6 @@ interface IUserContext {
 const userContext = createContext<IUserContext>({} as IUserContext);
 
 export function UserProvider({ children }: IChildrenProps) {
-  const secret = import.meta.env.VITE_SECRET;
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState<User | null>(null);
   const [firestore, setFirestore] = useState<IUserFirestore | null>(null);

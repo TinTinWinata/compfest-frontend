@@ -3,8 +3,8 @@ import { IFormQuestion } from '../interfaces/form-question';
 export const MENTAL_QUESTIONS: IFormQuestion[] = [
   {
     questionValue: 'Age',
-    question: 'Berapa umur anda?',
-    answer: ['Ya'],
+    question: 'Berapakah umur anda?',
+    answer: [],
     answerValue: [],
   },
   {

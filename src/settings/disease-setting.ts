@@ -11,56 +11,57 @@ import { ENDPOINT_LIST } from './endpoint-setting';
 import { MENTAL_QUESTIONS } from './mental-setting';
 import { STROKE_QUESTIONS } from './stroke-setting';
 
-export interface IDisease {
-  cardiovaskular: IFormsProps;
-  diabetes: IFormsProps;
-  mental: IFormsProps;
-  stroke: IFormsProps;
-  diabetesAnn: IFormsProps;
-  cardiovaskularAnn: IFormsProps;
-  mentalAnn: IFormsProps;
-  strokeAnn: IFormsProps;
+export interface IDiseaseForm extends IFormsProps {
+  link: string;
 }
 
-export const DISEASE_LIST: IDisease = {
-  cardiovaskular: {
+export const DISEASE_LIST: IDiseaseForm[] = [
+  {
+    link: '/cardiovaskular',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: CARDIOVASKULAR_QUESTIONS,
     name: 'Cardiovaskular',
   },
-  diabetes: {
+  {
+    link: '/diabetes',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: DIABETES_QUESTIONS,
     name: 'Diabetes',
   },
-  diabetesAnn: {
+  {
+    link: '/diabetes-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: DIABETES_QUESTIONS,
     name: 'Diabetes ANN',
   },
-  cardiovaskularAnn: {
+  {
+    link: '/cardiovaskular-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: CARDIOVASKULAR_QUESTIONS,
     name: 'Cardiovaskular ANN',
   },
-  mental: {
+  {
+    link: '/mental-health',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: MENTAL_QUESTIONS,
     name: 'Mental Health',
   },
-  mentalAnn: {
+  {
+    link: '/mental-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: MENTAL_QUESTIONS,
     name: 'Mental Health ANN',
   },
-  stroke: {
+  {
+    link: '/stroke',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: STROKE_QUESTIONS,
     name: 'Stroke',
   },
-  strokeAnn: {
+  {
+    link: '/stroke-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: STROKE_QUESTIONS,
     name: 'Stroke ANN',
   },
-};
+];

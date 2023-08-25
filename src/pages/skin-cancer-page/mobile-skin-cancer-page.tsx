@@ -7,7 +7,7 @@ export default function MobileSkinCancerPage() {
   const { id } = useParams();
   if (id) {
     const { localRef, webcamActive, setupSources } = useJoinRoom(id, 'join');
-    const handleScreenshot = (src: string) => {};
+    const handleScreenshot = () => {};
     return (
       <div className="w-full h-screen overflow-hidden center bg-primary">
         <MobileView>
@@ -33,39 +33,24 @@ export default function MobileSkinCancerPage() {
                 webcamActive ? 'block' : 'hidden'
               } `}
             ></video>
-            {!webcamActive && (
-              <button
-                onClick={setupSources}
-                className="p-5 bg-white font-semibold text-gray-500 rounded-md"
-              >
-                Start Video
-              </button>
-            )}
-
-            {/* <Webcam
-              audio={false}
-              style={{ position: 'relative', zIndex: 10 }}
-              height={720}
-              screenshotFormat="image/jpeg"
-              width={1280}
-              videoConstraints={videoConstraints}
-            >
-              {({
-                getScreenshot,
-              }: {
-                getScreenshot: () => string;
-              }): JSX.Element => (
-                <button
-                  className="w-full mt-5 rounded-lg bg-white py-3 text-primary font-bold text-xl"
-                  onClick={() => {
-                    handleScreenshot(getScreenshot());
-                  }}
-                >
-                  Take Photo
-                </button>
-              )}
-            </Webcam> */}
           </div>
+          {!webcamActive ? (
+            <button
+              onClick={setupSources}
+              className="p-5 bg-white font-semibold text-gray-500 rounded-md"
+            >
+              Start Video
+            </button>
+          ) : (
+            <div className="center">
+              <button
+                onClick={handleScreenshot}
+                className="w-fit text-gray-800 bg-white border-white py-3 px-10 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
+              >
+                Take Screenshot
+              </button>
+            </div>
+          )}
         </MobileView>
         <BrowserView>
           <div className="text-white font-bold text-center m-10 text-[40px]">

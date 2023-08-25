@@ -16,14 +16,14 @@ export default function SkinCancerPage() {
   const { hangUp, remoteRef, setupSources, isIncomeStream, screenshotRemote } =
     useHostRoom(uuid, 'create');
 
-  const getLink = () => `/skin-cancer/${uuid}`;
+  const getLink = () => `${import.meta.env.VITE_URL}/skin-cancer/${uuid}`;
   if (isMobile) {
     navigate(getLink());
     window.location.href = getLink();
   }
 
   const onHandleClick = () => {
-    navigator.clipboard.writeText(import.meta.env.VITE_URL + getLink());
+    navigator.clipboard.writeText(getLink());
     toastSuccess('Coppied to clipboard.');
   };
 
@@ -36,7 +36,7 @@ export default function SkinCancerPage() {
     <div className="w-full h-screen center relative overflow-hidden">
       <div className="w-full h-full center">
         <div className="border-gray-500 relative border border-opacity-20 rounded-[5%] w-[70%] h-[80%] center">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 ">
             <video
               playsInline
               autoPlay
@@ -69,7 +69,7 @@ export default function SkinCancerPage() {
               <QRCode
                 size={256}
                 style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-                value={uuid}
+                value={getLink()}
                 viewBox={`0 0 256 256`}
               />
               <p className="text-gray-500">
@@ -77,7 +77,7 @@ export default function SkinCancerPage() {
               </p>
               <button
                 onClick={onHandleClick}
-                className="focus:outline-none transition:all hover:bg-primary hover:text-white px-20 py-3  font-bold text-xl rounded-full  text-primary bg-white border border-primary"
+                className="focus:outline-none transition:all hover:bg-primary hover:text-white px-24 py-3  font-bold text-xl rounded-full  text-primary bg-white border border-primary"
               >
                 Copy Link
               </button>

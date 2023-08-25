@@ -10,12 +10,12 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db, storage } from '../settings/firebase-setting';
+import { db } from '../settings/firebase-setting';
 import { toastFirebaseError } from '../settings/toast-setting';
 import { servers } from '../settings/webrtc-setting';
+import { screenshotVideoToFirebase } from '../utils/firebase-helper';
 
 export default function useHostRoom(callId: string, mode: string) {
   const pc = new RTCPeerConnection(servers);
@@ -31,34 +31,8 @@ export default function useHostRoom(callId: string, mode: string) {
   const remoteRef = useRef<HTMLVideoElement>();
 
   const screenshotRemote = async () => {
-    if (remoteRef.current) {
-      const canvas = document.createElement('canvas');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const context = canvas.getContext('2d');
-      if (context) {
-        context.drawImage(remoteRef.current, 0, 0, canvas.width, canvas.height);
-        let image = canvas.toDataURL('image/jpeg');
-        const storageRef = ref(storage, `screenshots-3`);
-        canvas.toBlob(async function (blob: any) {
-          // const image = new Image();
-          // console.log('blob : ', blob);
-          // image.src = blob;
-          await uploadBytes(storageRef, blob);
-          const downloaadUrl = await getDownloadURL(storageRef);
-          console.log('download url : ', downloaadUrl);
-        }, 'image/jpeg');
-
-        // const response = await uploadString(storageRef, image);
-        // console.log('response :', response);
-        // const imageBlob = canvas.toBlob((blob) => {
-        //   if (blob) {
-        //     imageRef.put(blob).then(() => {
-        //       console.log('Image uploaded to Firebase Storage');
-        //     });
-        //   }
-        // }, imageType);
-      }
+    if (remoteRef && remoteRef.current) {
+      screenshotVideoToFirebase(remoteRef, callId);
     }
   };
 
@@ -114,7 +88,6 @@ export default function useHostRoom(callId: string, mode: string) {
 
     pc.ontrack = (event: any) => {
       event.streams[0].getTracks().forEach((track: any) => {
-        console.log('test');
         track && setIsIncomeStream(true);
         remoteStream.addTrack(track);
       });
@@ -195,7 +168,6 @@ export default function useHostRoom(callId: string, mode: string) {
 
       // const callData = (await callDoc.get()).data();
       const callData = (await getDoc(callDoc)).data();
-
       if (callData?.offer) {
         const offerDescription = callData.offer;
         await pc.setRemoteDescription(
