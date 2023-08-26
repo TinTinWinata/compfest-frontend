@@ -4,7 +4,7 @@ import { IEndpoint } from '../interfaces/endpoint-interface';
 // Example endpoint configuration, that will be used for service.tsx
 
 export interface EndpointList {
-  auth: AuthEndpoint;
+  test: IEndpoint;
   ai: AIEndpoint;
 }
 
@@ -19,17 +19,6 @@ interface AIEndpoint {
   mentalAnn: IEndpoint;
   dcnn: IEndpoint;
 }
-
-interface AuthEndpoint {
-  login: IEndpoint;
-}
-
-const AUTH_ENDPOINT: AuthEndpoint = {
-  login: {
-    method: Method.POST,
-    url: '/auth/login',
-  },
-};
 
 const AI_ENDPOINT: AIEndpoint = {
   dcnn: {
@@ -71,6 +60,9 @@ const AI_ENDPOINT: AIEndpoint = {
 };
 
 export const ENDPOINT_LIST: EndpointList = {
-  auth: AUTH_ENDPOINT,
+  test: {
+    method: Method.GET,
+    url: '/',
+  },
   ai: AI_ENDPOINT,
 };

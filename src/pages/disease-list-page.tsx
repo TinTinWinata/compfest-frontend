@@ -14,7 +14,7 @@ export default function DiseaseListPage() {
           {/* <hr className="my-5"></hr> */}
           {DISEASE_LIST.map((disease: IDiseaseForm) => (
             <div
-              className=" py-5 px-3 flex justify-between font-semibold text-gray-500 w-full  border-t border-gray-500 border-opacity-20"
+              className=" py-5 px-3 flex justify-between font-semibold text-gray-500 w-full  border-t border-gray-300 border-opacity-30"
               key={disease.link}
             >
               <div className="center">
