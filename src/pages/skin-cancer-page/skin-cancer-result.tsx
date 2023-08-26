@@ -11,7 +11,6 @@ export default function SkinCancerResult({
   open,
   setOpen,
 }: ISkinCancerResultProps) {
-  console.log('data : ', data);
   return (
     <Modal open={open} setOpen={setOpen}>
       {data ? (

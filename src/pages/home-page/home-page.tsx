@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Footer from '../../components/footer';
@@ -5,14 +6,19 @@ import Navbar from '../../components/navbar/navbar';
 import HomeDeseaseWrapper from './home-disease-wrapper';
 import HomeHowTo from './home-how-to';
 import HomeJoin from './home-join';
+import HomeParallax from './home-parallax';
 
 export default function HomePage() {
   const navigate = useNavigate();
   const onHandleClick = () => navigate('/skin-cancer');
+  const firstRef = createRef<HTMLDivElement>();
   return (
     <>
       <Navbar></Navbar>
-      <div className="w-full min-h-screen center relative overflow-hidden">
+      <div
+        ref={firstRef}
+        className="w-full min-h-screen center relative overflow-hidden"
+      >
         <div data-aos="fade-up" className="w-[80%] center ">
           {/* <div className="sm:block hidden absolute w-[200px] left-[18%] bottom-[30%] translate-y-[50%] ">
             <Player autoplay loop src={'/assets/left-2.json'} />
@@ -45,6 +51,7 @@ export default function HomePage() {
         <HomeMarquee />
       </div> */}
       <HomeHowTo />
+      <HomeParallax firstRef={firstRef} />
       <HomeDeseaseWrapper />
       <HomeJoin />
       <Footer />
