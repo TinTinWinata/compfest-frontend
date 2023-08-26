@@ -36,7 +36,7 @@ export default function FormDetail({
             ref={inputRef}
             placeholder={form.answer[0]}
             type=""
-            className="w-full p-2 bg-transparent rounded-md border border-blue-600 border-opacity-20"
+            className="focus:outline-blue-600 w-full p-2 bg-transparent rounded-md border border-blue-600 border-opacity-20"
           />
         ) : (
           form.answer.map((answer, index) => (

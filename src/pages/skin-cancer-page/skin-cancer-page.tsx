@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import QRCode from 'react-qr-code';
 import { useNavigate } from 'react-router-dom';
@@ -14,8 +14,20 @@ export default function SkinCancerPage() {
   const uuid = user ? user.uid : uuidv4();
   const [firstSetup, setFirstSetup] = useState<boolean>(true);
   const navigate = useNavigate();
-  const { hangUp, remoteRef, setupSources, isIncomeStream, screenshotRemote } =
-    useHostRoom(uuid, 'create');
+  const {
+    hangUp,
+    remoteRef,
+    setupSources,
+    isIncomeStream,
+    screenshotRemote,
+    data,
+  } = useHostRoom(uuid, 'create');
+  const [resultModal, setResultModal] = useState<boolean>(false);
+
+  const handleScreenshot = () => {
+    setResultModal(true);
+    screenshotRemote();
+  };
 
   const getLink = () => `${import.meta.env.VITE_URL}/skin-cancer/${uuid}`;
   if (isMobile) {
@@ -33,50 +45,49 @@ export default function SkinCancerPage() {
     setupSources();
   };
 
-  const data = null;
+  useEffect(() => {
+    if (data) {
+      setResultModal(true);
+    }
+  }, [data]);
 
   return (
     <div className="w-full h-screen center relative overflow-hidden">
       <div className="w-full h-full center">
         <div className="border-gray-500 relative border border-opacity-20 rounded-[5%] w-[70%] h-[80%] center">
-          {!data ? (
-            <>
-              <div className="flex flex-col gap-4 ">
-                <video
-                  playsInline
-                  autoPlay
-                  muted
-                  className={
-                    'w-[500px] h-[500px] rounded-md ' +
-                    (isIncomeStream ? ' block ' : ' hidden ')
-                  }
-                  ref={remoteRef}
-                ></video>
-                {isIncomeStream && (
-                  <div className="center">
-                    <button
-                      onClick={screenshotRemote}
-                      className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
-                    >
-                      Take Screenshot
-                    </button>
-                  </div>
-                )}
+          <div className="flex flex-col gap-4 ">
+            <video
+              playsInline
+              autoPlay
+              muted
+              className={
+                'w-[500px] h-[500px] rounded-md ' +
+                (isIncomeStream ? ' block ' : ' hidden ')
+              }
+              ref={remoteRef}
+            ></video>
+            {isIncomeStream && (
+              <div className="center">
+                <button
+                  onClick={handleScreenshot}
+                  className="w-full text-gray-800 border-primary p-3 rounded-full border hover:bg-primary hover:text-white transition-all font-semibold"
+                >
+                  Take Screenshot
+                </button>
               </div>
-              <div className="absolute left-[50%] top-0 translate-y-[-50%] text-center w-[60%] translate-x-[-50%] bg-white p-5">
-                <h1 className="text-primary text-[50px] font-bold">
-                  Upload Image
-                </h1>
-                <p className="font-semibold text-gray-500">
-                  Open this website on your mobile devices
-                </p>
-              </div>
-            </>
-          ) : (
-            <>
-              <SkinCancerResult data={data} />
-            </>
-          )}
+            )}
+          </div>
+          <div className="absolute left-[50%] top-0 translate-y-[-50%] text-center w-[60%] translate-x-[-50%] bg-white p-5">
+            <h1 className="text-primary text-[50px] font-bold">Upload Image</h1>
+            <p className="font-semibold text-gray-500">
+              Open this website on your mobile devices
+            </p>
+          </div>
+          <SkinCancerResult
+            open={resultModal}
+            setOpen={setResultModal}
+            data={data}
+          />
           {!isIncomeStream && (
             <div className="flex flex-col gap-5 items-center justify-center w-fit h-fit">
               <QRCode

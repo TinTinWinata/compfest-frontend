@@ -3,6 +3,7 @@ import { IEndpoint } from '../../interfaces/endpoint-interface';
 import { IFormAnswer } from '../../interfaces/form-answer';
 import { IFormQuestion } from '../../interfaces/form-question';
 import { toastError } from '../../settings/toast-setting';
+import DiseaseModal from '../disease-modal';
 import Finish from './finish';
 import FormDetail from './form-detail';
 import ProgressBar from './progress-bar';
@@ -106,6 +107,7 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
 
   return (
     <div className="bg-primary  w-full h-screen overflow-hidden  center">
+      <DiseaseModal />
       <div
         data-aos="fade-up"
         className="shadow-xl relative w-[1000px] h-[80%] p-6 bg-white rounded-xl"

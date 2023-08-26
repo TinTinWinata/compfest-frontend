@@ -29,6 +29,18 @@ export const DISEASE_LIST: IDiseaseForm[] = [
     name: 'Diabetes',
   },
   {
+    link: '/mental-health',
+    endpoint: ENDPOINT_LIST.ai.cardiovaskular,
+    forms: MENTAL_QUESTIONS,
+    name: 'Mental Health',
+  },
+  {
+    link: '/stroke',
+    endpoint: ENDPOINT_LIST.ai.cardiovaskular,
+    forms: STROKE_QUESTIONS,
+    name: 'Stroke',
+  },
+  {
     link: '/diabetes-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: DIABETES_QUESTIONS,
@@ -40,23 +52,12 @@ export const DISEASE_LIST: IDiseaseForm[] = [
     forms: CARDIOVASKULAR_QUESTIONS,
     name: 'Cardiovaskular ANN',
   },
+
   {
-    link: '/mental-health',
-    endpoint: ENDPOINT_LIST.ai.cardiovaskular,
-    forms: MENTAL_QUESTIONS,
-    name: 'Mental Health',
-  },
-  {
-    link: '/mental-ann',
+    link: '/mental-health-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: MENTAL_QUESTIONS,
     name: 'Mental Health ANN',
-  },
-  {
-    link: '/stroke',
-    endpoint: ENDPOINT_LIST.ai.cardiovaskular,
-    forms: STROKE_QUESTIONS,
-    name: 'Stroke',
   },
   {
     link: '/stroke-ann',

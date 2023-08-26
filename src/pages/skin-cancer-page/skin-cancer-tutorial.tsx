@@ -44,11 +44,14 @@ export default function SkinCancerTutorial({
       <div className="flex flex-col gap-20">
         {first && (
           <div className="">
-            <div className="flex text-white gap-2 cursor-pointer hover:underline">
+            <div
+              onClick={handleBack}
+              className="flex text-white gap-2 cursor-pointer hover:underline"
+            >
               <div className="center">
                 <BiArrowBack className="" />
               </div>
-              <p onClick={handleBack}>Back</p>
+              <p>Back</p>
             </div>
             <h1 className=" text-white w-full text-center text-[60px] font-bold">
               Skin Cancer by Diagno AI

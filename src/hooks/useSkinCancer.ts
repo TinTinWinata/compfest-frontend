@@ -5,7 +5,7 @@ import { toastError, toastSuccess } from '../settings/toast-setting';
 import Service from '../utils/service';
 
 export default function useSkinCancer() {
-  const [data, setData] = useState<IAISkinCancerResponse>();
+  const [data, setData] = useState<IAISkinCancerResponse | null>(null);
   const checkResult = async (data: any) => {
     const textnode = document.createTextNode('TEST');
     document.body.appendChild(textnode);

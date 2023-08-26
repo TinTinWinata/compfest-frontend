@@ -4,7 +4,7 @@ export const MENTAL_QUESTIONS: IFormQuestion[] = [
   {
     questionValue: 'Age',
     question: 'Berapakah umur anda?',
-    answer: [],
+    answer: ['10 - 100'],
     answerValue: [],
   },
   {

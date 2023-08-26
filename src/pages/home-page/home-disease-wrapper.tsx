@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import DiseaseComponent from './home-disease-component';
 
 const DISEASE_LIST = [
@@ -34,9 +35,12 @@ export default function HomeDeseaseWrapper() {
             </h1>
           </div>
           <div className="center">
-            <button className="h-fit px-8 py-3 text-sm font-semibold rounded-md bg-gray-100 transition-all hover:bg-gray-300">
+            <Link
+              to="/disease-list"
+              className="h-fit px-8 py-3 text-sm font-semibold rounded-md bg-gray-100 transition-all hover:bg-gray-300"
+            >
               See All Deseases
-            </button>
+            </Link>
           </div>
         </div>
         <div className=" rounded-xl grid grid-cols-2 w-full h-[550px] gap-x-10 gap-y-20 m-5">

@@ -1,4 +1,5 @@
 import { createRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useOnHoverOutside } from '../../hooks/useHoverOutside';
 import { IMenu } from '../../interfaces/menu-interface';
 import { MENU_LIST } from '../../settings/menu-setting';
@@ -13,9 +14,9 @@ export default function DeseaseMenu() {
   useOnHoverOutside(ref, closeHoverMenu); // Call the hook
   return (
     <div ref={ref} className="mx-2  font-semibold cursor-pointer relative">
-      <div className="" onMouseOver={() => setHover(true)}>
+      <Link to="/disease-list" className="" onMouseOver={() => setHover(true)}>
         Desease
-      </div>
+      </Link>
 
       {hover && (
         <div
@@ -24,7 +25,8 @@ export default function DeseaseMenu() {
         >
           <div className="w-full mt-4 bg-white custom-shadow rounded-md">
             {MENU_LIST.map((menu: IMenu, index: number) => (
-              <div
+              <Link
+                to={menu.link}
                 key={index}
                 className="text-gray-800 flex font-semibold px-4   hover:bg-blue-50 py-5 0 transition-all rounded-md"
               >
@@ -35,7 +37,7 @@ export default function DeseaseMenu() {
                   </div>
                 </div>
                 <div className="center bg-red">{menu.icon}</div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
