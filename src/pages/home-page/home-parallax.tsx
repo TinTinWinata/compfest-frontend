@@ -1,5 +1,6 @@
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { RefObject, createRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ScrollMagic from 'scrollmagic';
 import animationData from '../../../public/assets/parallax.json';
 
@@ -14,10 +15,13 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
   const introRef = createRef<HTMLDivElement>();
   const lottieRef = createRef<LottieRefCurrentProps>();
   const [textClass, setTextClass] = useState<string>('opacity-0');
+  const navigate = useNavigate();
 
   const getTotalFrames = (animationData: any) => {
     return Math.floor(animationData.op);
   };
+
+  const handleParkinson = () => navigate('/parkinson');
 
   const checkText = (percentage: number) => {
     // !Debugging Purpose
@@ -124,7 +128,10 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
           </p>
         </div>
         <div className="center mt-5">
-          <button className="focus:outline-none px-16 py-4 font-semibold text-xl rounded-full bg-primary text-white">
+          <button
+            onClick={handleParkinson}
+            className="focus:outline-none px-16 py-4 font-semibold text-xl rounded-full bg-primary text-white"
+          >
             Detect Parkinson
           </button>
         </div>

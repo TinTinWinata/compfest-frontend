@@ -18,11 +18,8 @@ export default function DiseaseModal() {
   const checkIsThereAnyAnnDisease = () => {
     const link = getCurrentUrl();
     const disease = DISEASE_LIST.find((disease: IDiseaseForm) => {
-      console.log('a : ', disease.link);
-      console.log('b : ', link + '-ann');
       return disease.link === link + '-ann';
     });
-    console.log('disease : ', disease);
     if (disease) {
       setOpen(true);
       setAnnLink(disease.link);
@@ -46,7 +43,7 @@ export default function DiseaseModal() {
         >
           <p className="text-center text-xl font-semibold">Use Default</p>
           <img className="h-32 mb-1 mt-3" src="/assets/prediction-2.png" />
-          <p className="text-center">more accurates, binary result</p>
+          <p className="text-center pt-3">more accurates, binary result</p>
         </div>
         <div
           onClick={handleClickAnn}
@@ -54,7 +51,7 @@ export default function DiseaseModal() {
         >
           <p className="text-center text-xl font-semibold">Use ANN</p>
           <img className="h-32 mb-1 mt-3" src="/assets/ann.png" />
-          <p className="text-center">less accurates, percentage result</p>
+          <p className="text-center pt-3">less accurates, percentage result</p>
         </div>
       </div>
     </Modal>
