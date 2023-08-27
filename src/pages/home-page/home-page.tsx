@@ -13,7 +13,7 @@ export default function HomePage() {
   const onHandleClick = () => navigate('/skin-cancer');
   const firstRef = createRef<HTMLDivElement>();
   return (
-    <>
+    <div>
       <Navbar></Navbar>
       <div
         ref={firstRef}
@@ -55,6 +55,6 @@ export default function HomePage() {
       <HomeDeseaseWrapper />
       <HomeJoin />
       <Footer />
-    </>
+    </div>
   );
 }
