@@ -31,6 +31,8 @@ class Service {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         ContentType: this.getContentType(contentType),
+        // 'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return config;
@@ -44,8 +46,7 @@ class Service {
   ): Promise<any> {
     // Return any because it can return anything (response from backend server)
     if (method === Method.GET) return await this.axios.get(url, config);
-    else if (method === Method.POST)
-      return await this.axios.post(url, data, config);
+    else if (method === Method.POST) return await this.axios.post(url, data);
     else if (method === Method.PUT)
       return await this.axios.put(url, data, config);
     else if (method === Method.PATCH)
@@ -79,12 +80,18 @@ class Service {
       success: false,
     };
     try {
+      // console.log('response : ', response);
+      console.log('request : ', data);
       const url = this.generateUrl(endpoint, id, param);
       const response = await this.getResponse(endpoint.method, data, url);
+      // !Debugging Purposes
+      console.log('response : ', response);
+
       result.data = response.data;
       result.message = response.statusText;
       result.success = true;
     } catch (error) {
+      console.log('[ERROR] response : ', error);
       const { response } = error as any;
 
       result = response

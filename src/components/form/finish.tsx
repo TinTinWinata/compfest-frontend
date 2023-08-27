@@ -9,6 +9,7 @@ import { IFormAnswer } from '../../interfaces/form-answer';
 import { ITest } from '../../interfaces/user-firestore-interface';
 import { toastError } from '../../settings/toast-setting';
 import Service from '../../utils/service';
+import TestRequest from '../test-request';
 
 export interface IFormFinishProps {
   answers: IFormAnswer[];
@@ -24,20 +25,34 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const { saveDesease } = useUserAuth();
   const [data, setData] = useState<IAIResponse | null>(null);
   const navigate = useNavigate();
+
+  const getResult = (): number => {
+    if (data) {
+      if (Array.isArray(data.result)) {
+        return getResult();
+      }
+      return data.result;
+    }
+    return -1;
+  };
+
   const fetch = async () => {
     const service = new Service();
     const data: IResultType = dataConverter(answers);
+    console.log('endpoint : ', endpoint);
+    console.log('data : ', data);
     const response = await service.request<IAIResponse>(
       endpoint,
       undefined,
       data
     );
+    console.log('response data : ', response.data);
     if (response.success && response.data) {
       setData(response.data);
       const test: ITest = {
         answers: data,
         name: name,
-        result: response.data.result[0],
+        result: getResult(),
       };
       saveDesease(test);
     } else {
@@ -59,9 +74,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
 
   const handleBack = () => navigate('/');
   const getLottieAsset = (): string => {
-    if (data && data.result[0] >= 0.5) {
+    if (data && getResult() >= 0.5) {
       return '/assets/sickness.json';
-    } else if (data && data.result[0] < 0.5) {
+    } else if (data && getResult() < 0.5) {
       return '/assets/strong.json';
     }
     return '/assets/loading.json';
@@ -70,9 +85,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const getLottieString = (): string => {
     if (!data) {
       return 'Please wait were checking all your answers!';
-    } else if (data.result[0] >= 0.5) {
+    } else if (getResult() >= 0.5) {
       return 'Kamu harus senantiasa menjaga kesehatan dengan pola makan sehat, olahraga teratur, dan memantau kadar gula darah untuk mencegah terjadinya komplikasi yang bisa membahayakan kesehatan saya di masa depan.';
-    } else if (data.result[0] < 0.5) {
+    } else if (getResult() < 0.5) {
       return 'Kamu aman! Harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko diabetes dan memiliki gaya hidup yang lebih sehat dan bugar.';
     }
     return '/assets/loading.json';
@@ -80,9 +95,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const getLottieTitle = (): string => {
     if (!data) {
       return '';
-    } else if (data.result[0] >= 0.5) {
+    } else if (getResult() >= 0.5) {
       return 'Kamu tidak aman';
-    } else if (data.result[0] < 0.5) {
+    } else if (getResult() < 0.5) {
       return 'Kamu aman';
     }
     return '/assets/loading.json';
@@ -105,6 +120,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
         {/* Invicible Button */}
         <div className="h-16"></div>
         {/* Real Button */}
+        {/* Debug Button */}
+        <button onClick={fetch}>Fetch Again</button>
+        <TestRequest />
         <Link
           to="/home"
           className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold   text-gray-50  transition-all w-full bg-accent "

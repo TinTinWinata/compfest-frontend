@@ -3,6 +3,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { HiMiniMicrophone } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { HEALTH_TEXT } from '../../settings/text-setting';
+import ParkinsonMic from './parkinson-mic';
 
 export default function ParkinsonPage() {
   const getRandomText = () => {
@@ -42,13 +43,7 @@ export default function ParkinsonPage() {
         </div>
         <div className="w-3/4 text-3xl mt-16 ">{text}</div>
       </div>
-      <div className="absolute bg-primary w-full h-[30%] bottom-0 left-0 rounded-t-3xl">
-        <div className="cursor-pointer absolute top-10 left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full  w-[300px] h-[300px] bg-white border-4 border-primary center">
-          <div className="">
-            <HiMiniMicrophone className="text-primary w-[100px] h-[100px]" />
-          </div>
-        </div>
-      </div>
+        <ParkinsonMic />
     </div>
   );
 }

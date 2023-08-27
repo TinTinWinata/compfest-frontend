@@ -5,6 +5,7 @@ import { IEndpoint } from '../interfaces/endpoint-interface';
 
 export interface EndpointList {
   test: IEndpoint;
+  testPost: IEndpoint;
   ai: AIEndpoint;
 }
 
@@ -62,6 +63,10 @@ const AI_ENDPOINT: AIEndpoint = {
 export const ENDPOINT_LIST: EndpointList = {
   test: {
     method: Method.GET,
+    url: '/',
+  },
+  testPost: {
+    method: Method.POST,
     url: '/',
   },
   ai: AI_ENDPOINT,

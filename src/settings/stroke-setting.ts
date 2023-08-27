@@ -4,7 +4,7 @@ export const STROKE_QUESTIONS: IFormQuestion[] = [
   {
     questionValue: 'age',
     question: 'Berapa umur Anda?',
-    answer: ['Ya'],
+    answer: ['20 -100'],
     answerValue: [],
   },
   {
