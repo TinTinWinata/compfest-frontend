@@ -25,12 +25,12 @@ export default function HomeDeseaseWrapper() {
   const [selected, setSelected] = useState<number>(-1);
 
   return (
-    <div className="bg-backgroundGray pb-10 w-full min-h-[900px]  flex justify-center items-center">
+    <div className="p-10 bg-backgroundGray pb-10 w-full min-h-[900px]  flex justify-center items-center">
       <div className="w-full flex flex-col items-center max-w-[900px]">
         <div className="w-full flex justify-between">
           <div className="text-white">
             <h1 className="uppercase font-bold tracking-wider">Deseases</h1>
-            <h1 className="text-[40px] font-semibold w-3/4">
+            <h1 className="text-lg sm:leading-[50px] sm:text-[40px] font-semibold w-3/4">
               Get Started to Diagnosis Before Late!
             </h1>
           </div>

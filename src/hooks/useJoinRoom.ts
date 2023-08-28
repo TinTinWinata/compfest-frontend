@@ -40,6 +40,12 @@ export default function useJoinRoom(callId: string, mode: string) {
   };
 
   const setupSources = async () => {
+    const callDoc = doc(collection(db, 'calls'), callId);
+    onSnapshot(callDoc, (snapshot: any) => {
+      const data = snapshot.data();
+      checkResult(data);
+    });
+
     const localStream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
@@ -62,7 +68,6 @@ export default function useJoinRoom(callId: string, mode: string) {
     setWebcamActive(true);
 
     if (mode === 'create') {
-      const callDoc = doc(collection(db, 'calls'), callId);
       const offerCandidates = collection(
         db,
         `calls/${callDoc.id}/offerCandidates`
@@ -109,7 +114,6 @@ export default function useJoinRoom(callId: string, mode: string) {
         });
       });
     } else if (mode === 'join') {
-      const callDoc = doc(db, 'calls', callId);
       const answerCandidates = collection(
         db,
         'calls',
@@ -145,10 +149,6 @@ export default function useJoinRoom(callId: string, mode: string) {
       };
 
       await updateDoc(callDoc, { answer });
-      onSnapshot(callDoc, (snapshot: any) => {
-        const data = snapshot.data();
-        checkResult(data);
-      });
 
       onSnapshot(offerCandidates, (snapshot: any) => {
         snapshot.docChanges().forEach((change: any) => {

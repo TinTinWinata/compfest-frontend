@@ -30,6 +30,7 @@ export default function SkinCancerPage() {
   };
 
   const getLink = () => `${import.meta.env.VITE_URL}/skin-cancer/${uuid}`;
+
   if (isMobile) {
     navigate(getLink());
     window.location.href = getLink();

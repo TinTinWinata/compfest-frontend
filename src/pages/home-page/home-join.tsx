@@ -11,7 +11,7 @@ export default function HomeJoin() {
     if (email) openRegister(email.value);
   };
   return (
-    <div className="background-gray-500 h-[300px] center gap-12">
+    <div className="p-20 background-gray-500 h-[300px] center gap-12">
       <div className="">
         <div className="text-primary font-semibold">THE SOONER THE BETTER</div>
         <div className="font-medium text-gray-800 text-[30px]">

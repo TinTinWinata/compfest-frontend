@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function HomeHowTo() {
   const [selected, setSelected] = useState<number>(0);
   return (
-    <div className="pb-20 gradient-circle-blue w-full h-[1000px] center">
+    <div className="p-10 pb-20 gradient-circle-blue w-full h-[1000px] center">
       <div className="w-[1000px]">
         <div className="text-primary font-semibold">How It Works</div>
         <div className="font-medium text-gray-800 text-[30px]">

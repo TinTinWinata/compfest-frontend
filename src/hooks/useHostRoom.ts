@@ -30,7 +30,7 @@ export default function useHostRoom(callId: string, mode: string) {
   const [roomId, setRoomId] = useState<any>(callId);
 
   const localRef = useRef<HTMLVideoElement>();
-  const remoteRef = useRef<HTMLVideoElement>();
+  const remoteRef = useRef<HTMLVideoElement | any>();
 
   const saveScreenshot = async (link: string) => {
     await updateDoc(doc(db, 'calls', callId), { result: link });

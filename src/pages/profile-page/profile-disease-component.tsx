@@ -11,7 +11,12 @@ export default function ProfileDiseaseComponent({
   test,
 }: IProfileDiseaseComponentProps) {
   const [isHide, setHide] = useState<boolean>(true);
-  const handleClickHide = () => setHide((prev) => !prev);
+  const isHaveAnswers = () => Object.keys(test).length > 0;
+  const handleClickHide = () => {
+    if (isHaveAnswers()) {
+      setHide((prev) => !prev);
+    }
+  };
   const isSave = test.result < 0.5;
   const isAnn = test.result !== 0 && test.result !== 1;
   return (
@@ -38,10 +43,14 @@ export default function ProfileDiseaseComponent({
           onClick={handleClickHide}
           className="text-gray-400 center cursor-pointer p-2 mr-2 transition-all hover:bg-gray-100 rounded-full"
         >
-          {isHide ? (
-            <FaEye className="w-5 h-5" />
-          ) : (
-            <FaEyeLowVision className="w-5 h-5" />
+          {isHaveAnswers() && (
+            <>
+              {isHide ? (
+                <FaEye className="w-5 h-5" />
+              ) : (
+                <FaEyeLowVision className="w-5 h-5" />
+              )}
+            </>
           )}
         </div>
       </div>

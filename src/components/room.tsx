@@ -79,7 +79,6 @@ export function Room({ mode, callId }: { mode: any; callId: any }) {
 
       pc.onicecandidate = (event: any) => {
         // event.candidate && offerCandidates.add(event.candidate.toJSON());
-        console.log('hello world');
         event.candidate && addDoc(offerCandidates, event.candidate.toJSON());
       };
 

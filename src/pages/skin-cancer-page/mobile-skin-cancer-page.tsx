@@ -15,6 +15,7 @@ export default function MobileSkinCancerPage() {
       screenshotLocal();
       setResultModal(true);
     };
+
     return (
       <div className="w-full h-screen overflow-hidden center bg-primary">
         <MobileView>

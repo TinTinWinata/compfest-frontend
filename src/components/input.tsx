@@ -56,7 +56,7 @@ export default function Input({
 
   return (
     <div className="w-full h-10 relative px-3 py-6 border border-border border-opacity-20 rounded-md">
-      <div className="absolute left-4 text-gray-400 top-[50%] translate-y-[-50%]">
+      <div className="sm:block hidden absolute left-4 text-gray-400 top-[50%] translate-y-[-50%]">
         {icon && icon}
       </div>
       {type === 'password' && (

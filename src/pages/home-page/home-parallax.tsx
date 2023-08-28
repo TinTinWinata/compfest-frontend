@@ -110,7 +110,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
       />
       <div
         className={
-          ' absolute  z-30 md:top-[70%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
+          ' absolute  z-30 top-[75%] sm:top-[70%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
           textClass
         }
       >
