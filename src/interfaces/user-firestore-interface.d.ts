@@ -1,4 +1,4 @@
-import { IResultType } from "../components/form/finish";
+import { IResultType } from '../components/form/finish';
 
 export interface ITest {
   name: string;
