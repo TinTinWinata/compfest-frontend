@@ -117,7 +117,6 @@ export default function ParkinsonMic() {
           </div>
         </div>
         <div className="z-10 w-full bg-primary h-full rounded-t-3xl absolute left-0 bottom-0"></div>
-        <div className="z-0 top-[100px] translate-y-[-100%] absolute w-full react-mic-wrapper"></div>
       </div>
     </>
   );
