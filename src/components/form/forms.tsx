@@ -18,7 +18,7 @@ export interface IFormsProps {
 }
 
 export default function Forms({ forms, endpoint, name }: IFormsProps) {
-  const [finish, setFinish] = useState<boolean>(true);
+  const [finish, setFinish] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
   const [activeBox, setActiveBox] = useState<number>(DEFAULT_ACTIVE);
   const [answers, setAnswers] = useState<IFormAnswer[]>([]);
@@ -97,10 +97,7 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
   };
 
   if (finish) {
-    return (
-          <Finish name={name} endpoint={endpoint} answers={answers} />
-
-    );
+    return <Finish name={name} endpoint={endpoint} answers={answers} />;
   }
 
   return (

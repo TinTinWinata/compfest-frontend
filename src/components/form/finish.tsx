@@ -1,5 +1,5 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../../contexts/user-context';
@@ -23,10 +23,7 @@ export interface IResultType {
 
 export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const { saveDesease } = useUserAuth();
-  const [data, setData] = useState<IAIResponse | null>({
-    result: 1,
-    status: 'Success',
-  });
+  const [data, setData] = useState<IAIResponse | null>(null);
   const navigate = useNavigate();
 
   const getResult = (): number => {
@@ -42,14 +39,11 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const fetch = async () => {
     const service = new Service();
     const data: IResultType = dataConverter(answers);
-    console.log('endpoint : ', endpoint);
-    console.log('data : ', data);
     const response = await service.request<IAIResponse>(
       endpoint,
       undefined,
       data
     );
-    console.log('response data : ', response.data);
     if (response.success && response.data) {
       setData(response.data);
       const test: ITest = {
@@ -71,9 +65,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
     }, {});
   };
 
-  // useEffect(() => {
-  //   fetch();
-  // }, [answers]);
+  useEffect(() => {
+    fetch();
+  }, [answers]);
 
   const handleBack = () => navigate('/');
   const getLottieAsset = (): string => {
@@ -117,34 +111,39 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
           <div className="ml-2 mt-2 text-gray-500 mb-2 text-sm">Back</div>
         </div>
         <hr />
+        {/* Real Button */}
+        {/* Debug Button */}
+        {/* <button onClick={fetch}>Fetch Again</button>
+        <TestRequest /> */}
         <div className="text-center  flex flex-col pb-20 center w-full h-full">
           <Player className="w-52 h-52" src={getLottieAsset()} autoplay loop />
           <h3 className="font-semibold text-2xl ">{getLottieTitle()}</h3>
           <p className="mt-4 text-gray-500 w-3/4">{getLottieString()}</p>
 
           {/* Invicible Button */}
-          <hr className="my-10 w-3/4" />
-          {/* Real Button */}
-          {/* Debug Button */}
-          {/* <button onClick={fetch}>Fetch Again</button>
-        <TestRequest /> */}
-          <div className="flex gap-4">
-            <Appointment
-              link="https://www.halodoc.com/tanya-dokter"
-              name="Alodoc"
-              icon="assets/halodoc.png"
-            />
-            <Appointment
-              icon="assets/klik-dokter.png"
-              link="https://www.klikdokter.com/tanya-dokter"
-              name="Klik Dokter"
-            />
-            <Appointment
-              icon="assets/link-sehat.png"
-              link="https://linksehat.com/tanya-dokter"
-              name="Link Sehat"
-            />
-          </div>
+          {data && (
+            <>
+              <hr className="my-10 w-3/4" />
+
+              <div className="flex gap-4">
+                <Appointment
+                  link="https://www.halodoc.com/tanya-dokter"
+                  name="Alodoc"
+                  icon="assets/halodoc.png"
+                />
+                <Appointment
+                  icon="assets/klik-dokter.png"
+                  link="https://www.klikdokter.com/tanya-dokter"
+                  name="Klik Dokter"
+                />
+                <Appointment
+                  icon="assets/link-sehat.png"
+                  link="https://linksehat.com/tanya-dokter"
+                  name="Link Sehat"
+                />
+              </div>
+            </>
+          )}
           <Link
             to="/home"
             className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold   text-gray-50  transition-all w-full bg-accent "
