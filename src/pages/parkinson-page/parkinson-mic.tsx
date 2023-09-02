@@ -1,19 +1,26 @@
 import MicRecorder from 'mic-recorder-to-mp3';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { HiMiniMicrophone } from 'react-icons/hi2';
 import useSound from 'use-sound';
 import soundData from '../../../public/assets/sound-click.mp3';
-import useParkinson from '../../hooks/useParkinson';
 import { toastError } from '../../settings/toast-setting';
 import { getSecondsBetweenDates } from '../../utils/date-helper';
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
-export default function ParkinsonMic() {
+
+interface IParkinsonMicProps {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  checkResult: (val: any) => Promise<void>;
+}
+
+export default function ParkinsonMic({
+  setOpen,
+  checkResult,
+}: IParkinsonMicProps) {
   const [record, setRecord] = useState<boolean>(false);
   const [time, setTime] = useState<Date>();
   const [play] = useSound(soundData);
-  const { checkResult, data } = useParkinson();
-  const TIME_VALIDATION = 3;
+  const TIME_VALIDATION = 4;
 
   const isValid = (): boolean => {
     if (time) {
@@ -58,7 +65,9 @@ export default function ParkinsonMic() {
   const onStop = async (recordedBlob: any) => {
     convertBlobURLToFile(recordedBlob, 'tester')
       .then((file) => {
+        setOpen(true);
         // downloadFile(file);
+        console.log('[FILE] : ', file);
         checkResult(file);
       })
       .catch((error) => {
@@ -89,18 +98,8 @@ export default function ParkinsonMic() {
       .catch((e: any) => console.error(e));
     play();
   };
-
-  //   const handle = (e: ChangeEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     const file = e.target.file.files[0];
-  //     checkResult(file);
-  //   };
   return (
     <>
-      {/* <form onSubmit={handle}>
-        <input name="file" type="file"></input>
-        <button type="submit">submit</button>
-      </form> */}
       <div className="absolute  w-full h-[30%] bottom-0 left-0 ">
         <div
           onMouseUp={handleMouseUp}

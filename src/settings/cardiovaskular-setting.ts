@@ -3,9 +3,10 @@ import { IFormQuestion } from '../interfaces/form-question';
 export const CARDIOVASKULAR_QUESTIONS: IFormQuestion[] = [
   {
     questionValue: 'age',
-    question: 'Berapa umur Anda? (dalam hari)',
-    answer: ['14000 - 23000'],
+    question: 'Berapa umur Anda?',
+    answer: ['10 - 100'],
     answerValue: [],
+    getAnswer: (ans?: number) => (ans ? ans * 365 : 0),
   },
   {
     questionValue: 'gender',

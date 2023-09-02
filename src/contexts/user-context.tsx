@@ -82,7 +82,6 @@ export function UserProvider({ children }: IChildrenProps) {
 
   async function saveDesease(test: ITest): Promise<void> {
     try {
-      console.log('saving ...', test);
       if (user && firestore) {
         const temp = { ...firestore };
         temp.tests.push(test);

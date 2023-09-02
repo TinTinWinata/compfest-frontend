@@ -3,4 +3,5 @@ export type IFormQuestion = {
   questionValue: string;
   answer: string[];
   answerValue: number[];
+  getAnswer?: (num?: number) => number;
 };

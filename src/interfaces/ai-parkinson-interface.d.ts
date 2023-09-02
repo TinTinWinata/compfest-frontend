@@ -1,4 +1,4 @@
 export interface IAIParkinsonResponse {
-    status: string;
-    result: string;
+  status: string;
+  result: number;
 }

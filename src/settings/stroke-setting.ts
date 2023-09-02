@@ -2,16 +2,16 @@ import { IFormQuestion } from '../interfaces/form-question';
 
 export const STROKE_QUESTIONS: IFormQuestion[] = [
   {
-    questionValue: 'age',
-    question: 'Berapa umur Anda?',
-    answer: ['20 -100'],
-    answerValue: [],
-  },
-  {
     questionValue: 'gender',
     question: 'Apa jenis kelamin Anda?',
     answer: ['Laki - Laki', 'Perempuan', 'Lainnya'],
     answerValue: [0, 1, 2],
+  },
+  {
+    questionValue: 'age',
+    question: 'Berapa umur Anda?',
+    answer: ['20 -100'],
+    answerValue: [],
   },
   {
     questionValue: 'hypertension',

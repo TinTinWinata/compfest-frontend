@@ -25,11 +25,10 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const { saveDesease } = useUserAuth();
   const [data, setData] = useState<IAIResponse | null>(null);
   const navigate = useNavigate();
-
   const getResult = (): number => {
     if (data) {
       if (Array.isArray(data.result)) {
-        return getResult();
+        return data.result[0];
       }
       return data.result;
     }
@@ -39,6 +38,7 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const fetch = async () => {
     const service = new Service();
     const data: IResultType = dataConverter(answers);
+    console.log(data);
     const response = await service.request<IAIResponse>(
       endpoint,
       undefined,
@@ -53,12 +53,12 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
       };
       saveDesease(test);
     } else {
-      console.log('response : ', response);
       toastError(response.message);
     }
   };
 
   const dataConverter = (answers: IFormAnswer[]): {} => {
+    console.log(answers);
     return answers.reduce((acc: IResultType, { name, value }) => {
       acc[name] = value;
       return acc;

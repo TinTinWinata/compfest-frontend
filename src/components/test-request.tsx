@@ -1,8 +1,11 @@
+import { ChangeEvent } from 'react';
+import useParkinson from '../hooks/useParkinson';
 import { ENDPOINT_LIST } from '../settings/endpoint-setting';
 import { toastSuccess } from '../settings/toast-setting';
 import Service from '../utils/service';
 
 export default function TestRequest() {
+  const { checkResult } = useParkinson();
   const handler = async () => {
     const service = new Service();
     const response = await service.request(ENDPOINT_LIST.test);
@@ -46,11 +49,25 @@ export default function TestRequest() {
     }
   };
 
+  const handleParkinson = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const payload = e.target.files[0];
+      if (payload) {
+        console.log('[TEST] Checking Result :', payload);
+        checkResult(payload);
+      }
+    }
+  };
+
   return (
     <div className="flex gap-5">
       <button onClick={handler}>Test POST Request</button>
       <button onClick={postHandler}>Test GET Request</button>
       <button onClick={postStroke}>Test POST STROKE Request</button>
+      <div className="flex gap-1">
+        <p>Test POST Parkinson</p>
+        <input onChange={handleParkinson} type="file"></input>
+      </div>
     </div>
   );
 }

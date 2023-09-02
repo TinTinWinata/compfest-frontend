@@ -2,54 +2,56 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import { useEffect } from 'react';
 import Modal, { IModalProps } from '../../components/modal';
 import { useUserAuth } from '../../contexts/user-context';
-import { IAISkinCancerResponse } from '../../interfaces/ai-skin-cancer-response-interface';
+import { IAIParkinsonResponse } from '../../interfaces/ai-parkinson-interface';
 import { ITest } from '../../interfaces/user-firestore-interface';
 
-interface ISkinCancerResultProps extends IModalProps {
-  data: IAISkinCancerResponse | null;
+interface IParkinsonResultProps extends IModalProps {
+  data: IAIParkinsonResponse | null;
 }
 
-export default function SkinCancerResult({
-  data,
+export default function ParkinsonResult({
   open,
   setOpen,
-}: ISkinCancerResultProps) {
+  data,
+}: IParkinsonResultProps) {
   const { saveDesease } = useUserAuth();
   const saveProfile = () => {
     if (data) {
       const test: ITest = {
         answers: {},
-        name: 'Skin Cancer',
-        result: data.result.predict[data.result.value],
+        name: 'Parkinson Test',
+        result: data.result,
       };
       saveDesease(test);
     }
   };
-  const getPercentage = () =>
-    data ? data.result.predict[data.result.value] * 100 : 0;
   useEffect(() => saveProfile(), [data]);
   return (
     <Modal open={open} setOpen={setOpen}>
       {data ? (
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="center">
-            <Player
-              className="w-52 h-52"
-              autoplay
-              loop
-              src="/assets/strong.json"
-            />
+            {data.result == 0 ? (
+              <Player
+                className="w-52 h-52"
+                autoplay
+                loop
+                src="/assets/strong.json"
+              />
+            ) : (
+              <Player
+                className="w-52 h-52"
+                autoplay
+                loop
+                src="/assets/sickness.json"
+              />
+            )}
           </div>
           <div className="flex text-lg flex-col justify-center items-center ">
             <p className="font-semibold">
               Succesfully Predicting! This is your Result:{' '}
             </p>
-            <p>
-              {data.result.result} ({getPercentage()}%)
-            </p>
-            <p className="text-red-500 font-semibold text-sm">
-              * warning this is only a prediction *
-            </p>
+            <p>{data.result == 0 ? 'You Are Safe' : 'You Are Not Safe'}</p>
           </div>
         </div>
       ) : (

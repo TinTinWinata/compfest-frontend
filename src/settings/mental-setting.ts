@@ -20,6 +20,12 @@ export const MENTAL_QUESTIONS: IFormQuestion[] = [
     answerValue: [1, 0],
   },
   {
+    questionValue: 'family_history',
+    question: 'Apakah Anda memiliki riwayat keluarga dengan penyakit mental?',
+    answer: ['Ya', 'Tidak'],
+    answerValue: [1, 0],
+  },
+  {
     questionValue: 'work_interfere',
     question:
       'Jika Anda memiliki kondisi kesehatan mental, apakah Anda merasa hal itu mengganggu pekerjaan Anda?',
@@ -90,7 +96,7 @@ export const MENTAL_QUESTIONS: IFormQuestion[] = [
     answerValue: [1, 0, 2],
   },
   {
-    questionValue: 'mental_health_consequence',
+    questionValue: 'phys_health_consequence',
     question:
       'Apakah menurut Anda mendiskusikan masalah kesehatan fisik dengan atasan Anda akan berakibat negatif?',
     answer: ['Ya', 'Tidak', 'Mungkin'],

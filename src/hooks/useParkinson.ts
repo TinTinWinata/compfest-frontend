@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ContentType } from '../enums/content-type-enum';
 import { IAIParkinsonResponse } from '../interfaces/ai-parkinson-interface';
 import { ENDPOINT_LIST } from '../settings/endpoint-setting';
@@ -8,13 +8,13 @@ import Service from '../utils/service';
 export default function useParkinson() {
   const [data, setData] = useState<IAIParkinsonResponse | null>(null);
 
-  const checkResult = async (data: any) => {
-    if (data) {
+
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const checkResult = async (payload: any) => {
+    setLoading(true);
+    if (payload) {
       const formData = new FormData();
-      formData.append('file', data);
-    //   !Debugging Purposes
-    //   console.log('[FETCHING TO SERVER FILE] : ', data);
-    //   console.log('[FETCHING TO SERVER FILE DATA] : ', formData.getAll('file'));
+      formData.append('file', payload);
       const service = new Service(null, ContentType.MULTIPART);
       const response = await service.request<IAIParkinsonResponse>(
         ENDPOINT_LIST.ai.parkinson,
@@ -22,13 +22,15 @@ export default function useParkinson() {
         formData
       );
       if (response.success && response.data) {
+        console.log('response data  :', response.data);
         setData(response.data);
         toastSuccess('Succesfully predict data!');
       } else {
-        toastError(response.message);
+        toastError('Please provide a valid response (read all the text given)');
       }
     }
+    setLoading(false);
   };
 
-  return { checkResult, data };
+  return { checkResult, data, isLoading };
 }

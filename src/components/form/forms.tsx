@@ -14,7 +14,6 @@ export interface IFormsProps {
   forms: IFormQuestion[];
   endpoint: IEndpoint;
   name: string;
-  descriptions: string[];
 }
 
 export default function Forms({ forms, endpoint, name }: IFormsProps) {
@@ -22,7 +21,6 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
   const [index, setIndex] = useState<number>(0);
   const [activeBox, setActiveBox] = useState<number>(DEFAULT_ACTIVE);
   const [answers, setAnswers] = useState<IFormAnswer[]>([]);
-  const [first, setFirst] = useState<boolean>(true);
   const inputRef = createRef<HTMLInputElement>();
 
   const isCurrentQuestionIsInput = () => {
@@ -33,10 +31,15 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
     const currForm: IFormQuestion = forms[index];
     if (isCurrentQuestionIsInput()) {
       // Input Question
-      return getAnswerInputRef();
+
+      return currForm.getAnswer
+        ? currForm.getAnswer(getAnswerInputRef())
+        : getAnswerInputRef();
     } else {
       // Answer Question
-      return currForm.answerValue[activeBox];
+      return currForm.getAnswer
+        ? currForm.getAnswer(currForm.answerValue[activeBox])
+        : currForm.answerValue[activeBox];
     }
   };
 
