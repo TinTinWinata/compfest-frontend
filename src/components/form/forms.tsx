@@ -14,10 +14,11 @@ export interface IFormsProps {
   forms: IFormQuestion[];
   endpoint: IEndpoint;
   name: string;
+  descriptions: string[];
 }
 
 export default function Forms({ forms, endpoint, name }: IFormsProps) {
-  const [finish, setFinish] = useState<boolean>(false);
+  const [finish, setFinish] = useState<boolean>(true);
   const [index, setIndex] = useState<number>(0);
   const [activeBox, setActiveBox] = useState<number>(DEFAULT_ACTIVE);
   const [answers, setAnswers] = useState<IFormAnswer[]>([]);
@@ -97,11 +98,8 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
 
   if (finish) {
     return (
-      <div className="bg-primary w-full h-screen overflow-hidden center">
-        <div className="relative p-6 w-[1000px] h-[90%] bg-gray-50 rounded-xl ">
           <Finish name={name} endpoint={endpoint} answers={answers} />
-        </div>
-      </div>
+
     );
   }
 

@@ -39,7 +39,8 @@ export default function TestRequest() {
       undefined,
       data
     );
-    console.log('response : ', response);
+    console.log('[TEST] data : ', data);
+    console.log('[TEST] response : ', response);
     if (response.success) {
       toastSuccess('Succesfully request to backend!');
     }

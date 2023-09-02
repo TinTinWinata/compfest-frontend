@@ -1,5 +1,5 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../../contexts/user-context';
@@ -9,7 +9,7 @@ import { IFormAnswer } from '../../interfaces/form-answer';
 import { ITest } from '../../interfaces/user-firestore-interface';
 import { toastError } from '../../settings/toast-setting';
 import Service from '../../utils/service';
-import TestRequest from '../test-request';
+import Appointment from './appointment';
 
 export interface IFormFinishProps {
   answers: IFormAnswer[];
@@ -23,7 +23,10 @@ export interface IResultType {
 
 export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const { saveDesease } = useUserAuth();
-  const [data, setData] = useState<IAIResponse | null>(null);
+  const [data, setData] = useState<IAIResponse | null>({
+    result: 1,
+    status: 'Success',
+  });
   const navigate = useNavigate();
 
   const getResult = (): number => {
@@ -68,9 +71,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
     }, {});
   };
 
-  useEffect(() => {
-    fetch();
-  }, [answers]);
+  // useEffect(() => {
+  //   fetch();
+  // }, [answers]);
 
   const handleBack = () => navigate('/');
   const getLottieAsset = (): string => {
@@ -84,13 +87,13 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
 
   const getLottieString = (): string => {
     if (!data) {
-      return 'Please wait were checking all your answers!';
+      return 'Mohon tunggu, kita sedang melakukan check pada jawabanmu!';
     } else if (getResult() >= 0.5) {
-      return 'Kamu harus senantiasa menjaga kesehatan dengan pola makan sehat, olahraga teratur, dan memantau kadar gula darah untuk mencegah terjadinya komplikasi yang bisa membahayakan kesehatan saya di masa depan.';
+      return 'Kamu harus senantiasa menjaga kesehatan dengan pola makan sehat, olahraga teratur untuk mencegah terjadinya komplikasi yang bisa membahayakan kesehatan di masa depan.';
     } else if (getResult() < 0.5) {
-      return 'Kamu aman! Harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko diabetes dan memiliki gaya hidup yang lebih sehat dan bugar.';
+      return 'Kamu aman! Harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko penyakit mematikan dan memiliki gaya hidup yang lebih sehat dan bugar.';
     }
-    return '/assets/loading.json';
+    return '';
   };
   const getLottieTitle = (): string => {
     if (!data) {
@@ -100,36 +103,56 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
     } else if (getResult() < 0.5) {
       return 'Kamu aman';
     }
-    return '/assets/loading.json';
+    return '';
   };
 
   return (
-    <>
-      <div onClick={handleBack} className="relative w-fit flex cursor-pointer">
-        <div className="center">
-          <FaArrowLeft className="w-3 h-3 text-gray-500" />
-        </div>
-        <div className="ml-2 mt-2 text-gray-500 mb-2 text-sm">Back</div>
-      </div>
-      <hr />
-      <div className="text-center  flex flex-col center w-full h-full">
-        <Player className="w-52 h-52" src={getLottieAsset()} autoplay loop />
-        <h3 className="font-semibold text-2xl ">{getLottieTitle()}</h3>
-        <p className="mt-2 text-gray-500 ">{getLottieString()}</p>
-
-        {/* Invicible Button */}
-        <div className="h-16"></div>
-        {/* Real Button */}
-        {/* Debug Button */}
-        <button onClick={fetch}>Fetch Again</button>
-        <TestRequest />
-        <Link
-          to="/home"
-          className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold   text-gray-50  transition-all w-full bg-accent "
+    <div className="bg-primary w-full h-screen gap-3 overflow-hidden center">
+      <div className="relative p-6 w-[1000px] h-[90%] bg-gray-50 rounded-xl ">
+        <div
+          onClick={handleBack}
+          className="center  relative w-fit flex cursor-pointer"
         >
-          Home
-        </Link>
+          <FaArrowLeft className="w-3 h-3 text-gray-500" />
+          <div className="ml-2 mt-2 text-gray-500 mb-2 text-sm">Back</div>
+        </div>
+        <hr />
+        <div className="text-center  flex flex-col pb-20 center w-full h-full">
+          <Player className="w-52 h-52" src={getLottieAsset()} autoplay loop />
+          <h3 className="font-semibold text-2xl ">{getLottieTitle()}</h3>
+          <p className="mt-4 text-gray-500 w-3/4">{getLottieString()}</p>
+
+          {/* Invicible Button */}
+          <hr className="my-10 w-3/4" />
+          {/* Real Button */}
+          {/* Debug Button */}
+          {/* <button onClick={fetch}>Fetch Again</button>
+        <TestRequest /> */}
+          <div className="flex gap-4">
+            <Appointment
+              link="https://www.halodoc.com/tanya-dokter"
+              name="Alodoc"
+              icon="assets/halodoc.png"
+            />
+            <Appointment
+              icon="assets/klik-dokter.png"
+              link="https://www.klikdokter.com/tanya-dokter"
+              name="Klik Dokter"
+            />
+            <Appointment
+              icon="assets/link-sehat.png"
+              link="https://linksehat.com/tanya-dokter"
+              name="Link Sehat"
+            />
+          </div>
+          <Link
+            to="/home"
+            className="absolute px-2 py-3 rounded-b-lg bottom-0 font-semibold   text-gray-50  transition-all w-full bg-accent "
+          >
+            Home
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

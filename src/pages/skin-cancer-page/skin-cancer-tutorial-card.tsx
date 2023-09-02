@@ -16,7 +16,7 @@ export default function SkinCancerTutorialCard({
   return (
     <div
       className={`${
-        first ? 'border-opacity-50' : 'border-opacity-0'
+        first ? 'border-opacity-50 bg-blue-600 ' : 'border-opacity-0'
       } border rounded-xl  border-gray-50 p-6  w-[200px]`}
     >
       <h1 className="mb-10 text-base">{title}</h1>
