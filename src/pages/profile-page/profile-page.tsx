@@ -53,7 +53,6 @@ export default function ProfilePage() {
               <CiLogout className="" />
             </div>
           </div>
-          <div className="h-5"></div>
           <ProfileDisease />
         </div>
       </div>

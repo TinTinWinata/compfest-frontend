@@ -6,7 +6,10 @@ export default function ProfileDisease() {
   const { firestore } = useUserAuth();
 
   return (
-    <div className="shadow-sm flex flex-col gap-2">
+    <div className="pb-10 shadow-sm flex flex-col gap-2">
+      <h1 className="text-2xl text-gray-600 mb-2 font-semibold">
+        Disease Lists
+      </h1>
       {firestore?.tests.map((test: ITest, index: number) => (
         <ProfileDiseaseComponent test={test} key={index} />
       ))}

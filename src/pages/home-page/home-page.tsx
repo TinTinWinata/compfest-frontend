@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Footer from '../../components/footer';
 import Navbar from '../../components/navbar/navbar';
-import TestRequest from '../../components/test-request';
 import HomeDeseaseWrapper from './home-disease-wrapper';
 import HomeHowTo from './home-how-to';
 import HomeJoin from './home-join';
@@ -16,7 +15,7 @@ export default function HomePage() {
   return (
     <div>
       <Navbar></Navbar>
-      <TestRequest />
+      {/* <TestRequest /> */}
       <div
         ref={firstRef}
         className="w-full min-h-screen center relative overflow-hidden"

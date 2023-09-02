@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { BiArrowBack } from 'react-icons/bi';
 import QRCode from 'react-qr-code';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useUserAuth } from '../../contexts/user-context';
 import useHostRoom from '../../hooks/useHostRoom';
@@ -56,6 +57,17 @@ export default function SkinCancerPage() {
     <div className="w-full h-screen center relative overflow-hidden">
       <div className="w-full h-full center">
         <div className="border-gray-500 relative border border-opacity-20 rounded-[5%] w-[70%] h-[80%] center">
+          <div className="absolute left-10 top-0 translate-y-[-100%] pb-2">
+            <Link
+              to="/home"
+              className="w-20 text-primary center gap-1 hover:underline cursor-pointer"
+            >
+              <div className="center">
+                <BiArrowBack className="w-3 h-3" />
+              </div>
+              <div className="">Back</div>
+            </Link>
+          </div>
           <div className="flex flex-col gap-4 ">
             <video
               playsInline
