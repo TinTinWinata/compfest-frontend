@@ -24,11 +24,11 @@ export default function ProfileDiseaseComponent({
       <div className="flex justify-between">
         <div className="gap-2 flex items-center justify-start">
           <div className="font-semibold">{test.name}</div>
-          {isAnn && (
+          {/* {isAnn && (
             <div className="center">
               ({(test.result * 10).toFixed(2)} % Potentials)
             </div>
-          )}
+          )} */}
           {isSave ? (
             <div className="rounded-full text-white font-bold bg-green-600 px-2 py-1 text-xs w-fit">
               Save

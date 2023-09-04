@@ -38,7 +38,7 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   const fetch = async () => {
     const service = new Service();
     const data: IResultType = dataConverter(answers);
-    console.log(data);
+    // console.log(data);
     const response = await service.request<IAIResponse>(
       endpoint,
       undefined,
@@ -58,7 +58,7 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
   };
 
   const dataConverter = (answers: IFormAnswer[]): {} => {
-    console.log(answers);
+    // console.log(answers);
     return answers.reduce((acc: IResultType, { name, value }) => {
       acc[name] = value;
       return acc;
@@ -81,11 +81,11 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
 
   const getLottieString = (): string => {
     if (!data) {
-      return 'Mohon tunggu, kita sedang melakukan check pada jawabanmu!';
+      return 'Please wait, we are checking your answer!';
     } else if (getResult() >= 0.5) {
-      return 'Kamu harus senantiasa menjaga kesehatan dengan pola makan sehat, olahraga teratur untuk mencegah terjadinya komplikasi yang bisa membahayakan kesehatan di masa depan.';
+      return 'You should always maintain your health with a healthy diet and regular exercise to prevent complications that could harm your health in the future.';
     } else if (getResult() < 0.5) {
-      return 'Kamu aman! Harus tetap menjaga kesehatan dengan pola makan yang sehat dan aktif berolahraga agar terhindar dari risiko penyakit mematikan dan memiliki gaya hidup yang lebih sehat dan bugar.';
+      return 'You are safe! You must maintain your health with a healthy diet and active exercise to avoid the risk of deadly diseases and have a healthier and fitter lifestyle.';
     }
     return '';
   };
@@ -93,9 +93,9 @@ export default function Finish({ answers, endpoint, name }: IFormFinishProps) {
     if (!data) {
       return '';
     } else if (getResult() >= 0.5) {
-      return 'Kamu tidak aman';
+      return 'You are not safe';
     } else if (getResult() < 0.5) {
-      return 'Kamu aman';
+      return 'You are safe';
     }
     return '';
   };

@@ -91,7 +91,7 @@ class Service {
       result.message = response.statusText;
       result.success = true;
     } catch (error) {
-      console.log('[ERROR] response : ', error);
+      // console.log('[ERROR] response : ', error);
       const { response } = error as any;
 
       result = response

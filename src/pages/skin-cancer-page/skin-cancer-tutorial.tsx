@@ -41,7 +41,7 @@ export default function SkinCancerTutorial({
           <PiCrownDuotone className="text-white text-3xl mr-10" />
         </div>
       )}
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-16">
         {first && (
           <div className="">
             <div
@@ -54,9 +54,9 @@ export default function SkinCancerTutorial({
               <p>Back</p>
             </div>
             <h1 className=" text-white w-full text-center text-[60px] font-bold">
-              Skin Cancer by Diagno AI
+              Skin Disease Classification
             </h1>
-            <p className="text-center text-gray-200 text-2xl">
+            <p className="text-center text-gray-200 text-lg">
               You can click "understand" if you already know how to use it!
             </p>
           </div>

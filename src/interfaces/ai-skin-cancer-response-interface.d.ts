@@ -1,6 +1,6 @@
 export interface IAISkinCancerResponse {
   result: {
-    predict: [number];
+    predict: number[];
     result: string;
     value: number;
   };

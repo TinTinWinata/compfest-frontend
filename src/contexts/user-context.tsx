@@ -150,7 +150,8 @@ export function UserProvider({ children }: IChildrenProps) {
     if (firestore && firestore.tests.length > 0) {
       const total = firestore.tests.length;
       const success = getSuccess();
-      return (success / total) * 100;
+      console.log('success : ', success);
+      return Math.round((success / total) * 100);
     }
     return 0;
   };

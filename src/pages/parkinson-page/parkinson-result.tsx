@@ -51,7 +51,12 @@ export default function ParkinsonResult({
             <p className="font-semibold">
               Succesfully Predicting! This is your Result:{' '}
             </p>
-            <p>{data.result == 0 ? 'You Are Safe' : 'You Are Not Safe'}</p>
+            <p className="font-bold mb-3">
+              {data.result == 0 ? 'You Are Safe' : 'You Are Not Safe'}
+            </p>
+            <p className="text-red-400 font-semibold text-xs">
+              * warning this is only a prediction *
+            </p>
           </div>
         </div>
       ) : (
@@ -64,7 +69,9 @@ export default function ParkinsonResult({
               src="/assets/loading.json"
             />
           </div>
-          <div className="center">Please wait were analysis your results..</div>
+          <div className="center text-gray-500 ">
+            Please wait were analysis your results..
+          </div>
         </div>
       )}
     </Modal>

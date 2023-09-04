@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { ChangeEvent, useEffect } from 'react';
 import { AiOutlineLock } from 'react-icons/ai';
@@ -68,7 +69,25 @@ export default function LoginPage() {
           </div>
         </div>
       </form>
-      <div className="lg:block hidden bg-blue-100 w-full"></div>
+      <div className="lg:block hidden h-full relative bg-blue-50 w-full sm:center">
+        <div className="absolute left-[50%] translate-x-[-50%] top-[40px]"></div>
+        <div className="absolute bottom-[0px] left-[50%] translate-x-[-50%]">
+          <Player
+            speed={1}
+            className="transform scale-x-[-1] w-[130px] pb-3"
+            autoplay
+            loop
+            src="/assets/bird-3.json"
+          />
+          <Player
+            speed={0.5}
+            className="w-[800px]"
+            autoplay
+            loop
+            src="/assets/login-5.json"
+          />
+        </div>
+      </div>
     </div>
   );
 }

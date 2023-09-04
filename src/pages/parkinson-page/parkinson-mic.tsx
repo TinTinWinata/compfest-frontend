@@ -67,11 +67,11 @@ export default function ParkinsonMic({
       .then((file) => {
         setOpen(true);
         // downloadFile(file);
-        console.log('[FILE] : ', file);
+        // console.log('[FILE] : ', file);
         checkResult(file);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

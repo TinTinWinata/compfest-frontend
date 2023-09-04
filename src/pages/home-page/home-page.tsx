@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Footer from '../../components/footer';
 import Navbar from '../../components/navbar/navbar';
-import TestRequest from '../../components/test-request';
 import HomeDeseaseWrapper from './home-disease-wrapper';
 import HomeHowTo from './home-how-to';
 import HomeJoin from './home-join';
@@ -16,7 +15,7 @@ export default function HomePage() {
   return (
     <div>
       <Navbar></Navbar>
-      <TestRequest />
+      {/* <TestRequest /> */}
       <div
         ref={firstRef}
         className="w-full min-h-screen center relative overflow-hidden"
@@ -32,7 +31,16 @@ export default function HomePage() {
             <div className="text-primary font-bold text-[60px]">
               Best AI for Diagnostics
             </div>
-            <ChangeText texts={['Diabetes.', 'Cancer.', 'Stroke.']} />
+            <ChangeText
+              texts={[
+                'Mental Health.',
+                'Diabetes.',
+                'Skin Disease.',
+                'Stroke.',
+                'Cardiovaskular.',
+                'Parkinson.',
+              ]}
+            />
             <p className="text-gray-400  text-md font-semibold my-8">
               A Safer Tomorrow Starts Today! <br />
               Utilize AI to Detect Desease and Embracing a Healthier Lifestyle
@@ -41,7 +49,7 @@ export default function HomePage() {
               onClick={onHandleClick}
               className="focus:outline-none px-16 py-4 font-semibold text-xl rounded-full bg-primary text-white"
             >
-              Skin Cancer
+              Skin Disease
             </button>
             <p className="tracking-wide text-sm text-gray-500 mt-2 ">
               Test is conducted free of charge,

@@ -37,17 +37,17 @@ export default function SkinCancerResult({
               className="w-52 h-52"
               autoplay
               loop
-              src="/assets/strong.json"
+              src="/assets/skin.json"
             />
           </div>
-          <div className="flex text-lg flex-col justify-center items-center ">
+          <div className="flex text-lg gap-3 flex-col justify-center items-center ">
             <p className="font-semibold">
-              Succesfully Predicting! This is your Result:{' '}
+              Success Prediction! Your Skin Disease Is :{' '}
             </p>
-            <p>
-              {data.result.result} ({getPercentage()}%)
+            <p className="font-bold">
+              {data.result.result} ({getPercentage().toFixed(2)}%)
             </p>
-            <p className="text-red-500 font-semibold text-sm">
+            <p className="text-red-400  font-semibold text-xs">
               * warning this is only a prediction *
             </p>
           </div>
@@ -62,7 +62,9 @@ export default function SkinCancerResult({
               src="/assets/loading.json"
             />
           </div>
-          <div className="center">Please wait were analysis your results..</div>
+          <div className="center text-gray-500">
+            Please wait were analysis your results..
+          </div>
         </div>
       )}
     </Modal>

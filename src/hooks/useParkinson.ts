@@ -22,7 +22,7 @@ export default function useParkinson() {
         formData
       );
       if (response.success && response.data) {
-        console.log('response data  :', response.data);
+        // console.log('response data  :', response.data);
         setData(response.data);
         toastSuccess('Succesfully predict data!');
       } else {
