@@ -5,6 +5,7 @@ import { Method } from '../enums/method-enum';
 
 import { IEndpoint } from '../interfaces/endpoint-interface';
 import { IBackendResponse } from '../interfaces/service-response-interface';
+import { SECOND_API_SETTING } from '../settings/second-api-setting';
 
 // Service facade to handle axios
 class Service {
@@ -56,7 +57,10 @@ class Service {
   }
 
   public generateUrl(endpoint: IEndpoint, id: string = '', param: any = {}) {
-    const baseURL = import.meta.env.VITE_API_URL;
+    let baseURL = import.meta.env.VITE_API_URL;
+    if (SECOND_API_SETTING.includes(endpoint.url)) {
+      baseURL = import.meta.env.VITE_SECOND_API_URL;
+    }
     let url = baseURL + endpoint.url;
     url += id ? `/${id}` : ``;
 
