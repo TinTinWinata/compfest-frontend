@@ -12,7 +12,7 @@ import SkinCancerTutorial from './skin-cancer-tutorial';
 
 export default function SkinCancerPage() {
   const { user } = useUserAuth();
-  const uuid = user ? user.uid : uuidv4();
+  const [uuid, setUuid] = useState<string>(user ? user.uid : uuidv4());
   const [firstSetup, setFirstSetup] = useState<boolean>(true);
   const navigate = useNavigate();
   const {
