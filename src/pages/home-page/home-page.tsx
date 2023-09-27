@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Footer from '../../components/footer';
 import Navbar from '../../components/navbar/navbar';
+import ScrollChecker from '../../components/scroll-checker';
 import HomeDeseaseWrapper from './home-disease-wrapper';
 import HomeHowTo from './home-how-to';
 import HomeJoin from './home-join';
@@ -14,6 +15,7 @@ export default function HomePage() {
   const firstRef = createRef<HTMLDivElement>();
   return (
     <div>
+      <ScrollChecker />
       <Navbar></Navbar>
       {/* <TestRequest /> */}
       <div

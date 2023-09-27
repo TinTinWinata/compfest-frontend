@@ -15,7 +15,7 @@ export default function DeseaseMenu() {
   return (
     <div ref={ref} className="mx-2  font-semibold cursor-pointer relative">
       <Link to="/disease-list" className="" onMouseOver={() => setHover(true)}>
-        Desease
+        Disease
       </Link>
 
       {hover && (
