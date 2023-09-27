@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { BiArrowBack } from 'react-icons/bi';
@@ -33,7 +34,6 @@ export default function SkinCancerPage() {
   const getLink = () => `${import.meta.env.VITE_URL}/skin-cancer/${uuid}`;
 
   if (isMobile) {
-    navigate(getLink());
     window.location.href = getLink();
   }
 
@@ -52,6 +52,22 @@ export default function SkinCancerPage() {
       setResultModal(true);
     }
   }, [data]);
+
+  if (isMobile) {
+    return (
+      <div className="bg-primary w-full min-h-screen h-full center">
+        <div className="center flex-col text-white font-bold text-xl">
+          <Player
+            autoplay
+            loop
+            className="w-[300px]"
+            src="./assets/brain.json"
+          />
+          <p>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-screen center relative overflow-hidden">

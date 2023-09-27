@@ -7,10 +7,10 @@ export default function HomeHowTo() {
     <div className="p-10 pb-20 gradient-circle-blue w-full h-[1000px] center">
       <div className="w-[1000px]">
         <div className="text-primary font-semibold">How It Works</div>
-        <div className="font-medium text-gray-800 text-[30px]">
+        <div className="font-medium text-gray-800  text-[20px] sm:text-[30px]">
           Diagnosis Easily with DiagnoAI.
         </div>
-        <div className="w-full  my-6 bg-white border rounded-md flex justify-evenly">
+        <div className="w-full  my-6 bg-white border text-xs sm:text-base rounded-md flex justify-evenly">
           {INSTRUCTION_LIST.map((instruction: string, index: number) => {
             const isSelected = index === selected;
             const onClick = () => setSelected(index);

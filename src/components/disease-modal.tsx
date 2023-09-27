@@ -41,17 +41,28 @@ export default function DiseaseModal() {
           onClick={() => setOpen(false)}
           className="cursor-pointer flex p-3 hover:bg-blue-50 transition-all rounded-md flex-col"
         >
-          <p className="text-center text-xl font-semibold">Use Default</p>
-          <img className="h-32 mb-1 mt-3" src="/assets/prediction-2.png" />
-          <p className="text-center pt-3">more accurates, binary result</p>
+          <p className="text-center text-lg sm:text-xl font-semibold">
+            Use Default
+          </p>
+          <img
+            className="h-20 sm:h-32 mb-1 mt-3"
+            src="/assets/prediction-2.png"
+          />
+          <p className="text-center text-sm sm:text-base  pt-3">
+            more accurates, binary result
+          </p>
         </div>
         <div
           onClick={handleClickAnn}
           className="cursor-pointer flex p-3 hover:bg-blue-50 transition-all rounded-md flex-col"
         >
-          <p className="text-center text-xl font-semibold">Use ANN</p>
-          <img className="h-32 mb-1 mt-3" src="/assets/ann.png" />
-          <p className="text-center pt-3">less accurates, percentage result</p>
+          <p className="text-center text-lg sm:text-xl font-semibold">
+            Use ANN
+          </p>
+          <img className="h-20 sm:h-32 mb-1 mt-3" src="/assets/ann.png" />
+          <p className="text-center text-sm sm:text-base pt-3">
+            less accurates, percentage result
+          </p>
         </div>
       </div>
     </Modal>

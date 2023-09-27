@@ -40,7 +40,7 @@ export default function SkinCancerResult({
               src="/assets/skin.json"
             />
           </div>
-          <div className="flex text-lg gap-3 flex-col justify-center items-center ">
+          <div className="flex text-md sm:text-lg gap-3 flex-col justify-center items-center ">
             <p className="font-semibold">
               Success Prediction! Your Skin Disease Is :{' '}
             </p>

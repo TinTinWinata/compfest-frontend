@@ -11,7 +11,6 @@ export default function DiseaseListPage() {
           <h1 className="font-semibold text-2xl text-center mb-7">
             Disease Lists
           </h1>
-          {/* <hr className="my-5"></hr> */}
           {DISEASE_LIST.map((disease: IDiseaseForm) => (
             <div
               className=" py-5 px-3 flex justify-between font-semibold text-gray-500 w-full  border-t border-gray-300 border-opacity-30"

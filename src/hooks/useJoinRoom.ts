@@ -47,7 +47,7 @@ export default function useJoinRoom(callId: string, mode: string) {
     });
 
     const localStream = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: { facingMode: 'environment' },
       audio: true,
     });
     const remoteStream = new MediaStream();

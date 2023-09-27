@@ -108,7 +108,7 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
       <DiseaseModal />
       <div
         data-aos="fade-up"
-        className="shadow-xl relative w-[1000px] h-[80%] p-6 bg-white rounded-xl"
+        className="shadow-xl relative w-full sm:w-[1000px] m-5 sm:m-0 h-[80%] p-6 bg-white rounded-xl"
       >
         <ProgressBar from={index + 1} to={forms.length} />
         <FormDetail
@@ -121,7 +121,7 @@ export default function Forms({ forms, endpoint, name }: IFormsProps) {
         <div className="w-full center translate-x-[-50%] left-[50%] absolute bottom-0">
           <div
             onClick={handleNext}
-            className=" cursor-pointer w-full bg-accent    transition-all center text-gray-50 p-5 rounded-b-xl font-semibold"
+            className=" cursor-pointer w-full bg-accent    transition-all center text-gray-50 p-4 sm:p-5 rounded-b-xl font-semibold"
           >
             Next
           </div>

@@ -38,13 +38,13 @@ export default function ParkinsonPage() {
           </Link>
           <button
             onClick={handleChangeText}
-            className="py-3 px-8 transition-all hover:text-white hover:bg-primary text-xl rounded-full border-2 font-semibold border-primary text-primary"
+            className="py-2 sm:py-3 px-2 sm:px-8 transition-all hover:text-white hover:bg-primary text-xs sm:text-xl rounded-full border-2 font-semibold border-primary text-primary"
           >
             Change Paragraph
           </button>
           <div className="w-20"></div>
         </div>
-        <div className="w-3/4 text-3xl mt-16 ">{text}</div>
+        <div className="w-3/4 text-md sm:text-3xl mt-16 ">{text}</div>
       </div>
       <ParkinsonMic checkResult={checkResult} setOpen={setOpen} />
       <ParkinsonResult open={open} setOpen={setOpen} data={data} />

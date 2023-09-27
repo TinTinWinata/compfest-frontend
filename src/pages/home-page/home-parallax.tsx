@@ -101,23 +101,26 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
   }, []);
 
   return (
-    <div ref={introRef} className="relative center w-full h-screen  ">
+    <div
+      ref={introRef}
+      className="overflow:hidden min-w-screen relative center w-full h-screen  "
+    >
       <Lottie
-        className="abs-center z-20 w-[300px] md:w-[600px]"
+        className="abs-center z-20 w-[500px] md:w-[600px]"
         autoplay={false}
         lottieRef={lottieRef}
         animationData={animationData}
       />
       <div
         className={
-          ' absolute  z-30 top-[75%] sm:top-[70%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
+          ' absolute  z-30 top-[70%] sm:top-[70%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
           textClass
         }
       >
-        <div className="center">
+        <div className="center ">
           <p
             className={
-              'mt-6 sm:text-xl md:text-xl lg:text-2xl text-center w-full font-thin  tracking-widest transition-all ' +
+              'sm:mt-6 sm:text-xl md:text-xl lg:text-2xl text-center w-full font-thin  tracking-widest transition-all ' +
               textClass
             }
           >
@@ -130,7 +133,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
         <div className="center mt-5">
           <button
             onClick={handleParkinson}
-            className="focus:outline-none px-16 py-4 font-semibold text-xl rounded-full bg-primary text-white"
+            className="focus:outline-none py-2 px-6 sm:px-16 sm:py-4 font-semibold text-lg sm:text-xl rounded-full bg-primary text-white"
           >
             Detect Parkinson
           </button>
@@ -138,11 +141,11 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
       </div>
       <div
         className={
-          ' absolute top-[30%] z-30 md:top-[30%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
+          ' absolute  z-30 top-[30%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
           textClass
         }
       >
-        <h1 className="text-center text-gray-700 text-2xl md:text-7xl font-semibold">
+        <h1 className="text-center text-gray-700  text-[50px] md:text-7xl font-bold">
           DiagnoAI
         </h1>
       </div>

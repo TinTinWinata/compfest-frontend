@@ -22,7 +22,7 @@ export default function ProgressBar({
           className={`transition-all  bg-blue-600 h-7 rounded-full`}
         ></div>
       </div>
-      <p className="mb-1 text-md text-gray-500 text-center mt-3 text-lg">{`Question ${from} / ${to}`}</p>
+      <p className="mb-1 text-md text-gray-500 text-center mt-3 text-sm sm:text-lg">{`Question ${from} / ${to}`}</p>
     </>
   );
 }

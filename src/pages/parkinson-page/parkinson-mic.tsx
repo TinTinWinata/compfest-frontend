@@ -100,19 +100,19 @@ export default function ParkinsonMic({
   };
   return (
     <>
-      <div className="absolute  w-full h-[30%] bottom-0 left-0 ">
+      <div className="absolute  w-full h-[30%] bottom-[-50px] sm:bottom-0 left-0 ">
         <div
           onMouseUp={handleMouseUp}
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUp}
-          className={`cursor-pointer z-20 absolute top-10 left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full  w-[300px] h-[300px]  border-4 ${
+          className={`cursor-pointer z-20 absolute top-10 left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full  w-[150px] h-[150px] sm:w-[300px] sm:h-[300px]  border-4 ${
             !record
               ? ' bg-white text-primary border-primary '
               : ' bg-primaryHover text-white border-white '
           }  center`}
         >
           <div className="center">
-            <HiMiniMicrophone className=" w-[100px] h-[100px]" />
+            <HiMiniMicrophone className=" sm:w-[100px] sm:h-[100px] w-[50px] h-[50px]" />
           </div>
         </div>
         <div className="z-10 w-full bg-primary h-full rounded-t-3xl absolute left-0 bottom-0"></div>

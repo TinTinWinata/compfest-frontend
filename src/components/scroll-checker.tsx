@@ -29,10 +29,10 @@ export default function ScrollChecker() {
 
   return (
     <div className={`z-0 fixed bottom-[-40px] w-full ${getOpacity()}`}>
-      <div className="flex w-full   justify-around">
+      <div className="flex w-full justify-around">
         {!isMobile && (
           <Player
-            className="sm:block hidden w-40 h-40"
+            className="sm:block  hidden w-40 h-40"
             src="/assets/down.json"
             autoplay
             loop

@@ -22,10 +22,10 @@ export default function DiseaseComponent({
       to={'/' + name.toLowerCase().replace(' ', '-')}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="relative w-full cursor-pointer"
+      className="relative   cursor-pointer"
     >
       <div
-        className={`absolute  top-0 left-0 w-full h-full transition-all duration-500 rounded-lg ${
+        className={`absolute top-0 left-0 w-full h-full transition-all duration-500 rounded-lg ${
           isFocusButNotThis() ? 'bg-gray-900' : 'bg-gray-500'
         } opacity-30`}
       ></div>
@@ -36,16 +36,18 @@ export default function DiseaseComponent({
           } translate-y-[-50%] z-30`}
         >
           <div className="center gap-2">
-            <FaCirclePlay className="w-10 h-10 text-white " />
-            <div className="text-white text-3xl font-bold">Start</div>
+            <FaCirclePlay className="w-5 h-5 sm:w-10 sm:h-10 text-white " />
+            <div className="text-white text-xl sm:text-3xl font-bold">
+              Start
+            </div>
           </div>
         </div>
       </div>
       <div
         style={{ backgroundImage: `url("${asset}")` }}
-        className="border bg-cover border-primary rounded-lg border-opacity-30 w-full h-full  "
+        className="border bg-cover border-primary rounded-lg border-opacity-30 w-full sm:h-full h-3/4  "
       ></div>
-      <div className="text-center text-gray-50 font-bold text-xl mt-2 pb-2">
+      <div className="text-center text-gray-50 font-bold text-md sm:text-xl mt-2 pb-2">
         {name}
       </div>
     </Link>

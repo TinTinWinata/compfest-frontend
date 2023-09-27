@@ -30,7 +30,7 @@ export default function HomePage() {
             <Player autoplay loop src={'/assets/find.json'} />
           </div> */}
           <div className="flex flex-col items-center text-center">
-            <div className="text-primary font-bold text-[60px]">
+            <div className="text-primary font-bold text-[40px] sm:text-[60px]">
               Best AI for Diagnostics
             </div>
             <ChangeText
@@ -43,17 +43,17 @@ export default function HomePage() {
                 'Parkinson.',
               ]}
             />
-            <p className="text-gray-400  text-md font-semibold my-8">
+            <p className="text-gray-400 text-sm sm:text-md font-semibold mt-2 mb-5 sm:my-8">
               A Safer Tomorrow Starts Today! <br />
               Utilize AI to Detect Desease and Embracing a Healthier Lifestyle
             </p>
             <button
               onClick={onHandleClick}
-              className="focus:outline-none px-16 py-4 font-semibold text-xl rounded-full bg-primary text-white"
+              className="focus:outline-none  px-8 py-2 sm:px-16 sm:py-4 font-semibold text-md sm:text-xl rounded-full bg-primary text-white"
             >
               Skin Disease
             </button>
-            <p className="tracking-wide text-sm text-gray-500 mt-2 ">
+            <p className="tracking-wide text-xs sm:text-sm text-gray-500 mt-2 ">
               Test is conducted free of charge,
             </p>
           </div>
