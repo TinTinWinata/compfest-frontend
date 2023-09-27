@@ -1,4 +1,5 @@
 import { createRef } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 import ChangeText from '../../components/change-text';
 import Footer from '../../components/footer';
@@ -31,7 +32,7 @@ export default function HomePage() {
           </div> */}
           <div className="flex flex-col items-center text-center">
             <div className="text-primary font-bold text-[40px] sm:text-[60px]">
-              Best AI for Diagnostics
+              {isMobile ? 'DiagnoAI' : 'Best AI for Diagnostics'}
             </div>
             <ChangeText
               texts={[
