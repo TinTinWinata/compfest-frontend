@@ -40,7 +40,7 @@ export default function HomePage() {
                 'Diabetes.',
                 'Skin Disease.',
                 'Stroke.',
-                'Cardiovaskular.',
+                'Cardiovascular.',
                 'Parkinson.',
               ]}
             />

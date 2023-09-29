@@ -20,7 +20,7 @@ export const DISEASE_LIST: IDiseaseForm[] = [
     link: '/cardiovaskular',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: CARDIOVASKULAR_QUESTIONS,
-    name: 'Cardiovaskular',
+    name: 'Cardiovascular',
   },
   {
     link: '/diabetes',
@@ -50,7 +50,7 @@ export const DISEASE_LIST: IDiseaseForm[] = [
     link: '/cardiovaskular-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskularAnn,
     forms: CARDIOVASKULAR_QUESTIONS,
-    name: 'Cardiovaskular ANN',
+    name: 'Cardiovascular ANN',
   },
 
   {

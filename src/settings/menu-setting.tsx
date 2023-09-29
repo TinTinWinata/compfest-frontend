@@ -13,7 +13,7 @@ export const MENU_LIST: IMenu[] = [
   },
   {
     link: '/cardiovaskular',
-    name: 'Cardiovaskular',
+    name: 'Cardiovascular',
     icon: <BsHeartPulse className="w-7 h-7" />,
   },
   {
