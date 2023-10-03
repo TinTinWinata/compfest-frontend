@@ -29,7 +29,12 @@ export default function ParkinsonResult({
   };
   useEffect(() => saveProfile(), [data]);
   return (
-    <Modal onClose={onClose} open={open} setOpen={setOpen}>
+    <Modal
+      canBeClose={data !== null}
+      onClose={onClose}
+      open={open}
+      setOpen={setOpen}
+    >
       {data ? (
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="center">

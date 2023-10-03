@@ -12,6 +12,7 @@ export interface IModalProps extends IChildrenProps {
   onClick?: () => void;
   onSubmit?: (e: ChangeEvent<HTMLFormElement>) => void;
   onClose?: () => void;
+  canBeClose?: boolean;
 }
 
 export default function Modal({
@@ -24,6 +25,7 @@ export default function Modal({
   onClose,
   onClick,
   onSubmit,
+  canBeClose = true,
 }: IModalProps) {
   const handleOnSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ export default function Modal({
         className="fixed z-30 inset-0 overflow-y-auto"
         open={open}
         onClose={(e) => {
-          setOpen(e);
+          canBeClose && setOpen(e);
           onClose && onClose();
         }}
       >
