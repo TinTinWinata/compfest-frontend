@@ -6,6 +6,7 @@ import Service from '../utils/service';
 
 export default function useSkinCancer() {
   const [data, setData] = useState<IAISkinCancerResponse | null>(null);
+  const reset = () => setData(null);
   const checkResult = async (data: any) => {
     if (data && data.result !== undefined && data.result !== '') {
       const link = data.result as string;
@@ -25,5 +26,5 @@ export default function useSkinCancer() {
       }
     }
   };
-  return { checkResult, data };
+  return { checkResult, data, reset };
 }

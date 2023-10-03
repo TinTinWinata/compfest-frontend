@@ -23,6 +23,7 @@ export default function SkinCancerPage() {
     isIncomeStream,
     screenshotRemote,
     data,
+    reset,
   } = useHostRoom(uuid, 'create');
   const [resultModal, setResultModal] = useState<boolean>(false);
 
@@ -113,6 +114,7 @@ export default function SkinCancerPage() {
             </p>
           </div>
           <SkinCancerResult
+            onClose={reset}
             open={resultModal}
             setOpen={setResultModal}
             data={data}

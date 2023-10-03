@@ -20,7 +20,7 @@ export default function useJoinRoom(callId: string, mode: string) {
   // Invite Mutation
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
-  const { checkResult, data } = useSkinCancer();
+  const { checkResult, data, reset } = useSkinCancer();
 
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
@@ -188,5 +188,6 @@ export default function useJoinRoom(callId: string, mode: string) {
     webcamActive,
     screenshotLocal,
     data,
+    reset,
   };
 }
