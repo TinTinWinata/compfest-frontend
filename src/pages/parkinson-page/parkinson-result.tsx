@@ -7,12 +7,14 @@ import { ITest } from '../../interfaces/user-firestore-interface';
 
 interface IParkinsonResultProps extends IModalProps {
   data: IAIParkinsonResponse | null;
+  onClose: () => void;
 }
 
 export default function ParkinsonResult({
   open,
   setOpen,
   data,
+  onClose,
 }: IParkinsonResultProps) {
   const { saveDesease } = useUserAuth();
   const saveProfile = () => {
@@ -27,7 +29,7 @@ export default function ParkinsonResult({
   };
   useEffect(() => saveProfile(), [data]);
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal onClose={onClose} open={open} setOpen={setOpen}>
       {data ? (
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="center">

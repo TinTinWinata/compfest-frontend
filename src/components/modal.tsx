@@ -11,6 +11,7 @@ export interface IModalProps extends IChildrenProps {
   button?: string;
   onClick?: () => void;
   onSubmit?: (e: ChangeEvent<HTMLFormElement>) => void;
+  onClose?: () => void;
 }
 
 export default function Modal({
@@ -20,6 +21,7 @@ export default function Modal({
   caption,
   children,
   button,
+  onClose,
   onClick,
   onSubmit,
 }: IModalProps) {
@@ -34,7 +36,10 @@ export default function Modal({
         static
         className="fixed z-30 inset-0 overflow-y-auto"
         open={open}
-        onClose={setOpen}
+        onClose={(e) => {
+          setOpen(e);
+          onClose && onClose();
+        }}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
