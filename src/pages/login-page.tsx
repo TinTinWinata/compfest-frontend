@@ -56,8 +56,8 @@ export default function LoginPage() {
             icon={<AiOutlineLock className="w-5 h-5" />}
             label="Password"
           />
-          <div className="my-16 flex justify-between w-full">
-            <button className="focus:outline-none px-20 py-3 transition-all rounded-full hover:bg-primaryHover bg-primary text-white text-xl font-semibold">
+          <div className="my-16 flex gap-2 sm:gap-0 flex-col sm:flex-row sm:justify-between w-full">
+            <button className="focus:outline-none px-12 py-2 sm:px-20 sm:py-3 transition-all rounded-full hover:bg-primaryHover bg-primary text-white text-xl font-semibold">
               Login
             </button>
             <div
