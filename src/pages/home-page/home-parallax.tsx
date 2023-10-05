@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { RefObject, createRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
   const lottieRef = createRef<LottieRefCurrentProps>();
   const [textClass, setTextClass] = useState<string>('opacity-0');
   const navigate = useNavigate();
+  const [showScroll, setShowScroll] = useState<boolean>(false);
 
   const getTotalFrames = (animationData: any) => {
     return Math.floor(animationData.op);
@@ -24,8 +26,11 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
   const handleParkinson = () => navigate('/parkinson');
 
   const checkText = (percentage: number) => {
-    // !Debugging Purpose
-
+    if (percentage > 0 && percentage < 85) {
+      setShowScroll(true);
+    } else {
+      setShowScroll(false);
+    }
     if (percentage > 100) {
       setTextClass('opacity-0');
     } else if (percentage > TEXT_SHOW_IN_PROGRESS) {
@@ -112,8 +117,30 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
         animationData={animationData}
       />
       <div
+        className={`
+      ${showScroll ? 'opacity-100' : 'opacity-0'}
+      text-xl absolute top-0 left-0 w-full h-full transition-all duration-300`}
+      >
+        <div className="absolute bottom-0 left-0  w-full">
+          <div className="flex justify-between w-full">
+            <Player
+              className="w-32 h-32"
+              autoplay
+              loop
+              src="./assets/down.json"
+            />
+            <Player
+              className="w-32 h-32"
+              autoplay
+              loop
+              src="./assets/down.json"
+            />
+          </div>
+        </div>
+      </div>
+      <div
         className={
-          ' absolute  z-30 top-[70%] sm:top-[70%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
+          ' absolute  z-30 top-[75%]  left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
           textClass
         }
       >
@@ -141,7 +168,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
       </div>
       <div
         className={
-          ' absolute  z-30 top-[30%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
+          ' absolute  z-30 top-[30%] sm:top-[25%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ' +
           textClass
         }
       >

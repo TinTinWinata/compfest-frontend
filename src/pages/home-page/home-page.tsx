@@ -30,7 +30,7 @@ export default function HomePage() {
           <div className="sm:block hidden absolute w-[300px] right-[18%] bottom-[30%] translate-y-[50%] ">
             <Player autoplay loop src={'/assets/find.json'} />
           </div> */}
-          <div className="flex flex-col items-center text-center">
+          <div className="mt-10 flex flex-col items-center text-center">
             <div className="text-primary font-bold text-[40px] sm:text-[60px]">
               {isMobile ? 'DiagnoAI' : 'Best AI for Diagnostics'}
             </div>
@@ -44,7 +44,7 @@ export default function HomePage() {
                 'Parkinson.',
               ]}
             />
-            <p className="text-gray-400 text-sm sm:text-md font-semibold mt-2 mb-5 sm:my-8">
+            <p className="text-gray-400 text-md sm:text-md font-semibold mt-2 mb-5 sm:my-8 ">
               A Safer Tomorrow Starts Today! <br />
               Utilize AI to Detect Desease and Embracing a Healthier Lifestyle
             </p>
@@ -54,7 +54,7 @@ export default function HomePage() {
             >
               Skin Disease
             </button>
-            <p className="tracking-wide text-xs sm:text-sm  text-gray-400 sm:text-gray-500 mt-2 ">
+            <p className="tracking-wide text-xs  text-gray-400 sm:text-gray-500 mt-2 ">
               Test is conducted free of charge,
             </p>
           </div>

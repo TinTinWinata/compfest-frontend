@@ -26,7 +26,7 @@ export default function ChangeText({ texts }: IChangeTextProps) {
   };
 
   return (
-    <div className=" font-bold flex my-8 text-[40px] sm:text-[65px]">
+    <div className=" font-bold flex my-8 text-[40px] sm:text-[50px]">
       <div ref={el} className="">
         Healthy
       </div>

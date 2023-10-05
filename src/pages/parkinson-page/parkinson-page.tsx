@@ -26,7 +26,7 @@ export default function ParkinsonPage() {
         data-aos="fade-up"
         className="items-center w-full  flex flex-col  text-gray-500 tracking-wider text-center h-[65%]"
       >
-        <div className="w-3/4 mt-32  flex justify-between">
+        <div className="w-3/4 mt-20  flex justify-between">
           <Link
             to="/home"
             className="w-20 text-primary center gap-1 hover:underline cursor-pointer"
