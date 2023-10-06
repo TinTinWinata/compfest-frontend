@@ -12,8 +12,8 @@ export const MENU_LIST: IMenu[] = [
     icon: <BiDonateBlood className="w-7 h-7" />,
   },
   {
-    link: '/cardiovaskular',
-    name: 'Cardiovaskular',
+    link: '/cardiovascular',
+    name: 'Cardiovascular',
     icon: <BsHeartPulse className="w-7 h-7" />,
   },
   {

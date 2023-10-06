@@ -24,7 +24,7 @@ export default function useHostRoom(callId: string, mode: string) {
   const link = import.meta.env.VITE_APP_LINK;
   const [webcamActive, setWebcamActive] = useState(false);
   const [isIncomeStream, setIsIncomeStream] = useState<boolean>(false);
-  const { data, checkResult } = useSkinCancer();
+  const { data, checkResult, reset } = useSkinCancer();
 
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState<any>(callId);
@@ -230,5 +230,6 @@ export default function useHostRoom(callId: string, mode: string) {
     isIncomeStream,
     screenshotRemote,
     data,
+    reset,
   };
 }

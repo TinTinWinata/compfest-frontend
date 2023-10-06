@@ -17,10 +17,10 @@ export interface IDiseaseForm extends IFormsProps {
 
 export const DISEASE_LIST: IDiseaseForm[] = [
   {
-    link: '/cardiovaskular',
+    link: '/cardiovascular',
     endpoint: ENDPOINT_LIST.ai.cardiovaskular,
     forms: CARDIOVASKULAR_QUESTIONS,
-    name: 'Cardiovaskular',
+    name: 'Cardiovascular',
   },
   {
     link: '/diabetes',
@@ -47,10 +47,10 @@ export const DISEASE_LIST: IDiseaseForm[] = [
     name: 'Diabetes ANN',
   },
   {
-    link: '/cardiovaskular-ann',
+    link: '/cardiovascular-ann',
     endpoint: ENDPOINT_LIST.ai.cardiovaskularAnn,
     forms: CARDIOVASKULAR_QUESTIONS,
-    name: 'Cardiovaskular ANN',
+    name: 'Cardiovascular ANN',
   },
 
   {

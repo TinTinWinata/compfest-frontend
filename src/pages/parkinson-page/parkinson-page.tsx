@@ -7,7 +7,7 @@ import ParkinsonMic from './parkinson-mic';
 import ParkinsonResult from './parkinson-result';
 
 export default function ParkinsonPage() {
-  const { data, isLoading, checkResult } = useParkinson();
+  const { data, isLoading, checkResult, reset } = useParkinson();
   const getRandomText = () => {
     const max = HEALTH_TEXT.length - 1;
     const min = 0;
@@ -26,7 +26,7 @@ export default function ParkinsonPage() {
         data-aos="fade-up"
         className="items-center w-full  flex flex-col  text-gray-500 tracking-wider text-center h-[65%]"
       >
-        <div className="w-3/4 mt-32  flex justify-between">
+        <div className="w-3/4 mt-20  flex justify-between">
           <Link
             to="/home"
             className="w-20 text-primary center gap-1 hover:underline cursor-pointer"
@@ -47,7 +47,12 @@ export default function ParkinsonPage() {
         <div className="w-3/4 text-md sm:text-3xl mt-16 ">{text}</div>
       </div>
       <ParkinsonMic checkResult={checkResult} setOpen={setOpen} />
-      <ParkinsonResult open={open} setOpen={setOpen} data={data} />
+      <ParkinsonResult
+        onClose={reset}
+        open={open}
+        setOpen={setOpen}
+        data={data}
+      />
     </div>
   );
 }

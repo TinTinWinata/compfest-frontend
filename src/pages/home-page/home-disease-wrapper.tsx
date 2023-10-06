@@ -8,7 +8,7 @@ const DISEASE_LIST = [
     asset: '/assets/diabetes.jpg',
   },
   {
-    name: 'Cardiovaskular',
+    name: 'Cardiovascular',
     asset: '/assets/cardiovaskular.webp',
   },
   {

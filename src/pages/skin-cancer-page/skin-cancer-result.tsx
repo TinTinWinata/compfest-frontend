@@ -7,14 +7,17 @@ import { ITest } from '../../interfaces/user-firestore-interface';
 
 interface ISkinCancerResultProps extends IModalProps {
   data: IAISkinCancerResponse | null;
+  onClose?: () => void;
 }
 
 export default function SkinCancerResult({
   data,
   open,
   setOpen,
+  onClose,
 }: ISkinCancerResultProps) {
   const { saveDesease } = useUserAuth();
+
   const saveProfile = () => {
     if (data) {
       const test: ITest = {
@@ -25,11 +28,19 @@ export default function SkinCancerResult({
       saveDesease(test);
     }
   };
+
   const getPercentage = () =>
     data ? data.result.predict[data.result.value] * 100 : 0;
+
   useEffect(() => saveProfile(), [data]);
+
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal
+      canBeClose={data !== null}
+      onClose={onClose}
+      open={open}
+      setOpen={setOpen}
+    >
       {data ? (
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="center">

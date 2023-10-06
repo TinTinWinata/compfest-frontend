@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ContentType } from '../enums/content-type-enum';
 import { IAIParkinsonResponse } from '../interfaces/ai-parkinson-interface';
 import { ENDPOINT_LIST } from '../settings/endpoint-setting';
@@ -8,8 +8,8 @@ import Service from '../utils/service';
 export default function useParkinson() {
   const [data, setData] = useState<IAIParkinsonResponse | null>(null);
 
-
   const [isLoading, setLoading] = useState<boolean>(false);
+  const reset = () => setData(null);
   const checkResult = async (payload: any) => {
     setLoading(true);
     if (payload) {
@@ -32,5 +32,5 @@ export default function useParkinson() {
     setLoading(false);
   };
 
-  return { checkResult, data, isLoading };
+  return { checkResult, data, isLoading, reset };
 }

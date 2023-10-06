@@ -9,8 +9,14 @@ export default function MobileSkinCancerPage() {
   const { id } = useParams();
   if (id) {
     const [resultModal, setResultModal] = useState<boolean>(false);
-    const { localRef, webcamActive, setupSources, data, screenshotLocal } =
-      useJoinRoom(id, 'join');
+    const {
+      localRef,
+      webcamActive,
+      setupSources,
+      data,
+      screenshotLocal,
+      reset,
+    } = useJoinRoom(id, 'join');
     const handleScreenshot = () => {
       screenshotLocal();
       setResultModal(true);
@@ -63,6 +69,7 @@ export default function MobileSkinCancerPage() {
             open={resultModal}
             setOpen={setResultModal}
             data={data}
+            onClose={reset}
           />
         </MobileView>
         <BrowserView>
