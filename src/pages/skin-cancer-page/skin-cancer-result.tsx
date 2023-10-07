@@ -103,14 +103,14 @@ export default function SkinCancerResult({
             />
           </div>
           <div className="flex text-md sm:text-lg gap-3 flex-col justify-center items-center ">
-            <p className="font-semibold center">
+            {/* <p className="font-semibold center">
               Success Prediction! Your Skin Disease Is :{' '}
-            </p>
+            </p> */}
             <div className="">
               <p className="text-center font-bold">
                 {data.result.result} ({getPercentage().toFixed(2)}%)
               </p>
-              <p className="center text-center text-xs text-gray-400">
+              <p className="w-1/2 center text-center text-xs text-gray-400">
                 {getText()}
               </p>
             </div>
