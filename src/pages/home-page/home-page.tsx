@@ -31,7 +31,7 @@ export default function HomePage() {
             <Player autoplay loop src={'/assets/find.json'} />
           </div> */}
           <div className="mt-10 flex flex-col items-center text-center">
-            <div className="text-primary font-bold text-[40px] sm:text-[60px]">
+            <div className="text-primary font-bold text-[50px] sm:text-[60px]">
               {isMobile ? 'DiagnoAI' : 'Best AI for Diagnostics'}
             </div>
             <ChangeText
