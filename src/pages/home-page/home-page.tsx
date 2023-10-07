@@ -44,7 +44,7 @@ export default function HomePage() {
                 'Parkinson.',
               ]}
             />
-            <p className="text-gray-400 text-md sm:text-md font-semibold mt-2 mb-5 sm:my-8 ">
+            <p className="text-gray-400 text-sm sm:text-md font-semibold mt-2 mb-5 sm:my-8 ">
               A Safer Tomorrow Starts Today! <br />
               Utilize AI to Detect Desease and Embracing a Healthier Lifestyle
             </p>

@@ -108,10 +108,10 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
   return (
     <div
       ref={introRef}
-      className="overflow:hidden min-w-screen relative center w-full h-screen  "
+      className="overflow-x-hidden min-w-screen relative center w-full h-screen  "
     >
       <Lottie
-        className="abs-center z-20 w-[500px] md:w-[600px]"
+        className=" overflow-hidden abs-center z-20 w-[500px] md:w-[600px]"
         autoplay={false}
         lottieRef={lottieRef}
         animationData={animationData}

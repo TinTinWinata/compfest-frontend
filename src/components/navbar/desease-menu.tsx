@@ -1,4 +1,5 @@
 import { createRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import { useOnHoverOutside } from '../../hooks/useHoverOutside';
 import { IMenu } from '../../interfaces/menu-interface';
@@ -14,7 +15,11 @@ export default function DeseaseMenu() {
   useOnHoverOutside(ref, closeHoverMenu); // Call the hook
   return (
     <div ref={ref} className="mx-2  font-semibold cursor-pointer relative">
-      <Link to="/disease-list" className="" onMouseOver={() => setHover(true)}>
+      <Link
+        to="/disease-list"
+        className=""
+        onMouseOver={() => !isMobile && setHover(true)}
+      >
         Disease
       </Link>
 
