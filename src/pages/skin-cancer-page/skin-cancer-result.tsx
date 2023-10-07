@@ -110,7 +110,7 @@ export default function SkinCancerResult({
               <p className="text-center font-bold">
                 {data.result.result} ({getPercentage().toFixed(2)}%)
               </p>
-              <div className="center">
+              <div className="center mt-1">
                 <p className="w-3/4  text-center text-xs text-gray-400">
                   {getText()}
                 </p>
