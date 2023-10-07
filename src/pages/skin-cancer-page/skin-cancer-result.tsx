@@ -10,6 +10,49 @@ interface ISkinCancerResultProps extends IModalProps {
   onClose?: () => void;
 }
 
+// 0: 'Melanocytic nevi',
+// 1: 'Melanoma',
+// 2: 'Benign keratosis-like lesions',
+// 3: 'Basal cell carcinoma',
+// 4: 'Actinic keratoses',
+// 5: 'Vascular lesions',
+// 6: 'Dermatofibroma',
+// 7: 'Clear Skin'
+
+const MAPPED_RESULT = new Map();
+MAPPED_RESULT.set(
+  'Melanocytic nevi',
+  'Commonly known as moles, these are benign growths on the skin due to a proliferation of melanocytes.  '
+);
+MAPPED_RESULT.set(
+  'Melanoma',
+  'The most dangerous type of skin cancer. It arises from pigment-producing cells (melanocytes) and can appear as new or changing moles.  '
+);
+MAPPED_RESULT.set(
+  'Benign keratosis-like lesions',
+  'Solar Lentigines: Commonly called "liver spots" or "age spots," these are flat, brown spots on the skin due to sun exposure. '
+);
+MAPPED_RESULT.set(
+  'Basal cell carcinoma',
+  'Most common type of skin cancer, characterized by pink or pearly white bumps, often with visible blood vessels.  '
+);
+MAPPED_RESULT.set(
+  'Actinic keratoses',
+  'Rough, scaly patches on the skin caused by prolonged sun exposure. '
+);
+MAPPED_RESULT.set(
+  'Vascular lesions',
+  'Angiomas: Benign growths consisting of small blood vessels. They can appear anywhere on the body. '
+);
+MAPPED_RESULT.set(
+  'Dermatofibroma',
+  'Firm, non-cancerous bumps on the skin often caused by minor injury.  '
+);
+MAPPED_RESULT.set(
+  'Clear Skin',
+  'Your skin radiates with the vibrant glow of perfect health.'
+);
+
 export default function SkinCancerResult({
   data,
   open,
@@ -27,6 +70,14 @@ export default function SkinCancerResult({
       };
       saveDesease(test);
     }
+  };
+
+  const getText = () => {
+    if (data) {
+      const val = MAPPED_RESULT.get(data.result.result);
+      if (val) return val;
+    }
+    return '';
   };
 
   const getPercentage = () =>
@@ -52,11 +103,14 @@ export default function SkinCancerResult({
             />
           </div>
           <div className="flex text-md sm:text-lg gap-3 flex-col justify-center items-center ">
-            <p className="font-semibold">
+            <p className="font-semibold center">
               Success Prediction! Your Skin Disease Is :{' '}
             </p>
             <p className="font-bold">
               {data.result.result} ({getPercentage().toFixed(2)}%)
+            </p>
+            <p className="center text-xs text-gray-400 opacity-40">
+              {getText()}
             </p>
             <p className="text-red-400  font-semibold text-xs">
               * warning this is only a prediction *
