@@ -29,7 +29,7 @@ export default function HomeDeseaseWrapper() {
       <div className="w-full flex flex-col items-center max-w-[900px]">
         <div className="w-full flex justify-between">
           <div className="text-white">
-            <h1 className="uppercase font-bold tracking-wider">Deseases</h1>
+            <h1 className="uppercase font-bold tracking-wider">Diseases</h1>
             <h1 className="text-sm sm:text-lg  sm:leading-[50px] sm:text-[40px] font-semibold w-3/4">
               Get Started to Diagnosis Before Late!
             </h1>
@@ -39,7 +39,7 @@ export default function HomeDeseaseWrapper() {
               to="/disease-list"
               className="h-fit px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold rounded-md bg-gray-100 transition-all hover:bg-gray-300"
             >
-              See All Deseases
+              See All Diseases
             </Link>
           </div>
         </div>

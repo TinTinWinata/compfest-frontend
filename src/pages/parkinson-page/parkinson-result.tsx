@@ -55,13 +55,13 @@ export default function ParkinsonResult({
             )}
           </div>
           <div className="flex text-lg flex-col justify-center items-center ">
-            <p className="font-semibold">
+            <p className="font-semibold text-center">
               Succesfully Predicting! This is your Result:{' '}
             </p>
-            <p className="font-bold mb-3">
+            <p className="font-bold mb-3 text-center">
               {data.result == 0 ? 'You Are Safe' : 'You Are Not Safe'}
             </p>
-            <p className="text-red-400 font-semibold text-xs">
+            <p className="text-red-400 font-semibold text-xs text-center">
               * warning this is only a prediction *
             </p>
           </div>

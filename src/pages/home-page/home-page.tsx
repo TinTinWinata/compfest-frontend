@@ -12,7 +12,7 @@ import HomeParallax from './home-parallax';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const onHandleClick = () => navigate('/skin-cancer');
+  const onHandleClick = () => navigate('/parkinson');
   const firstRef = createRef<HTMLDivElement>();
   return (
     <div>
@@ -52,7 +52,7 @@ export default function HomePage() {
               onClick={onHandleClick}
               className="focus:outline-none  px-10 py-3 sm:px-16 sm:py-4 font-semibold text-md sm:text-xl rounded-full bg-primary text-white"
             >
-              Skin Disease
+              Parkinson
             </button>
             <p className="tracking-wide text-xs  text-gray-400 sm:text-gray-500 mt-2 ">
               Test is conducted free of charge,

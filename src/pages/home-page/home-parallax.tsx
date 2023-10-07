@@ -23,7 +23,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
     return Math.floor(animationData.op);
   };
 
-  const handleParkinson = () => navigate('/parkinson');
+  const handleParkinson = () => navigate('/skin-cancer');
 
   const checkText = (percentage: number) => {
     if (percentage > 0 && percentage < 85) {
@@ -162,7 +162,7 @@ export default function HomeParallax({ firstRef }: IHomeParallaxProps) {
             onClick={handleParkinson}
             className="focus:outline-none py-2 px-6 sm:px-16 sm:py-4 font-semibold text-lg sm:text-xl rounded-full bg-primary text-white"
           >
-            Detect Parkinson
+            Detect Skin Disease
           </button>
         </div>
       </div>
