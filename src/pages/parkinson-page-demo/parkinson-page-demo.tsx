@@ -7,7 +7,7 @@ import ParkinsonMic from '../parkinson-page/parkinson-mic';
 import ParkinsonResult from '../parkinson-page/parkinson-result';
 
 export default function ParkinsonDemoPage() {
-  const { data, isLoading, checkResult } = useParkinsonDemo();
+  const { data, isLoading, checkResult, reset } = useParkinsonDemo();
   const getRandomText = () => {
     const max = HEALTH_TEXT.length - 1;
     const min = 0;
@@ -47,7 +47,12 @@ export default function ParkinsonDemoPage() {
         <div className="w-3/4 text-md sm:text-3xl mt-16 ">{text}</div>
       </div>
       <ParkinsonMic checkResult={checkResult} setOpen={setOpen} />
-      <ParkinsonResult open={open} setOpen={setOpen} data={data} />
+      <ParkinsonResult
+        onClose={reset}
+        open={open}
+        setOpen={setOpen}
+        data={data}
+      />
     </div>
   );
 }

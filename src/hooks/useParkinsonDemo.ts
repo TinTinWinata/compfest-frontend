@@ -19,5 +19,9 @@ export default function useParkinsonDemo() {
     }, 3000);
   };
 
-  return { checkResult, data, isLoading };
+  const reset = () => {
+    setData(null);
+  };
+
+  return { checkResult, data, isLoading, reset };
 }
