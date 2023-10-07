@@ -52,7 +52,7 @@ export default function HomePage() {
               onClick={onHandleClick}
               className="focus:outline-none  px-10 py-3 sm:px-16 sm:py-4 font-semibold text-md sm:text-xl rounded-full bg-primary text-white"
             >
-              Parkinson
+              Detect Parkinson
             </button>
             <p className="tracking-wide text-xs  text-gray-400 sm:text-gray-500 mt-2 ">
               Test is conducted free of charge,
