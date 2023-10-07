@@ -58,10 +58,7 @@ function App() {
                   }
                 ></Route>
               ))}
-              <Route
-                path="/*"
-                element={<MiddlewareRoutes></MiddlewareRoutes>}
-              ></Route>
+              <Route path="/*" element={<MiddlewareRoutes />}></Route>
               <Route
                 path="/room-create/:id"
                 element={<Room mode={'create'} callId={''} />}
