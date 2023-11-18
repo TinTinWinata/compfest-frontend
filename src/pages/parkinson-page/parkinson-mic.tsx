@@ -63,7 +63,7 @@ export default function ParkinsonMic({
   };
 
   const onStop = async (recordedBlob: any) => {
-    convertBlobURLToFile(recordedBlob, 'tester')
+    convertBlobURLToFile(recordedBlob, 'tester.mp3')
       .then((file) => {
         setOpen(true);
         // downloadFile(file);
